@@ -1,12 +1,21 @@
 index.php
-book.php?id=
-review.php?id=
-login.php
-forgot.php
-admin.php
-book_records.php
-search.php?terms=
+search.php
+  search.php?terms= -> search_results
+review.php?id= -> specific_review
 cart.php
-checkout.php
-shipped.php
 register.php
+  register.php?user= -> update_customer
+checkout.php -> confirm_order
+shipped.php -> proof_of_purchase
+login.php
+admin.php
+  admin.php -> login is a session confirm
+book_records.php -> admin_report
+
+only suggested page that is missing is the register_first_alert:
+  will be done on a page by page case
+
+additional pages:
+book.php?id= -> book overview page
+forgot.php -> forgot password page
+user.php?id= -> user overview page

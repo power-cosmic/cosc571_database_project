@@ -6,7 +6,8 @@ cart
 register_customer
 register_first_alert
 confirm_order
-update_customer/register_customer
+update_customer
 proof_of_purchase
-admin_login
+user_login
 admin_report
+admin_login
