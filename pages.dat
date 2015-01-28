@@ -6,7 +6,7 @@ cart.php
 register.php
   register.php?user= -> update_customer
 checkout.php -> confirm_order
-shipped.php -> proof_of_purchase
+confirmation.php -> proof_of_purchase
 login.php
 admin.php
   admin.php -> login is a session confirm
