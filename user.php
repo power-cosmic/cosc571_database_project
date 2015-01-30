@@ -3,11 +3,9 @@
 ?>
 <!doctype html>
 <html>
-  <head>
   <?php
-    createBasicHead('3-B - User');
+    echo createBasicHead('3-B - User', ['test.js']);
   ?>
-  </head>
   <body>
   </body>
 </html>
