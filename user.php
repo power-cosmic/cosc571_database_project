@@ -9,5 +9,6 @@
   ?>
   <body>
     <?php echo createHeader(); ?>
+    <?php echo createFooter(); ?>
   </body>
 </html>
