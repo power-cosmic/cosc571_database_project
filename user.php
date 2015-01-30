@@ -1,5 +1,5 @@
 <?php
-  include_once 'admin/php/header.php';
+  include_once 'admin/php/common.php';
 ?>
 <!doctype html>
 <html>
