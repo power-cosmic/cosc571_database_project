@@ -4,11 +4,9 @@
 ?>
 <!doctype html>
 <html>
-  <?php
-    echo createBasicHead('3-B - User', ['test.js']);
-  ?>
+  <?=createBasicHead('3-B - User', ['test.js'])?>
   <body>
-    <?php echo createHeader(); ?>
-    <?php echo createFooter(); ?>
+    <?=createHeader()?>
+    <?=createFooter()?>
   </body>
 </html>
