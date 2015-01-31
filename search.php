@@ -8,7 +8,7 @@ include_once 'admin/php/displays.php';
   <body>
     <?=createHeader()?>
     <div class="content">
-      <div id="search" class="box">
+      <div id="search" class="centered box">
   
         <form method="get">
           <input type="text" id="query" placeholder="search query">

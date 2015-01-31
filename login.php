@@ -9,7 +9,7 @@ include_once 'admin/php/displays.php';
   <div id="container">
     <?=createHeader()?>
     <div class="content">
-      <div id="login" class="box">
+      <div id="login" class="centered box">
 
         <form method="post">
           <input type="text" name="username" id="username" placeholder="username"> <input type="password"

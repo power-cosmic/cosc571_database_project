@@ -4,7 +4,7 @@ include_once 'constants.php';
 
 function createHeader($showCart = true, $showLogin = true) {
   $to_return = '<div id="header" class="bar">
-      <div class="box">
+      <div class="centered box">
       <div><h1>3b</h1></div>';
 
   if (! $_SESSION ['logged_in']) {
@@ -34,7 +34,7 @@ function createHeader($showCart = true, $showLogin = true) {
 
 function createFooter() {
   $to_return = '<div id="footer" class="bar">
-      <div class="box">&copy; 2013-'.date('Y').'</div>
+      <div class="centered thin-box">&copy; 2013-'.date('Y').'</div>
       </div>';
   
   

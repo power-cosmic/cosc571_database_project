@@ -1,28 +1,35 @@
 
 div.box {
+  padding: 20px;
+}
+
+div.thin-box {
   padding: 10px;
+}
+
+.centered {
+  width: 60%;
+  margin: 0px auto;
 }
 
 div.bar {
   width: 100%;
-  /*background-color: #142E54;/*#080B3B;*/
-  color: #333335;/*#8B9AB1;*/
+  color: #333335;
 }
 
 #header {
-  /*border-bottom: 2px solid #031633;*/
-  /*box-shadow: 0px 0px 2px 2px black;*/
+  background-color: #f2f2f2;
 }
 
 #footer {
   color: #4C668C;
   position: absolute;
   bottom: 0px;
-  height: 40px;
+  height: 45px;
 }
 
 .content {
-  padding-bottom: 40px;
+  padding-bottom: 45px;
 }
 
 #container {
@@ -93,12 +100,10 @@ input {
   color: #980177;
 }
 
-
-
-
-
 div {
   margin: 0px;
+  padding: 0px;
+  position: relative;
 }
 
 /*
