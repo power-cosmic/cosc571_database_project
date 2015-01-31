@@ -7,8 +7,7 @@
   $project_root = explode('/admin/', $_SERVER['SCRIPT_NAME'])[0];
   
   $locations = array(
-      'main_style'=> $project_root.'css/styles.css',
+      'main_style'=> 'admin/css/styles.css',
       'home'=> $project_root
   );
-  
 ?>

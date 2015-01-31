@@ -1,5 +1,51 @@
+
 div.box {
-  height: 40px;
-  width: 80%;
-  background-color: blue;
+  padding: 10px;
 }
+
+div.bar {
+  width: 100%;
+  background-color: #142E54;/*#080B3B;*/
+  color: #8B9AB1;
+}
+
+#header {
+  /*border-bottom: 2px solid #031633;*/
+  box-shadow: 0px 0px 2px 2px black;
+}
+
+#footer {
+  color: #4C668C;
+  position: absolute;
+  bottom: 0px;
+  height: 60px;
+}
+
+#container {
+  position: relative;
+  min-height: 100%;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  background-color: #8B9AB1;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.content {
+  padding-bottom: 60px;
+}
+
+div {
+  margin: 0px;
+}
+
+/*
+	References
+
+	color scheme: http://paletton.com/#uid=53F160kllll7qz6enrbsjfvEN9D
+	footer placement: http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
+
+*/
