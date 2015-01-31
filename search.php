@@ -1,11 +1,20 @@
+<?php
+  include_once 'admin/php/common.php';
+  include_once 'admin/php/displays.php';
+?>
 <!doctype html>
 <html>
-  <head>
-    <title>3-B Search Results</title>
-  </head>
+  <?=createBasicHead('3-B - Search Results')?>
   <body>
-    <div id="header"></div>
-    <div id="login"></div>
-    <div id="footer"></div>
+    <?=createHeader()?>
+    <div id="search">
+      
+      <form method="get">
+        <input type="text" id="query" placeholder="search query">
+        <input type="submit" value="search">
+      </form>
+      
+    </div>
+    <?=createFooter()?>
   </body>
 </html>
