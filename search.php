@@ -4,17 +4,15 @@
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('3-B - Search Results')?>
+  <?=createBasicHead('3-B | Search Results')?>
   <body>
     <?=createHeader()?>
     <div id="search">
-      
-      <form method="get">
+      <form method="get" action="<?=$_SERVER['PHP_SELF']?>">
         <input type="text" id="query" placeholder="search query">
         <input type="submit" value="search">
       </form>
-      
-    </div>
+      </div>
     <?=createFooter()?>
   </body>
 </html>
