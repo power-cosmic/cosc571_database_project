@@ -1,12 +1,14 @@
+<?php
+include_once 'admin/php/common.php';
+include_once 'admin/php/displays.php';
+?>
 <!doctype html>
 <html>
-  <head>
-    <title>3-B</title>
-  </head>
+  <?=createBasicHead('3-B | home')?>
   <body>
-    <div id="header"></div>
+    <?=createHeader()?>
     <div id="login"></div>
     <div id="top_picks"></div>
-    <div id="footer"></div>
+    <?=createFooter()?>
   </body>
 </html>

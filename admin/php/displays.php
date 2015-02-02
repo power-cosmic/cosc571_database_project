@@ -5,8 +5,9 @@ include_once 'constants.php';
 function createHeader($showCart = true, $showLogin = true) {
   $to_return = '<div id="header" class="bar">
       <div class="centered box">
-      <div><h1>3b</h1></div>';
-
+      <div id="title"><h1>3b</h1></div>
+      <div id="user-info">';
+  
   if (! $_SESSION ['logged_in']) {
     if ($showLogin) {
       $to_return .= '<div id="logInButton">log in</div>';
@@ -19,7 +20,9 @@ function createHeader($showCart = true, $showLogin = true) {
             </div>';
         break;
       case $GLOBALS ['user_status'] ['user'] :
-        $to_return .= '<div id="nameAndLogoutButtons>Hi</div>';
+        $to_return .= '<div id="nameAndLogoutButtons">
+              <a href="'.$GLOBALS['locations']['home'].'">logout</a>
+            </div>';
         break;
       default :
     }
@@ -28,7 +31,7 @@ function createHeader($showCart = true, $showLogin = true) {
   if ($showCart) {
   }
 
-  $to_return .= '</div></div>';
+  $to_return .= '</div></div></div>';
   return $to_return;
 }
 
