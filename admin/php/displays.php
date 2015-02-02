@@ -8,10 +8,17 @@ function createHeader($showCart = true, $showLogin = true) {
       <div id="title"><h1>3b</h1></div>
       <div id="user-info">';
   
-  $_SESSION['logged_in'] = 'user';
   if (! $_SESSION ['logged_in']) {
     if ($showLogin) {
-      $to_return .= '<div id="logInButton">log in</div>';
+      $to_return .= '<div id="logInButton">
+          <a href="'.$GLOBALS['locations']['login'].'">log in</a>
+          </div>
+          <div>
+            <a href="'.$GLOBALS['locations']['new_user'].'">register</a>
+          </div>
+          <div>
+            <a href="'.$GLOBALS['locations']['cart'].'">cart</a>      
+          </div>';
     }
   } else {
     switch ($_SESSION ['logged_in']) {
@@ -39,7 +46,10 @@ function createHeader($showCart = true, $showLogin = true) {
 
 function createFooter() {
   $to_return = '<div id="footer" class="bar">
-      <div class="centered thin-box">&copy; 2013-'.date('Y').'</div>
+        <div class="centered">
+          <div class="thin-box">&copy; 2013-'.date('Y').'</div> | 
+          <div class="thin-box"><a href="'.$GLOBALS['locations']['admin'].'">admin</a>
+        </div>
       </div>';
   
   

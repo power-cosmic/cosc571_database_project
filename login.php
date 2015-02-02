@@ -7,7 +7,7 @@ include_once 'admin/php/displays.php';
   <?=createBasicHead('3-B | Login')?>
   <body>
     <div id="container">
-      <?=createHeader()?>
+      <?=createHeader(true, false)?>
 
       <div class="content">
         <div id="login" class="centered box">
