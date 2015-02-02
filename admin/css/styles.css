@@ -19,6 +19,16 @@ div.bar {
 
 #header {
   background-color: #f2f2f2;
+  height: 110px;
+}
+
+#title {
+  float: left;
+}
+
+#user-info {
+  float: right;
+  margin: 33px 20px 10px;
 }
 
 #footer {
@@ -35,6 +45,10 @@ div.bar {
 #container {
   position: relative;
   min-height: 100%;
+}
+
+#query {
+  width: 400px;
 }
 
 html, body {

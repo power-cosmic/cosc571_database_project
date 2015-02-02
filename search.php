@@ -12,7 +12,7 @@ include_once 'admin/php/displays.php';
       <div id="search" class="centered box">
   
         <form method="get" action="<?=$_SERVER['PHP_SELF']?>">
-          <input type="text" id="query" placeholder="search query">
+          <input type="text" id="query" placeholder="search query" id="search-bar">
           <input type="submit" value="search" class="green button">
         </form>
   
