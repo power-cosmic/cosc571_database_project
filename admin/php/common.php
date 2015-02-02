@@ -1,7 +1,7 @@
 <?php
   include_once 'constants.php';
 
-  function createBasicHead($title = '3-B.com', $scripts = [], $styles = []) {
+  function createBasicHead($title = '3-B.com', $script_location = null, $styles = []) {
 
     $toReturn = '<head>
     <title>'.$title.'</title>
@@ -11,10 +11,17 @@
       $toReturn .= '<link rel="stylesheet" type="text/css" href="'.$style.'">';
     }
     
-    foreach($scripts as $script) {
-
-        $toReturn .= '<script src="'.$script.'"></script>';
-
+    if ($script_location) {
+      $toReturn .= '<script src="'.$GLOBALS['locations']['lib'].'require.js"></script>
+          <script>
+            require.config({
+              paths: {
+                lib: "'.$GLOBALS['admin_root'].'lib",
+                js: "'.$GLOBALS['admin_root'].'js"
+              }
+            });
+            require(["js/'.$script_location.'"]);
+            </script>';
     }
 
     $toReturn .= '</head>';

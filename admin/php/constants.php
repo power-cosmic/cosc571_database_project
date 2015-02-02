@@ -13,6 +13,8 @@
   
   $locations = array(
       'main_style'=> $admin_root.'css/styles.css',
+      'scripts'=> $admin_root.'js/',
+      'lib'=> $admin_root.'lib/',
       'home'=> $project_root.'index.php',
       'cart'=> $project_root.'cart.php',
       'admin'=> $project_root.'admin.php',
