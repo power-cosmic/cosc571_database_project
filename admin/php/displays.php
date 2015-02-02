@@ -3,7 +3,8 @@ session_start ();
 include_once 'constants.php';
 
 function createHeader($showCart = true, $showLogin = true) {
-  $to_return = '<div id="header" class="box">
+  $to_return = '<div id="header" class="bar">
+      <div class="centered box">
       <div><h1>3b</h1></div>';
 
   if (! $_SESSION ['logged_in']) {
@@ -27,12 +28,14 @@ function createHeader($showCart = true, $showLogin = true) {
   if ($showCart) {
   }
 
-  $to_return .= '</div>';
+  $to_return .= '</div></div>';
   return $to_return;
 }
 
 function createFooter() {
-  $to_return = '<div id="footer" class="box">&copy; 2013-'.date('Y').'</div>';
+  $to_return = '<div id="footer" class="bar">
+      <div class="centered thin-box">&copy; 2013-'.date('Y').'</div>
+      </div>';
   
   
   

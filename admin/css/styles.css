@@ -1,5 +1,130 @@
+
 div.box {
-  height: 40px;
-  width: 80%;
-  background-color: blue;
+  padding: 20px;
 }
+
+div.thin-box {
+  padding: 10px;
+}
+
+.centered {
+  width: 60%;
+  margin: 0px auto;
+}
+
+div.bar {
+  width: 100%;
+  color: #333335;
+}
+
+#header {
+  background-color: #f2f2f2;
+}
+
+#footer {
+  color: #4C668C;
+  position: absolute;
+  bottom: 0px;
+  height: 45px;
+}
+
+.content {
+  padding-bottom: 45px;
+}
+
+#container {
+  position: relative;
+  min-height: 100%;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  background-color: white;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+input {
+  border: 2px solid black;
+  background: none;
+  padding: 4px 5px;
+  height: 15px;
+}
+
+.button {
+  text-decoration: none;
+  font-weight: bold;
+  background: none;
+  border: none;
+  padding: 5px 10px 22px;
+  vertical-align: middle;
+}
+
+.big-button {
+  padding: 10px 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.green {
+  background-color: #75C101;
+  color: #D4F6A1;
+  border-color: #214500;
+}
+
+.green:hover {
+  background-color: #D4F6A1;
+  color: #75C101;
+}
+
+.blue {
+  background-color: #0F398B;
+  color: #96ADDB;
+  border-color: #031633;
+}
+
+.blue:hover {
+  background-color: #96ADDB;
+  color: #0F398B;
+}
+
+.purple {
+  background-color: #980177;
+  color: #E193D0;
+  border-color: #250133;
+}
+
+.purple:hover {
+  background-color: #E193D0;
+  color: #980177;
+}
+
+div {
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+table, tr, th, td {
+  border-collapse: collapse;
+  border: 1px solid #0F398B;
+  padding: 8px 16px;
+}
+
+th {
+  background-color: #0F398B;
+  color: #96ADDB;
+}
+
+td {
+  color: #0F398B;
+}
+
+/*
+	References
+
+	color scheme: http://paletton.com/#uid=53F160kllll7qz6enrbsjfvEN9D
+	footer placement: http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
+
+*/
