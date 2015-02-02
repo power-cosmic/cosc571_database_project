@@ -4,7 +4,7 @@ include_once 'admin/php/displays.php';
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('3-B | Search Results')?>
+  <?=createBasicHead('3-B | Search Results', 'search')?>
   <body>
     <?=createHeader()?>
 
@@ -13,7 +13,7 @@ include_once 'admin/php/displays.php';
   
         <form method="get" action="<?=$_SERVER['PHP_SELF']?>">
           <input type="text" id="query" placeholder="search query" id="search-bar">
-          <input type="submit" value="search" class="green button">
+          <input type="submit" value="search" class="green button"> 
           
           <br>
           
@@ -30,7 +30,7 @@ include_once 'admin/php/displays.php';
           </div>
           <div id="search-category-box">
             <h3>Categories</h3>
-            <input type="button" id="toggle-all-button" class="purple button" value="Select all">
+            <input type="button" id="toggle-category-button" class="purple button" value="Select all">
             <!-- TODO: generate these from database -->
             <input type="checkbox" name="category" value="horror" id="category-horror" checked>
             <label for="category-horror">Horror</label>

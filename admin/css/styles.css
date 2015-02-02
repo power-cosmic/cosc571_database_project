@@ -67,6 +67,12 @@ input {
   height: 15px;
 }
 
+input[type="submit"]:disabled {
+  background-color: #cccccc;
+  color: #999999;
+  cursor: default;
+}
+
 .button {
   text-decoration: none;
   cursor: pointer;
