@@ -106,6 +106,21 @@ div {
   position: relative;
 }
 
+table, tr, th, td {
+  border-collapse: collapse;
+  border: 1px solid #0F398B;
+  padding: 8px 16px;
+}
+
+th {
+  background-color: #0F398B;
+  color: #96ADDB;
+}
+
+td {
+  color: #0F398B;
+}
+
 /*
 	References
 
