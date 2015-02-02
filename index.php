@@ -6,9 +6,11 @@ include_once 'admin/php/displays.php';
 <html>
   <?=createBasicHead('3-B | home')?>
   <body>
-    <?=createHeader()?>
-    <div id="login"></div>
-    <div id="top_picks"></div>
-    <?=createFooter()?>
+    <div id="container">
+      <?=createHeader()?>
+      <div id="login"></div>
+      <div id="top_picks"></div>
+      <?=createFooter()?>
+    </div>
   </body>
 </html>

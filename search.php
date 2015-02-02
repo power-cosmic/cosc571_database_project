@@ -6,9 +6,10 @@ include_once 'admin/php/displays.php';
 <html>
   <?=createBasicHead('3-B | Search Results', 'search')?>
   <body>
-    <?=createHeader()?>
 
-    <div class="content">
+    <div id="container">
+      <?=createHeader()?>
+      <div class="content">
       <div id="search" class="centered box">
   
         <form method="get" action="<?=$_SERVER['PHP_SELF']?>">
@@ -41,7 +42,8 @@ include_once 'admin/php/displays.php';
         </form>
   
       </div>
+      </div>
+      <?=createFooter()?>
     </div>
-    <?=createFooter()?>
   </body>
 </html>

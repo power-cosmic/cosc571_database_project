@@ -19,8 +19,8 @@ include_once 'admin/php/displays.php';
               type="submit" value="login" class="blue button">
           </form>
         </div>
+      </div>
+      <?=createFooter()?>
     </div>
-  </div>
-  <?=createFooter()?>
-</body>
+  </body>
 </html>
