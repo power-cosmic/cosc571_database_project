@@ -8,6 +8,7 @@ function createHeader($showCart = true, $showLogin = true) {
       <div id="title"><h1>3b</h1></div>
       <div id="user-info">';
   
+  $_SESSION['logged_in'] = 'user';
   if (! $_SESSION ['logged_in']) {
     if ($showLogin) {
       $to_return .= '<div id="logInButton">log in</div>';
@@ -22,6 +23,7 @@ function createHeader($showCart = true, $showLogin = true) {
       case $GLOBALS ['user_status'] ['user'] :
         $to_return .= '<div id="nameAndLogoutButtons">
               <a href="'.$GLOBALS['locations']['home'].'">logout</a>
+              <a href="'.$GLOBALS['locations']['cart'].'">cart</a>
             </div>';
         break;
       default :

@@ -21,5 +21,6 @@ include_once 'admin/php/displays.php';
         </div>
     </div>
   </div>
+  <?=createFooter()?>
 </body>
 </html>

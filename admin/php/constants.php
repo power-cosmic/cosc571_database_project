@@ -14,5 +14,6 @@
   $locations = array(
       'main_style'=> $admin_root.'css/styles.css',
       'home'=> $project_root.'index.php',
+      'cart'=> $project_root.'cart.php',
   );
 ?>
