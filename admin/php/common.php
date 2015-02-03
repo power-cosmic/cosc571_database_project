@@ -1,10 +1,10 @@
 <?php
   include_once 'constants.php';
 
-  function createBasicHead($title = $GLOBALS['name']['short'], $script_location = null, $styles = []) {
+  function createBasicHead($title = '', $script_location = null, $styles = []) {
 
     $toReturn = '<head>
-    <title>' . $GLOBALS['name']['short']. ' | ' . $title . '</title>
+    <title>' . $GLOBALS['name']['short'] . ' | ' . $title . '</title>
     <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['main_style'] . '">';
     
     foreach($styles as $style) {
