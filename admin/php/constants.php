@@ -3,6 +3,11 @@
       'admin'=>'admin',
       'user'=>'user'
   );
+
+  $name = array(
+      'full'=>'Best-Buy-Books',
+      'short'=>'3-B'
+  );
  
   $project_root = explode('/', $_SERVER['SCRIPT_NAME'])[0];
   if (strlen($project_root)) {

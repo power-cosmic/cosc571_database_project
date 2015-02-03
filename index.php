@@ -4,7 +4,7 @@ include_once 'admin/php/displays.php';
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('3-B | home')?>
+  <?=createBasicHead('home')?>
   <body>
     <div id="container">
       <?=createHeader()?>

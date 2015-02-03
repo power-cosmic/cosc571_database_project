@@ -4,7 +4,7 @@ include_once 'admin/php/displays.php';
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('3-B | Search Results', 'search')?>
+  <?=createBasicHead('Search Results', 'search')?>
   <body>
 
     <div id="container">

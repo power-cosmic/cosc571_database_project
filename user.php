@@ -4,7 +4,7 @@
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('3-B - User', ['test.js'])?>
+  <?=createBasicHead('User', ['test.js'])?>
   <body>
     <?=createHeader()?>
     <?=createFooter()?>

@@ -5,7 +5,7 @@ include_once 'admin/php/admin_login.php';
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('3-B - Admin')?>
+  <?=createBasicHead('Admin')?>
   <body>
   <div id="container">
     <?=createHeader()?>
