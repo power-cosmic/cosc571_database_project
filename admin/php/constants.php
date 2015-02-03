@@ -5,7 +5,7 @@
   );
 
   $name = array(
-      'full' => 'Best-Buy-Books',
+      'long' => 'Best-Buy-Books',
       'short' => '3-B'
   );
  
