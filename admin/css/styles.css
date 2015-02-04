@@ -18,6 +18,11 @@ div.bar {
   color: #333335;
 }
 
+a.no-decoration:link, a.no-decoration:visited, a.no-decoration:hover, a.no-decoration:active {
+  color: inherit;
+  text-decoration: none;
+}
+
 #header {
   background-color: #f2f2f2;
   height: 110px;
