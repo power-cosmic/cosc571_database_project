@@ -22,3 +22,11 @@ Temporary Items
 
 # no image files
 *.jpg
+
+#vim ignore
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
