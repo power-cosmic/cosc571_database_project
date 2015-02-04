@@ -5,7 +5,7 @@ include_once 'constants.php';
 function createHeader($showCart = true, $showLogin = true) {
   $to_return = '<div id="header" class="bar">
       <div class="centered box">
-      <div id="title"><h1>' . $GLOBALS['name']['long'] . '</h1></div>
+      <div id="title"><a href="' . $GLOBALS['locations']['home'] . '"<h1>' . $GLOBALS['name']['long'] . '</h1></div>
       <div id="user-info">';
   
   if (! $_SESSION ['logged_in']) {

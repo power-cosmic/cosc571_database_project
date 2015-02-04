@@ -25,6 +25,7 @@ div.bar {
 
 #title {
   float: left;
+  text-decoration: none;
 }
 
 #user-info {
