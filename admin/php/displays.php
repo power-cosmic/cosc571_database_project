@@ -14,7 +14,7 @@ function createHeader($showCart = true, $showLogin = true) {
           <a href="' . $GLOBALS['locations']['login'] . '">log in</a>
           </div>
           <div>
-            <a href="' . $GLOBALS['locations']['new_user'] . '">register</a>
+            <a href="' . $GLOBALS['locations']['register'] . '">register</a>
           </div>
           <div>
             <a href="' . $GLOBALS['locations']['cart'] . '">cart</a>      
