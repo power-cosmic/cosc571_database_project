@@ -43,7 +43,7 @@
              </div>
              <div class="form-row">
               <label for="state">State</label>
-              <?=create_dropdown()?>
+              <?=create_state_dropdown()?>
               <label class="short" for="zip">Zip</label>
               <input class="short" type="text" name="zip" id="zip" placeholder="12345">
              </div>
