@@ -1,11 +1,12 @@
 <?php
-include_once 'admin/php/constants.php';
-include_once 'admin/php/common.php';
-include_once 'admin/php/displays.php';
+  include_once 'admin/php/constants.php';
+  include_once 'admin/php/common.php';
+  include_once 'admin/php/displays.php';
+  include_once 'admin/php/us_state_dropdown.php';
 ?>
 <!doctype html>
 <html>
-  <?= createBasicHead('Register')?>
+  <?=createBasicHead('Register')?>
   <body>
     <div id="container">
       <?=createHeader(true, false)?>
@@ -42,17 +43,13 @@ include_once 'admin/php/displays.php';
              </div>
              <div class="form-row">
               <label for="state">State</label>
-              <select name="stat">
-                <!-- TODO: generate all states -->
-                <option value="mi">MI</option>
-                <option value="ny">NY</option>
-              </select>
-                <label class="short" for="zip">Zip</label>
-                <input class="short" type="text" name="zip" id="zip" placeholder="12345">
+              <?=create_dropdown()?>
+              <label class="short" for="zip">Zip</label>
+              <input class="short" type="text" name="zip" id="zip" placeholder="12345">
              </div>
              <div class="form-row">
               <label for="card-type">Credit card</label>
-              <select name="stat">
+              <select name="card-type">
                 <option value="visa">VISA</option>
                 <option value="mc">MasterCard</option>
               </select>
