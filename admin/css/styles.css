@@ -150,6 +150,23 @@ td {
   color: #0F398B;
 }
 
+div.form-row {
+  padding: 5px;
+}
+
+.form-row > label {
+  min-width: 140px;
+  display: inline-block;
+}
+
+label.short {
+  width: 40px;
+}
+
+input.short {
+  width: 60px;
+}
+
 /*
 	References
 
