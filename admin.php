@@ -12,7 +12,7 @@ include_once 'admin/php/constants.php';
     <?=createHeader()?>
     <div class="content">
 
-      <? if ($_SESSION['logged_in'] == $GLOBALS['user_status']['admin']) { ?>
+      <?php if ($_SESSION['logged_in'] == $GLOBALS['user_status']['admin']) { ?>
         <!-- display admin page -->
       <div id="login" class="centered box">
         <p>
@@ -68,7 +68,7 @@ include_once 'admin/php/constants.php';
         </table>
       </div>
 
-      <?
+      <?php
       } else {
         echo generate_admin_login();
       }
