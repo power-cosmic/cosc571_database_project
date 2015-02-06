@@ -27,7 +27,9 @@
                     'title' => 'Absolute Java',
                     'author' => 'Walter Savitch',
                     'price' => '149.99',
-                    'quantity' => '2'
+                    'quantity' => '2',
+                    'publisher' => 'Addison-Wesley',
+                    'isbn' => '978-0132834230'
                 ]
               ?>
               <tr>

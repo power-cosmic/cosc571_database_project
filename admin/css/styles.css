@@ -159,6 +159,12 @@ div.form-row {
   display: inline-block;
 }
 
+.book-label {
+  display: inline-block;
+  font-weight: bold;
+  width: 90px;
+}
+
 .disabled-input {
   border: none;
   color: black;
