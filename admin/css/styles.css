@@ -173,6 +173,22 @@ input.short {
   width: 60px;
 }
 
+.quantity-box {
+  width: 30px;
+}
+
+.book-info {
+  color: black;
+}
+
+.align-right {
+  float: right;
+}
+
+.wide {
+  width: 100%;
+}
+
 /*
 	References
 
