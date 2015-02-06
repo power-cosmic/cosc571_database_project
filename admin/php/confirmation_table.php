@@ -1,4 +1,5 @@
 <?php
+include_once 'book_info.php';
 
 function generate_confirmation_table($title, $user, $books, $confirmation = null) {
   $card_types = [
@@ -38,7 +39,8 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
   /* generate the info above the table */
   $to_return = '<div id="user-checkout-info" class="box"><h2>' . $title . '</h2>
           <div id="address-info" class="user-info-box box">
-            <h3>Shipping Address</h3>' . $user['first_name'] . ' ' . $user['last_name'] . '<br>' . $user['address'] . '<br>' . $user['city'] . '<br>' . $user['state'] . ' ' . $user['zip'] . '</div>
+            <h3>Shipping Address</h3>' . $user['first_name'] . ' ' . $user['last_name'] . '<br>' . $user['address'] . '<br>' . $user['city'] .
+       '<br>' . $user['state'] . ' ' . $user['zip'] . '</div>
           <div id="card-info" class="user-info-box box">
             <h3>Credit Card</h3>';
 
@@ -84,7 +86,7 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
 
   foreach($books as $book) {
     $to_return .= '<tr>
-                  <td class="book-info"><?=generateBookInfo($book)?></td>
+                  <td class="book-info">' . generateBookInfo($book) . '</td>
                   <td class="book-info"><input type="text" name="quantity" class="quantity-box" value="' . $book['quantity'] . '"></td>
                   <td class="book-info">$' . $book['quantity'] * $book['price'] . '</td>
                 </tr>';
