@@ -3,6 +3,13 @@ include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 include_once 'admin/php/admin_login.php';
 include_once 'admin/php/constants.php';
+
+session_start();
+
+if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
+  $_SESSION['logged_in'] = $GLOBALS['user_status']['admin'];
+}
+
 ?>
 <!doctype html>
 <html>
