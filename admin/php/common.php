@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['main_style'] . '">';
     
     foreach($styles as $style) {
-      $toReturn .= '<link rel="stylesheet" type="text/css" href="' . $style . '">';
+      $toReturn .= '<link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['styles'] . $style . '">';
     }
     
     if ($script_location) {

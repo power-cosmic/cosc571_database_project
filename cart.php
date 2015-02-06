@@ -5,7 +5,7 @@
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Cart')?>
+  <?=createBasicHead('Cart', null, ['book_table.css'])?>
   <body>
     <div id="container">
       <?=createHeader()?>

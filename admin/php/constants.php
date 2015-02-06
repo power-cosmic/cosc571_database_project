@@ -17,6 +17,7 @@
   $admin_root = $project_root . "admin/";
   
   $locations = array(
+      'styles' => $admin_root . 'css/',
       'main_style' => $admin_root . 'css/styles.css',
       'scripts' => $admin_root . 'js/',
       'lib' => $admin_root . 'lib/',
