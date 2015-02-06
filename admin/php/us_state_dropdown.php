@@ -1,12 +1,12 @@
 <?php
-function create_state_dropdown($select_name='state', $type='mixed') {
+function create_state_dropdown($select_name='state', $type='mixed', $selected=null) {
 	$state_dropdown = "\n" . '<select name="' . $select_name . '">' . "\n";
-	$state_dropdown .= create_state_dropdown_options($type);
+	$state_dropdown .= create_state_dropdown_options($type, $selected);
 	$state_dropdown .= '</select>' . "\n";
 	return $state_dropdown;
 }
 
-function create_state_dropdown_options($type='mixed') {
+function create_state_dropdown_options($type='mixed', $selected) {
 	$states = array(
 		'AK' => 'Alaska',
 		'AL' => 'Alabama',
@@ -81,7 +81,8 @@ function create_state_dropdown_options($type='mixed') {
 				break;
 		}
 		
-		$options .= '<option value="' . $value . '">' . $display . '</option>' . "\n";
+		$selected_string = (!strcmp($value, $selected))? 'selected="selected"': '';
+		$options .= '<option value="' . $value . '" ' . $selected_string . '>' . $display . '</option>' . "\n";
 	}
 		
 	return $options;
