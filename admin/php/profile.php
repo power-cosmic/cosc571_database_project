@@ -10,7 +10,9 @@ function createProfileForm($username = null) {
   
   $user_data = null;
   $disabled = ($username == null)? 'disabled': '';
-
+  
+  $card_types = ['MasterCard', 'VISA'];
+  
   if ($username) {
     /* TODO: get user data from db */
     $user = [
@@ -19,7 +21,7 @@ function createProfileForm($username = null) {
         'last_name' => 'Skywalker',
         'address' => '48 Williams St.',
         'city' => 'Tatooine',
-        'state' => 'Skywalker',
+        'state' => 'MI',
         'zip' => '48197',
         'card_type' => 'VISA',
         'card_number' => '1111222233334444',
@@ -28,35 +30,39 @@ function createProfileForm($username = null) {
   }
     
   $to_return = '<form method="post" action="<?=$_SERVER[\'PHP_SELF\']?>">'
-            .generateGenericForRow("username", $user, $false, $username != null);
-  
-            if (!$user) {
-              $to_return .= generateGenericForRow("password", $user)
-                  .generateGenericForRow("confirm password", $user);
-            }
-  
-            $most_needed_fields = ['first name', 'last name', 'address', 'city'];
-            foreach ($most_needed_fields as $field) {
-              $to_return .= generateGenericForRow($field, $user);
-            }
+      .generateGenericForRow("username", $user, $false, $username != null);
+    
+      if (!$user) {
+        $to_return .= generateGenericForRow("password", $user)
+            .generateGenericForRow("confirm password", $user);
+      }
+    
+      $most_needed_fields = ['first name', 'last name', 'address', 'city'];
+      foreach ($most_needed_fields as $field) {
+        $to_return .= generateGenericForRow($field, $user);
+      }
             
-            $to_return .= '<div class="form-row">
-              <label for="state">State</label>'
-              .create_state_dropdown()
-              .'<label class="short" for="zip">Zip</label>
-              <input class="short" type="text" name="zip" id="zip" placeholder="12345" value="'.$user['zip'].'">
-             </div>
-             <div class="form-row">
-              <label for="card-type">Credit card</label>
-              <select name="card-type" value="asdf">
-                <option value="visa">VISA</option>
-                <option value="mc">MasterCard</option>
-              </select>
-             </div>'
-             .generateGenericForRow('card number', $user)
-             .generateGenericForRow('card expiration', $user)
-             .'<input type="submit" value="Register" class="green button">
-          </form>'; 
+      $to_return .= '<div class="form-row">
+          <label for="state">State</label>'
+          .create_state_dropdown('state', 'mixed', $user['state'])
+          .'<label class="short" for="zip">Zip</label>
+          <input class="short" type="text" name="zip" id="zip" placeholder="12345" value="'.$user['zip'].'">
+         </div>
+         <div class="form-row">
+          <label for="card-type">Credit card</label>
+          <select name="card-type">';
+
+      foreach ($card_types as $card_type) {
+        $value = strtolower($card_type);
+        $selected = (!strcmp($card_type, $user['card_type']))? 'selected = "selected"': '';
+        $to_return .= "<option value=\"$value\" $selected>$card_type</option>"; 
+      }
+      $to_return .= '</select>
+         </div>'
+         .generateGenericForRow('card number', $user)
+         .generateGenericForRow('card expiration', $user)
+         .'<input type="submit" value="Register" class="green button">
+      </form>'; 
   
   return $to_return;
 }
@@ -69,10 +75,13 @@ function generateGenericForRow($field_name, $user, $password = false, $disabled 
   
   $input_type = ($password)? 'password': 'text';
   $disabled_string = ($disabled)? ' disabled': '';
+  $classes = ($disabled)? 'disabled-input': '';
   
   return '<div class="form-row">
     <label for="'.$hyphenated.'">'.$capitalized.'</label>
-    <input type="'.$input_type.'" name="'.$hyphenated.'" id="'.$hyphenated.'" placeholder="'.$capitalized.'" value="'.$user[$underscored].'" '.$disabled_string.'>
+    <input type="'.$input_type.'" name="'.$hyphenated.'" id="'.$hyphenated.'" class="'.$classes.'"
+        placeholder="'.$capitalized.'" value="'.$user[$underscored].'" '.$disabled_string.'>
   </div>';
 }
+
 ?>
