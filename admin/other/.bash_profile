@@ -16,3 +16,5 @@ GITRESET="git reset HEAD --hard"
 GITPULL="git pull origin master"
 
 eval $CDTOPUBLIC
+eval $GITRESET
+eval $GITPULL
