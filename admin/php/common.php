@@ -1,19 +1,18 @@
 <?php
-  include_once 'constants.php';
+include_once 'constants.php';
 
-  function createBasicHead($title = '', $script_location = null, $styles = []) {
-
-    $toReturn = '<head>
+function createBasicHead($title = '', $script_location = null, $styles = []) {
+  $toReturn = '<head>
     <title>' . $GLOBALS['name']['short'] . ' | ' . $title . '</title>
     <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['main_style'] . '">';
-    
-    foreach($styles as $style) {
-      $toReturn .= '
+
+  foreach($styles as $style) {
+    $toReturn .= '
     <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['styles'] . $style . '">';
-    }
-    
-    if ($script_location) {
-      $toReturn .= '
+  }
+
+  if ($script_location) {
+    $toReturn .= '
     <script src="' . $GLOBALS['locations']['lib'] . 'require.js"></script>
     <script>
       require.config({
@@ -24,11 +23,11 @@
       });
       require(["js/' . $script_location . '"]);
     </script>';
-    }
+  }
 
-    $toReturn .= '
+  $toReturn .= '
   </head>' . "\n";
 
-    return $toReturn;
-  }
+  return $toReturn;
+}
 ?>
