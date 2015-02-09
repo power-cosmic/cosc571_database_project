@@ -57,22 +57,6 @@ if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
               <td>$234</td>
             </tr>
           </table>
-          <br>
-          <table id="book-table">
-            <tr>
-              <th>Title</th>
-              <th>Number Reviews</th>
-            </tr>
-            <!-- TODO: generate this w/ php -->
-            <tr>
-              <td>Book 1</td>
-              <td>654</td>
-            </tr>
-            <tr>
-              <td>Book 2</td>
-              <td>13</td>
-            </tr>
-          </table>
         </div>
 
         <?php
