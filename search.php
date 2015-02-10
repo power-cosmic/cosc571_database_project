@@ -5,7 +5,7 @@ include_once 'admin/php/displays.php';
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Search Results', 'search')?>
+  <?=createBasicHead('Search Results', 'search', ['book_table.css'])?>
   <body>
 
     <div id="container">
@@ -48,10 +48,7 @@ include_once 'admin/php/displays.php';
         <div id="search-results" class="centered box">
           <table id="books-in-cart" class="wide">
             <tr>
-              <th>Remove</th>
-              <th>Book Description</th>
-              <th>Qty</th>
-              <th>Price</th>
+              <th>Results</th>
             </tr>
             
             <!-- TODO: generate rows from db -->
@@ -67,10 +64,7 @@ include_once 'admin/php/displays.php';
               ]
             ?>
             <tr>
-              <td class="book-info"><input type="submit" class="purple button" value="Delete" name="delete <?=$book['id']?>">
               <td class="book-info"><?=generateBookInfo($book)?></td>
-              <td class="book-info"><input type="text" name="quantity" class="quantity-box" value="<?=$book['quantity']?>"></td>
-              <td class="book-info">$<?=$book['price']*$book['quantity']?></td>
             </tr>
             
           </table>
