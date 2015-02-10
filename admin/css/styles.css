@@ -165,9 +165,19 @@ div.form-row {
   font-weight: bold;
 }
 
-
 .wide {
   width: 100%;
+}
+
+.glow-link {
+  color: #0F398B;
+  transition: color 0.2s;
+  -webkit-transition: color 0.2s;
+  text-decoration: none;
+}
+
+.glow-link:hover {
+  color: #75C101;
 }
 
 /*

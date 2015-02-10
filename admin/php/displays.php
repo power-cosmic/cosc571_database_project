@@ -14,13 +14,9 @@ function createHeader($showCart = true, $showLogin = true) {
     if ($showLogin) {
       $to_return .= '
             <div id="logInButton">
-              <a href="' . $GLOBALS['locations']['login'] . '">log in</a>
-            </div>
-            <div>
-              <a href="' . $GLOBALS['locations']['register'] . '">register</a>
-            </div>
-            <div>
-              <a href="' . $GLOBALS['locations']['cart'] . '">cart</a>
+              <a href="' . $GLOBALS['locations']['login'] . '" class="glow-link">log in</a> |
+              <a href="' . $GLOBALS['locations']['register'] . '" class="glow-link">register</a> | 
+              <a href="' . $GLOBALS['locations']['cart'] . '" class="glow-link">cart</a>
             </div>';
     }
   } else {
@@ -28,14 +24,14 @@ function createHeader($showCart = true, $showLogin = true) {
       case $GLOBALS['user_status']['admin']:
         $to_return .= '
             <div id="adminLogoutButton">
-              <a href="logout.php">logout</a>
+              <a href="logout.php" class="glow-link">logout</a>
             </div>';
         break;
       case $GLOBALS['user_status']['user']:
         $to_return .= '
             <div id="nameAndLogoutButtons">
-              <a href="' . $GLOBALS['locations']['home'] . '">logout</a>
-              <a href="' . $GLOBALS['locations']['cart'] . '">cart</a>
+              <a href="' . $GLOBALS['locations']['home'] . '" class="glow-link">logout</a>
+              <a href="' . $GLOBALS['locations']['cart'] . '" class="glow-link">cart</a>
             </div>';
         break;
       default:
