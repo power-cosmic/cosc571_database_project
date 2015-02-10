@@ -49,6 +49,8 @@ function createHeader($showCart = true, $showLogin = true) {
 }
 
 function createFooter() {
+  date_default_timezone_set('America/Detroit');
+
   $to_return = '<div id="footer" class="bar">
         <div class="centered">
           <div class="thin-box">&copy; 2013-' . date('Y') . '</div> |
