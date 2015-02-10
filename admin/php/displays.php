@@ -15,7 +15,7 @@ function createHeader($showCart = true, $showLogin = true) {
       $to_return .= '
             <div id="logInButton">
               <a href="' . $GLOBALS['locations']['login'] . '" class="glow-link">log in</a> |
-              <a href="' . $GLOBALS['locations']['register'] . '" class="glow-link">register</a> | 
+              <a href="' . $GLOBALS['locations']['register'] . '" class="glow-link">register</a> |
               <a href="' . $GLOBALS['locations']['cart'] . '" class="glow-link">cart</a>
             </div>';
     }
@@ -24,7 +24,7 @@ function createHeader($showCart = true, $showLogin = true) {
       case $GLOBALS['user_status']['admin']:
         $to_return .= '
             <div id="adminLogoutButton">
-              <a href="logout.php" class="glow-link">logout</a>
+              <a href="' . $GLOBALS['locations']['logout'] . '" class="glow-link">logout</a>
             </div>';
         break;
       case $GLOBALS['user_status']['user']:
@@ -49,6 +49,8 @@ function createHeader($showCart = true, $showLogin = true) {
 }
 
 function createFooter() {
+  date_default_timezone_set('America/Detroit');
+
   $to_return = '<div id="footer" class="bar">
         <div class="centered">
           <div class="thin-box">&copy; 2013-' . date('Y') . '</div> |

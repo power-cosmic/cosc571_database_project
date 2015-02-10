@@ -57,6 +57,7 @@ if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
               <td>$234</td>
             </tr>
           </table>
+          <p><a href="book_records.php">View Book Records</a></p>
         </div>
 
         <?php
