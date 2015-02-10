@@ -1,4 +1,5 @@
 <?php
+include_once 'admin/php/book_info.php';
 include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 ?>
@@ -40,8 +41,42 @@ include_once 'admin/php/displays.php';
           </div>
           
         </form>
-  
       </div>
+      
+      <!-- results here if applicable -->
+      <?php if ($_GET['query']) { ?>
+        <div id="search-results" class="centered box">
+          <table id="books-in-cart" class="wide">
+            <tr>
+              <th>Remove</th>
+              <th>Book Description</th>
+              <th>Qty</th>
+              <th>Price</th>
+            </tr>
+            
+            <!-- TODO: generate rows from db -->
+            <?php 
+              $book = [
+                  'id' => 1,
+                  'title' => 'Absolute Java',
+                  'author' => 'Walter Savitch',
+                  'price' => '149.99',
+                  'quantity' => '2',
+                  'publisher' => 'Addison-Wesley',
+                  'isbn' => '978-0132834230'
+              ]
+            ?>
+            <tr>
+              <td class="book-info"><input type="submit" class="purple button" value="Delete" name="delete <?=$book['id']?>">
+              <td class="book-info"><?=generateBookInfo($book)?></td>
+              <td class="book-info"><input type="text" name="quantity" class="quantity-box" value="<?=$book['quantity']?>"></td>
+              <td class="book-info">$<?=$book['price']*$book['quantity']?></td>
+            </tr>
+            
+          </table>
+      
+        </div>
+        <?php } ?>
       </div>
       <?=createFooter()?>
     </div>
