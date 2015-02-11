@@ -1,0 +1,59 @@
+div.scrolling-view {
+  width: 110%;
+  height: 200px;
+  margin-left: -5%;
+  background-color: lightblue;
+  margin-top: 20px;
+  margin-bottom: 10px; overflow-x : auto;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+h2.book-view-header {
+  margin-left: 5%;
+}
+
+div.book-view {
+  margin: 0px 10px; text-align : center;
+  display: inline-block;
+  height: 80%;
+  width: 200px;
+  vertical-align: middle;
+  background-color: lightgreen;
+  text-align: center;
+}
+
+span.v-align-helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle
+}
+
+img.book-cover {
+  height: 80px;
+  vertical-align: middle;
+  margin-top: 10%;
+}
+
+.book-info {
+  color: black;
+  overflow: hidden;
+}
+.book-info:hover {
+  overflow: visible;
+  background-color: white !important;
+  border: 1px solid;
+ /*  position:absolute; */
+  z-index: 1;
+}
+.book-label {
+  text-align: right;
+  display: inline-block;
+  font-weight: bold;
+  width: 75px;
+  margin-right: 10%;
+}
+
+.book-info-box {
+  margin-top: 10px;
+}

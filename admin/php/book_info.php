@@ -36,4 +36,19 @@ function generateBookInfoLine($label, $content) {
         <label class="book-label">' . $label . '</label>' . $content . '</div>';
 }
 
+/**
+ * Generate content for a book with cover, used on the main page
+ *
+ * @param array   $book Book information (title, author, etc)
+ */
+function generateBookView($book) {
+  $to_return = '<div class="book-view">
+        <img src="' . $book['cover'] . '" class="book-cover" /><div class="book-info-box">'
+          . generateBookInfoLine('Title', $book['title'])
+          . generateBookInfoLine('Author', $book['author'])
+          . '</div>
+           </div>';
+  return $to_return;
+}
+
 ?>
