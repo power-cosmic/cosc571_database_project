@@ -9,10 +9,13 @@ $name = array(
   'short' => '3-B'
 );
 
-$project_root = explode('/', $_SERVER['SCRIPT_NAME'])[0];
-if (strlen($project_root)) {
-  $project_root .= "/";
-}
+$project_root_parts = explode('/', $_SERVER['SCRIPT_NAME']);
+$project_root = $project_root_parts[1] . '/'
+                . $project_root_parts[2] . '/';
+
+$project_root = $_SERVER['REQUEST_SCHEME'] . '://'
+                  . $_SERVER['SERVER_NAME'] . '/'
+                      . $project_root;
 
 $admin_root = $project_root . "admin/";
 
