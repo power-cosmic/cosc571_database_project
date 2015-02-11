@@ -11,7 +11,8 @@ $name = array(
 
 $project_root_parts = explode('/', $_SERVER['SCRIPT_NAME']);
 $project_root = $project_root_parts[1] . '/'
-                . $project_root_parts[2] . '/';
+                . ((substr($project_root_parts[2], -4) == '.php') ?
+                  '' : $project_root_parts[2] . '/');
 
 $project_root = $_SERVER['REQUEST_SCHEME'] . '://'
                   . $_SERVER['SERVER_NAME'] . '/'
