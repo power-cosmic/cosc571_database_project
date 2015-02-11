@@ -1,10 +1,11 @@
 <?php
+include_once 'admin/php/book_info.php';
 include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Search Results', 'search')?>
+  <?=createBasicHead('Search Results', 'search', ['book_table.css'])?>
   <body>
 
     <div id="container">
@@ -40,8 +41,36 @@ include_once 'admin/php/displays.php';
           </div>
           
         </form>
-  
       </div>
+      
+      <!-- results here if applicable -->
+      <?php if ($_GET['query']) { ?>
+        <div id="search-results" class="centered box">
+          <table id="books-in-cart" class="wide">
+            <tr>
+              <th>Results</th>
+            </tr>
+            
+            <!-- TODO: generate rows from db -->
+            <?php 
+              $book = [
+                  'id' => 1,
+                  'title' => 'Absolute Java',
+                  'author' => 'Walter Savitch',
+                  'price' => '149.99',
+                  'quantity' => '2',
+                  'publisher' => 'Addison-Wesley',
+                  'isbn' => '978-0132834230'
+              ]
+            ?>
+            <tr>
+              <td class="book-info"><?=generateBookInfo($book)?></td>
+            </tr>
+            
+          </table>
+      
+        </div>
+        <?php } ?>
       </div>
       <?=createFooter()?>
     </div>
