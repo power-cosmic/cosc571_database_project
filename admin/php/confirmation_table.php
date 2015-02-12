@@ -101,26 +101,32 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
 
   $to_return .= '</table>';
   $to_return .= '<div class="box">
-                  <table id="total" class="right-aligned">
-                    <tr>
-                      <td class="book-info">Subtotal</td>
-                      <td class="right-aligned book-info">' . 
-                        sprintf("$%.2f", $subtotal) . 
-                      '</td>
-                    </tr>
-                    <tr>
-                      <td class="book-info">Subtotal</td>
-                      <td class="right-aligned book-info">' . 
-                        sprintf("$%.2f", $shipping) . 
-                      '</td>
-                    </tr>
-                    <tr>
-                      <td class="book-info">Total</td>
-                      <td class="right-aligned book-info">' . 
-                        sprintf("$%.2f", $subtotal + $shipping) . 
-                      '</td>
-                    </tr>
-                  </table>
+                  <div id="shipping-notice" class="user-info-box">
+                    <h3>Shipping Note</h3>
+                    Books will be delivered within 5 business days
+                  </div>
+                  <div id="totals" class="right-aligned user-info-box">
+                    <table id="total" class="right-aligned">
+                      <tr>
+                        <td class="book-info">Subtotal</td>
+                        <td class="right-aligned book-info">' . 
+                          sprintf("$%.2f", $subtotal) . 
+                        '</td>
+                      </tr>
+                      <tr>
+                        <td class="book-info">Subtotal</td>
+                        <td class="right-aligned book-info">' . 
+                          sprintf("$%.2f", $shipping) . 
+                        '</td>
+                      </tr>
+                      <tr>
+                        <td class="book-info">Total</td>
+                        <td class="right-aligned book-info">' . 
+                          sprintf("$%.2f", $subtotal + $shipping) . 
+                        '</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>';
 
   return $to_return;

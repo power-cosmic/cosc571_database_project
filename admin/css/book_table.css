@@ -25,6 +25,10 @@ input.short {
   float: right;
 }
 
+#shipping-notice {
+  width: 200px;
+}
+
 .user-info-box {
   display: inline-block;
   vertical-align: top;
