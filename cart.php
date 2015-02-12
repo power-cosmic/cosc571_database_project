@@ -33,10 +33,10 @@
                 ]
               ?>
               <tr>
-                <td class="book-info"><input type="submit" class="purple button" value="Delete" name="delete <?=$book['id']?>">
+                <td class="book-info thin-cell"><input type="submit" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
                 <td class="book-info"><?=generateBookInfo($book)?></td>
-                <td class="book-info"><input type="text" name="quantity" class="quantity-box" value="<?=$book['quantity']?>"></td>
-                <td class="book-info">$<?=$book['price']*$book['quantity']?></td>
+                <td class="book-info thin-cell"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
+                <td class="book-info thin-cell"><div class="centered-input">$<?=$book['price']*$book['quantity']?></div></td>
               </tr>
               
             </table>

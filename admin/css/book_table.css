@@ -29,3 +29,7 @@ input.short {
   display: inline-block;
   vertical-align: top;
 }
+
+.thin-cell {
+  width: 80px;
+}

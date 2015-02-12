@@ -13,6 +13,15 @@ div.thin-box {
   margin: 0px auto;
 }
 
+.centered-input {
+  margin: 0px auto;
+  display: block;
+}
+
+.right-aligned {
+  text-align: right;
+}
+
 div.bar {
   width: 100%;
   color: #333335;
