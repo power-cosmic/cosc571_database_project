@@ -22,7 +22,7 @@
               
               <!-- TODO: generate rows from db -->
               <?php 
-                $book = [
+                $test_book = [
                     'id' => 1,
                     'title' => 'Absolute Java',
                     'author' => 'Walter Savitch',
@@ -30,17 +30,31 @@
                     'quantity' => '2',
                     'publisher' => 'Addison-Wesley',
                     'isbn' => '978-0132834230'
-                ]
+                ];
+                $books = [$test_book, $test_book];
+                $total = 0;
               ?>
-              <tr>
-                <td class="book-info"><input type="submit" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
-                <td class="book-info"><?=generateBookInfo($book)?></td>
-                <td class="book-info"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
-                <td class="book-info"><div class="centered-input">$<?=$book['price']*$book['quantity']?></div></td>
-              </tr>
+              <?php 
+                $total = 0;
+                foreach ($books as $book) {
+                  $cost = $book['price']*$book['quantity'];
+                  $total += $cost;
+              ?>
+                <tr>
+                  <td class="book-info"><input type="submit" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
+                  <td class="book-info"><?=generateBookInfo($book)?></td>
+                  <td class="book-info"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
+                  <td class="book-info"><div class="centered-input">$<?=$cost?></div></td>
+                </tr>
+              <?php 
+                }
+              ?>
               
             </table>
-            <div id="buttons" class="box align-right">
+            <div id="total" class="box right-aligned">
+              Subtotal: $<?=$total?>
+            </div>
+            <div id="buttons" class="box right-aligned">
               <input type="submit" class="blue button" value="Update">
               <input type="submit" class="green button" value="Checkout">
             </div>
