@@ -22,7 +22,7 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
   ];
 
   /* TODO: generate rows from db */
-  $book = [
+  $dummy_book = [
       'id' => 1,
       'title' => 'Absolute Java',
       'author' => 'Walter Savitch',
@@ -33,8 +33,11 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
   ];
 
   $books = [
-      $book
+      $dummy_book, $dummy_book
   ];
+  
+  $subtotal = 0;
+  $shipping = 4;
 
   /* generate the info above the table */
   $to_return = '<div id="user-checkout-info" class="box"><h2>' . $title . '</h2>
@@ -87,14 +90,38 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
               </tr>';
 
   foreach($books as $book) {
+    $cost = $book['quantity'] * $book['price'];
+    $subtotal += $cost;
     $to_return .= '<tr>
                   <td class="book-info">' . generateBookInfo($book) . '</td>
                   <td class="book-info"><input type="number" name="quantity" class="quantity-box centered-input" value="' . $book['quantity'] . '"></td>
-                  <td class="book-info">$' . $book['quantity'] * $book['price'] . '</td>
+                  <td class="book-info">$' . $cost . '</td>
                 </tr>';
   }
 
   $to_return .= '</table>';
+  $to_return .= '<div class="box">
+                  <table id="total" class="right-aligned">
+                    <tr>
+                      <td class="book-info">Subtotal</td>
+                      <td class="right-aligned book-info">' . 
+                        sprintf("$%.2f", $subtotal) . 
+                      '</td>
+                    </tr>
+                    <tr>
+                      <td class="book-info">Subtotal</td>
+                      <td class="right-aligned book-info">' . 
+                        sprintf("$%.2f", $shipping) . 
+                      '</td>
+                    </tr>
+                    <tr>
+                      <td class="book-info">Total</td>
+                      <td class="right-aligned book-info">' . 
+                        sprintf("$%.2f", $subtotal + $shipping) . 
+                      '</td>
+                    </tr>
+                  </table>
+                </div>';
 
   return $to_return;
 }
