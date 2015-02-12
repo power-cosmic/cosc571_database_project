@@ -80,14 +80,14 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
   $to_return .= '<table id="books-in-cart" class="wide">
               <tr>
                 <th>Book Description</th>
-                <th>Qty</th>
-                <th>Price</th>
+                <th class="thin-cell">Qty</th>
+                <th class="thin-cell">Price</th>
               </tr>';
 
   foreach($books as $book) {
     $to_return .= '<tr>
                   <td class="book-info">' . generateBookInfo($book) . '</td>
-                  <td class="book-info"><input type="text" name="quantity" class="quantity-box" value="' . $book['quantity'] . '"></td>
+                  <td class="book-info"><input type="number" name="quantity" class="quantity-box centered-input" value="' . $book['quantity'] . '"></td>
                   <td class="book-info">$' . $book['quantity'] * $book['price'] . '</td>
                 </tr>';
   }

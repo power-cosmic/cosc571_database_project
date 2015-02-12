@@ -14,10 +14,10 @@
           <form method="post" action="<?=$_SERVER['PHP_SELF']?>">
             <table id="books-in-cart" class="wide">
               <tr>
-                <th>Remove</th>
+                <th class="thin-cell">Remove</th>
                 <th>Book Description</th>
-                <th>Qty</th>
-                <th>Price</th>
+                <th class="thin-cell">Qty</th>
+                <th class="thin-cell">Price</th>
               </tr>
               
               <!-- TODO: generate rows from db -->
@@ -33,10 +33,10 @@
                 ]
               ?>
               <tr>
-                <td class="book-info thin-cell"><input type="submit" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
+                <td class="book-info"><input type="submit" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
                 <td class="book-info"><?=generateBookInfo($book)?></td>
-                <td class="book-info thin-cell"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
-                <td class="book-info thin-cell"><div class="centered-input">$<?=$book['price']*$book['quantity']?></div></td>
+                <td class="book-info"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
+                <td class="book-info"><div class="centered-input">$<?=$book['price']*$book['quantity']?></div></td>
               </tr>
               
             </table>
