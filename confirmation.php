@@ -21,10 +21,6 @@
             ]?>
             
             <?=generate_confirmation_table("Confirmation", null, null, $confirmation)?>
-            <div id="buttons" class="box align-right">
-              <input type="submit" class="blue button" value="Update">
-              <input type="submit" class="green button" value="Checkout">
-            </div>
           </form>
         </div>
       </div>
