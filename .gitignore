@@ -60,3 +60,7 @@ local.properties
 .target
 # TeXlipse plugin
 .texlipse
+
+# LibreOffice locks
+.~lock.*#
+
