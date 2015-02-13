@@ -33,6 +33,7 @@ $locations = array(
   'admin' => $project_root . 'admin.php',
   'register' => $project_root . 'register.php',
   'login' => $project_root . 'login.php',
-  'logout' => $admin_root . 'php/logout.php'
+  'logout' => $admin_root . 'php/logout.php',
+  'search' => $project_root . 'search.php'
 );
 ?>
