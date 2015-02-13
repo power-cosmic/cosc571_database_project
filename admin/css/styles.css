@@ -88,6 +88,10 @@ input[type="submit"]:disabled {
   cursor: default;
 }
 
+a.button {
+  padding: 5px;
+}
+
 .button {
   text-decoration: none;
   cursor: pointer;
