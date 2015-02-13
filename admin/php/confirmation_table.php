@@ -94,7 +94,14 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
     $subtotal += $cost;
     $to_return .= '<tr>
                   <td class="book-info">' . generateBookInfo($book) . '</td>
-                  <td class="book-info"><input type="number" name="quantity" class="quantity-box centered-input" value="' . $book['quantity'] . '"></td>
+                  <td class="book-info">';
+    if ($confirmation) {
+      $to_return .= $book['quantity'];
+    } else {
+      $to_return .= '<input type="number" name="quantity" 
+          class="quantity-box centered-input" value="' . $book['quantity'] . '">';
+    }
+    $to_return .= '</td>
                   <td class="book-info">$' . $cost . '</td>
                 </tr>';
   }

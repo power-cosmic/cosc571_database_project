@@ -45,6 +45,8 @@ include_once 'admin/php/displays.php';
         <div id="search-results" class="centered box">
           <table id="books-in-cart" class="wide">
             <tr>
+              <th class="thin-cell"></th>
+              <th class="thin-cell"></th>
               <th>Results</th>
             </tr>
             
@@ -61,6 +63,13 @@ include_once 'admin/php/displays.php';
               ]
             ?>
             <tr>
+              <td class="book-info">
+                <input type="button" class="green button centered-input" 
+                    value="Add to cart" name="add <?=$book['id']?>">
+              </td>
+                <td class="book-info">
+                  <a href="review.php?id=<?=$book['id']?>" class="blue button centered-input">Reviews</a>
+                </td>
               <td class="book-info"><?=generateBookInfo($book)?></td>
             </tr>
             
