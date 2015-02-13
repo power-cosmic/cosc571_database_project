@@ -5,8 +5,10 @@ $user_status = array(
 );
 
 $name = array(
-  'long' => 'Best-Buy-Books',
-  'short' => '3-B'
+  //'long' => 'Best-Buy-Books',
+  //'short' => '3-B'
+  'long' => 'Titan Entertainment',
+  'short' => 'TE'
 );
 
 $project_root_parts = explode('/', $_SERVER['SCRIPT_NAME']);
