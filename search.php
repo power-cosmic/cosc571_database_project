@@ -64,7 +64,7 @@ include_once 'admin/php/displays.php';
             ?>
             <tr>
               <td class="book-info">
-                <input type="submit" class="green button centered-input" 
+                <input type="button" class="green button centered-input" 
                     value="Add to cart" name="add <?=$book['id']?>">
               </td>
                 <td class="book-info">

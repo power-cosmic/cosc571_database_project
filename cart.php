@@ -41,7 +41,7 @@
                   $total += $cost;
               ?>
                 <tr>
-                  <td class="book-info"><input type="submit" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
+                  <td class="book-info"><input type="button" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
                   <td class="book-info"><?=generateBookInfo($book)?></td>
                   <td class="book-info"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
                   <td class="book-info"><div class="centered-input">$<?=$cost?></div></td>
