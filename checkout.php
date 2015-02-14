@@ -12,11 +12,11 @@
       <?=createHeader()?>
       <div class="content">
         <div id="cart" class="centered box">
-          <form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+          <form method="post" action="confirmation.php">
             <?=generate_confirmation_table("Checkout", null, null, null)?>
             <div id="buttons" class="box align-right">
-              <input type="submit" class="blue button" value="Update">
-              <input type="submit" class="green button" value="Checkout">
+              <input type="submit" class="purple button" value="Edit Cart">
+              <input type="submit" class="green button" value="Submit Order">
             </div>
           </form>
         </div>

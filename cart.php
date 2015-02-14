@@ -11,7 +11,7 @@
       <?=createHeader()?>
       <div class="content">
         <div id="cart" class="centered box">
-          <form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+          <form method="post" action="checkout.php">
             <table id="books-in-cart" class="wide">
               <tr>
                 <th class="thin-cell">Remove</th>
@@ -19,9 +19,9 @@
                 <th class="thin-cell">Qty</th>
                 <th class="thin-cell">Price</th>
               </tr>
-              
+
               <!-- TODO: generate rows from db -->
-              <?php 
+              <?php
                 $test_book = [
                     'id' => 1,
                     'title' => 'Absolute Java',
@@ -34,7 +34,7 @@
                 $books = [$test_book, $test_book];
                 $total = 0;
               ?>
-              <?php 
+              <?php
                 $total = 0;
                 foreach ($books as $book) {
                   $cost = $book['price']*$book['quantity'];
@@ -46,10 +46,10 @@
                   <td class="book-info"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
                   <td class="book-info"><div class="centered-input">$<?=$cost?></div></td>
                 </tr>
-              <?php 
+              <?php
                 }
               ?>
-              
+
             </table>
             <div id="total" class="box right-aligned">
               Subtotal: $<?=$total?>

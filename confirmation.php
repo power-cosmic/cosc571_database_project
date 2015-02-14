@@ -13,13 +13,15 @@
       <div class="content">
         <div id="cart" class="centered box">
           <form method="post" action="<?=$_SERVER['PHP_SELF']?>">
-          
-            <?php $confirmation=[
+
+            <?php
+              $confirmation=[
                 'username' => 'coolguy47',
                 'date' => '02/06/1990',
                 'time' => '11:20:22'
-            ]?>
-            
+              ]
+            ?>
+
             <?=generate_confirmation_table("Confirmation", null, null, $confirmation)?>
           </form>
         </div>
