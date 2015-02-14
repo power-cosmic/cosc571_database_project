@@ -49,9 +49,14 @@ a.no-decoration:link, a.no-decoration:visited, a.no-decoration:hover, a.no-decor
 
 #footer {
   color: #4C668C;
+  background-color: #f2f2f2;
   position: absolute;
   bottom: 0px;
   height: 45px;
+}
+
+#footer-data {
+  top: 10px;
 }
 
 .content {

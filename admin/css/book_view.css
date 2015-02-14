@@ -14,7 +14,8 @@ h2.book-view-header {
 }
 
 div.book-view {
-  margin: 0px 10px; text-align : center;
+  margin: 0px 10px; 
+  text-align : center;
   display: inline-block;
   height: 80%;
   width: 200px;
