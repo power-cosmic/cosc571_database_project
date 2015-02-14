@@ -8,7 +8,7 @@ $name = array(
   //'long' => 'Best-Buy-Books',
   //'short' => '3-B'
   'long' => 'Titan Entertainment',
-  'short' => 'TE'
+  'short' => 'T&and;E'
 );
 
 $project_root_parts = explode('/', $_SERVER['SCRIPT_NAME']);
