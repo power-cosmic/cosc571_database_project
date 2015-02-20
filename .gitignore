@@ -21,7 +21,7 @@ Temporary Items
 .apdisk
 
 # no image files
-*.jpg
+#*.jpg
 
 #vim ignore
 [._]*.s[a-w][a-z]
