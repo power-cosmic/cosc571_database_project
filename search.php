@@ -33,10 +33,18 @@ include_once 'admin/php/connection.php';
           <h3>Categories</h3>
           <input type="button" id="toggle-category-button" class="purple button" value="Select all">
           <!-- TODO: generate these from database -->
-          <input type="checkbox" name="category" value="horror" id="category-horror" form="<?=$search_id?>" checked>
-          <label for="category-horror">Horror</label>
-          <input type="checkbox" name="category" value="scary" id="category-scary" form="<?=$search_id?>" checked>
-          <label for="category-scary">Scary</label>
+          <?php
+          $sql = "SELECT name FROM genre;";
+          $db = open_connection();
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+          while($genre = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          ?>
+          <input type="checkbox" name="category" value="<?=$genre['name']?>" id="category-<?=$genre['name']?>" form="<?=$search_id?>" checked>
+          <label for="category-<?=$genre['name']?>"><?=$genre['name']?></label>
+          <?php
+          }
+          ?>
         </div>
 
         <!-- </form> -->
