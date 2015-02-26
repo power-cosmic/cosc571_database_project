@@ -63,7 +63,12 @@ include_once 'admin/php/connection.php';
                   'isbn' => '978-0132834230'
               ];
               $db = open_connection();
-              $sql = "SELECT * FROM book LIMIT 10;";
+              $sql = "SELECT *
+                      FROM book,author,publisher,genre
+                      WHERE author_id=author.id
+                            AND publisher_id=publisher.id
+                            AND genre_id=genre.id
+                      LIMIT 10;";
               $stmt = $db->prepare($sql);
               $stmt->execute();
               while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
