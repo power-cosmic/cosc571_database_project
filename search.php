@@ -2,6 +2,7 @@
 include_once 'admin/php/book_info.php';
 include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
+include_once 'admin/php/connection.php';
 ?>
 <!doctype html>
 <html>
@@ -12,11 +13,11 @@ include_once 'admin/php/displays.php';
       <?=createHeader()?>
       <div class="content">
       <div id="search" class="centered box">
-        
+
         <br>
-        
+
         <?php $search_id = "the-search"?>
-        
+
         <div id="search-criteria-box">
           <h3>Search Criteria</h3>
           <input type="checkbox" name="criteria" value="title" id="criteria-title" form="<?=$search_id?>" checked>
@@ -37,10 +38,10 @@ include_once 'admin/php/displays.php';
           <input type="checkbox" name="category" value="scary" id="category-scary" form="<?=$search_id?>" checked>
           <label for="category-scary">Scary</label>
         </div>
-          
+
         <!-- </form> -->
       </div>
-      
+
       <?php if ($_GET['query']) { ?>
         <div id="search-results" class="centered box">
           <table id="books-in-cart" class="wide">
@@ -49,9 +50,9 @@ include_once 'admin/php/displays.php';
               <th class="thin-cell"></th>
               <th>Results</th>
             </tr>
-            
+
             <!-- TODO: generate rows from db -->
-            <?php 
+            <?php
               $book = [
                   'id' => 1,
                   'title' => 'Absolute Java',
@@ -60,11 +61,18 @@ include_once 'admin/php/displays.php';
                   'quantity' => '2',
                   'publisher' => 'Addison-Wesley',
                   'isbn' => '978-0132834230'
-              ]
+              ];
+              $db = open_connection();
+              $sql = "SELECT * FROM book LIMIT 10;";
+              $stmt = $db->prepare($sql);
+              $stmt->execute();
+              while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                print_r($row); //etc...
+              }
             ?>
             <tr>
               <td class="book-info">
-                <input type="button" class="green button centered-input" 
+                <input type="button" class="green button centered-input"
                     value="Add to cart" name="add <?=$book['id']?>">
               </td>
                 <td class="book-info">
@@ -72,9 +80,9 @@ include_once 'admin/php/displays.php';
                 </td>
               <td class="book-info"><?=generateBookInfo($book)?></td>
             </tr>
-            
+
           </table>
-      
+
         </div>
         <?php } ?>
       </div>
