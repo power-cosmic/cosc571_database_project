@@ -63,7 +63,9 @@ include_once 'admin/php/connection.php';
                   'isbn' => '978-0132834230'
               ];
               $db = open_connection();
-              $sql = "SELECT *
+              $sql = "SELECT title, price, isbn, description,
+                              publisher.name as publisher, genre.name as genre,
+                              first_name, last_name
                       FROM book,author,publisher,genre
                       WHERE author_id=author.id
                             AND publisher_id=publisher.id
