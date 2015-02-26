@@ -9,7 +9,9 @@
  * @param boolean $show_isbn Whether or not to show isbn
  */
 function generateBookInfo($book, $show_publisher = false, $showISBN = false) {
-  $to_return = generateBookInfoLine('Title', $book['title']) . generateBookInfoLine('Author', $book['author']) . generateBookInfoLine('Price', "$" . $book['price']);
+  $to_return = generateBookInfoLine('Title', $book['title'])
+    . generateBookInfoLine('Author', $book['first_name'] . ' ' . $book['last_name'])
+    . generateBookInfoLine('Price', "$" . $book['price']);
 
   if ($show_publisher) {
     $to_return .= generateBookInfoLine('Publisher', $book['publisher']);
@@ -45,7 +47,7 @@ function generateBookView($book) {
   $to_return = '<div class="book-view">
         <img src="' . $book['cover'] . '" class="book-cover" /><div class="book-info-box">'
           . generateBookInfoLine('Title', $book['title'])
-          . generateBookInfoLine('Author', $book['author'])
+          . generateBookInfoLine('Author', $book['first_name'] . ' ' . $book['last_name'])
           . '</div>
            </div>';
   return $to_return;

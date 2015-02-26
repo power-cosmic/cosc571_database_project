@@ -73,21 +73,23 @@ include_once 'admin/php/connection.php';
                       LIMIT 10;";
               $stmt = $db->prepare($sql);
               $stmt->execute();
-              while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                print_r($row); //etc...
-              }
+              while($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                print_r($book); //etc...
             ?>
             <tr>
               <td class="book-info">
                 <input type="button" class="green button centered-input"
-                    value="Add to cart" name="add <?=$book['id']?>">
+                    value="Add to cart" name="add <?=$book['isbn']?>">
               </td>
                 <td class="book-info">
-                  <a href="review.php?id=<?=$book['id']?>" class="blue button centered-input">Reviews</a>
+                  <a href="review.php?id=<?=$book['isbn']?>" class="blue button centered-input">Reviews</a>
                 </td>
               <td class="book-info"><?=generateBookInfo($book)?></td>
             </tr>
-
+            <?php
+            }
+            ?>
           </table>
 
         </div>
