@@ -54,7 +54,7 @@ include_once 'admin/php/connection.php';
         <div id="search-results" class="centered box">
           <table id="books-in-cart" class="wide">
             <tr>
-              <th>Results</th>
+              <th colspan="3">Results</th>
             </tr>
 
             <!-- TODO: generate rows from db -->
