@@ -54,8 +54,6 @@ include_once 'admin/php/connection.php';
         <div id="search-results" class="centered box">
           <table id="books-in-cart" class="wide">
             <tr>
-              <th class="thin-cell"></th>
-              <th class="thin-cell"></th>
               <th>Results</th>
             </tr>
 
