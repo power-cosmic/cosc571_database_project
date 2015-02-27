@@ -59,15 +59,6 @@ include_once 'admin/php/connection.php';
 
             <!-- TODO: generate rows from db -->
             <?php
-              $book = [
-                  'id' => 1,
-                  'title' => 'Absolute Java',
-                  'author' => 'Walter Savitch',
-                  'price' => '149.99',
-                  'quantity' => '2',
-                  'publisher' => 'Addison-Wesley',
-                  'isbn' => '978-0132834230'
-              ];
               $db = open_connection();
               $sql = "SELECT title, price, isbn, description,
                               publisher.name as publisher, genre.name as genre,
@@ -81,7 +72,6 @@ include_once 'admin/php/connection.php';
               $stmt->execute();
               while($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-                print_r($book); //etc...
             ?>
             <tr>
               <td class="book-info">
