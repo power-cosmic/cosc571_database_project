@@ -28,14 +28,20 @@
   $word_database['article'] = ['a', 'the'];
   
   $review_symbols = array(
-      'review' => ['#statement_list'],
+      'review' => [
+          '#statement_list', 
+          '#statement_list', 
+          '#statement_list #pros_cons',
+          '#pros-cons #statement_list'
+      ],
+      'pros_cons' => ["<br/>pros:<br/> #statement_list <br/>cons:<br/> #statement_list"],
       'statement_list' => ['#statement', '#statement #statement_list'],
       'statement' => [
         '#subject is $adjective .',
         '#subject $transitive_verb #object .',
         '#subject $intransitive_verb .'
       ],
-      'thing' => ['$article $noun', '$author', '$book', 'this'],
+      'thing' => ['$article $noun', '$article $noun', '$author', '$book', 'this'],
       'subject' => ['I', 'he', 'she', 'they', '#thing', '#thing', '#thing'],
       'object' => ['me', 'him', 'her', 'them', '#thing', '#thing', '#thing']
   );
