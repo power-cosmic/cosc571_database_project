@@ -52,7 +52,7 @@
     if (gettype($choice) == 'string') {
       return $choice;
     } else {
-      $index = rand(0, sizeof($choices) - 1);
+      $index = rand(0, sizeof($choice) - 1);
       return $choice[$index];
     }
   }
