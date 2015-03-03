@@ -34,6 +34,9 @@ $locations = array(
   'register' => $project_root . 'register.php',
   'login' => $project_root . 'login.php',
   'logout' => $admin_root . 'php/logout.php',
-  'search' => $project_root . 'search.php'
+  'search' => $project_root . 'search.php',
+  'images' => $admin_root . 'images/',
+  'favicon' => $admin_root . 'images/icons/te_favicon.ico'
+  //'favicon' => $admin_root . 'images/icons/b3_favicon.ico'
 );
 ?>
