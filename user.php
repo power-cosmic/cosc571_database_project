@@ -1,6 +1,8 @@
 <?php
-  include_once 'admin/php/common.php';
-  include_once 'admin/php/displays.php';
+include_once 'admin/php/common.php';
+include_once 'admin/php/displays.php';
+
+session_start();
 ?>
 <!doctype html>
 <html>

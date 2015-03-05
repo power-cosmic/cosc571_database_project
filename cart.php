@@ -1,7 +1,9 @@
 <?php
-  include_once 'admin/php/book_info.php';
-  include_once 'admin/php/common.php';
-  include_once 'admin/php/displays.php';
+include_once 'admin/php/common.php';
+include_once 'admin/php/displays.php';
+include_once 'admin/php/book_info.php';
+
+session_start();
 ?>
 <!doctype html>
 <html>

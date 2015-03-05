@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 ?>
 <!doctype html>
 <html>
@@ -6,6 +8,6 @@
     <title>Error</title>
   </head>
   <body>
-  <h1>Hi</h1>
+  <h1>More hi</h1>
   </body>
 </html>

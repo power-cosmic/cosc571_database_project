@@ -1,8 +1,10 @@
 <?php
-  include_once 'admin/php/constants.php';
-  include_once 'admin/php/common.php';
-  include_once 'admin/php/displays.php';
-  include_once 'admin/php/review_info.php';
+include_once 'admin/php/common.php';
+include_once 'admin/php/displays.php';
+include_once 'admin/php/constants.php';
+include_once 'admin/php/review_info.php';
+
+session_start();
 ?>
 <!doctype html>
 <html>
