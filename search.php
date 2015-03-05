@@ -42,7 +42,17 @@ session_start();
           $stmt->execute();
           while($genre = $stmt->fetch(PDO::FETCH_ASSOC)) {
           ?>
-          <input type="checkbox" name="category" value="<?=$genre['name']?>" id="category-<?=$genre['name']?>" form="<?=$search_id?>" checked>
+          <input type="checkbox" name="category[]"
+              value="<?=$genre['name']?>" id="category-<?=$genre['name']?>"
+              form="<?=$search_id?>"
+              <?php
+                foreach ($_GET['catagory'] as $checked_genre) {
+                  if ($genre['name'] == $checked_genre) {
+                     echo ' checked="checked"';
+                     break;
+                  }
+                }
+              ?>>
           <label for="category-<?=$genre['name']?>"><?=$genre['name']?></label>
           <?php
           }
