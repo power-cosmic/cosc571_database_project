@@ -69,7 +69,6 @@ session_start();
               <th colspan="3">Results</th>
             </tr>
 
-            <!-- TODO: generate rows from db -->
             <?php
               $db = open_connection();
               $sql = "SELECT title, price, isbn, description,
@@ -82,18 +81,18 @@ session_start();
                       LIMIT 10;";
               $stmt = $db->prepare($sql);
               $stmt->execute();
-              while($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
+              while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $book = new Book($book_data);
             ?>
             <tr>
               <td class="book-info">
                 <input type="button" class="green button centered-input"
-                    value="Add to cart" name="add <?=$book['isbn']?>">
+                    value="Add to cart" name="add <?=$book->isbn?>">
               </td>
                 <td class="book-info">
-                  <a href="review.php?id=<?=$book['isbn']?>" class="blue button centered-input">Reviews</a>
+                  <a href="review.php?id=<?=$book->isbn?>" class="blue button centered-input">Reviews</a>
                 </td>
-              <td class="book-info"><?=generateBookInfo($book)?></td>
+              <td class="book-info"><?=$book->generateBookInfo()?></td>
             </tr>
             <?php
             }
