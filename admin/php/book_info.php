@@ -2,6 +2,7 @@
 
 class Book {
 
+  public $id = -1;
   public $title = '';
   public $first_name = '';
   public $last_name = '';

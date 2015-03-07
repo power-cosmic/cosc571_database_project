@@ -24,29 +24,40 @@ session_start();
 
               <!-- TODO: generate rows from db -->
               <?php
-                $test_book = [
+                $test_book_data = [
                     'id' => 1,
                     'title' => 'Absolute Java',
                     'author' => 'Walter Savitch',
                     'price' => '149.99',
-                    'quantity' => '2',
                     'publisher' => 'Addison-Wesley',
                     'isbn' => '978-0132834230'
                 ];
-                $books = [$test_book, $test_book];
+                $books = [new Book($test_book_data), new Book($test_book_data)];
+                $quantities = [1, 2];
                 $total = 0;
               ?>
               <?php
                 $total = 0;
-                foreach ($books as $book) {
-                  $cost = $book['price']*$book['quantity'];
+                for ($i = 0; $i < count($books); $i++) {
+                  $book = $books[$i];
+                  $cost = $book->price * $quantities[$i];
                   $total += $cost;
               ?>
                 <tr>
-                  <td class="book-info"><input type="button" class="purple button centered-input" value="Delete" name="delete <?=$book['id']?>">
-                  <td class="book-info"><?=generateBookInfo($book)?></td>
-                  <td class="book-info"><input type="number" name="quantity" class="quantity-box right-aligned centered-input" value="<?=$book['quantity']?>"></td>
-                  <td class="book-info"><div class="centered-input">$<?=$cost?></div></td>
+                  <td class="book-info">
+                    <input type="button" 
+                        class="purple button centered-input" 
+                        value="Delete" name="delete <?=$book->id?>">
+                  </td>
+                  <td class="book-info"><?=$book->generateBookInfo()?></td>
+                  <td class="book-info">
+                    <input type="number" name="quantity" 
+                        class="quantity-box right-aligned centered-input" 
+                        value="<?=$quantities[$i]?>">
+                  </td>
+                  <td class="book-info">
+                    <div class="centered-input">$<?=$cost?></div>
+                  </td>
                 </tr>
               <?php
                 }
