@@ -33,8 +33,9 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
   ];
 
   $books = [
-      $dummy_book, $dummy_book
+      new Book($dummy_book), new Book($dummy_book)
   ];
+  $quantities = [1, 2];
   
   $subtotal = 0;
   $shipping = 4;
@@ -89,17 +90,18 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
                 <th class="thin-cell">Price</th>
               </tr>';
 
-  foreach($books as $book) {
-    $cost = $book['quantity'] * $book['price'];
+  for($i = 0; $i < count($books); $i++) {
+    $book = $books[$i];
+    $cost = $quantities[$i] * $book->price;
     $subtotal += $cost;
     $to_return .= '<tr>
-                  <td class="book-info">' . generateBookInfo($book) . '</td>
+                  <td class="book-info">' . $book->generateBookInfo() . '</td>
                   <td class="book-info">';
     if ($confirmation) {
-      $to_return .= $book['quantity'];
+      $to_return .= $book->quantity;
     } else {
       $to_return .= '<input type="number" name="quantity" 
-          class="quantity-box centered-input" value="' . $book['quantity'] . '">';
+          class="quantity-box centered-input" value="' . $quantities[$i] . '">';
     }
     $to_return .= '</td>
                   <td class="book-info">$' . $cost . '</td>
