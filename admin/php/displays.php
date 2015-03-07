@@ -46,7 +46,8 @@ function createHeader($showCart = true, $showLogin = true) {
         </div>
         <div style="position:absolute;bottom:5px;text-align:center;width:100%;">
           <form id="the-search" action="' . $GLOBALS['locations']['search'] . '" method="GET">
-            <input type="text" name="query" placeholder="search query" id="search-bar">
+            <input type="text" name="query" placeholder="search query" id="search-bar" 
+                value="' . $_GET['query'] . '">
             <input type="submit" value="search" class="green button">
           </form>
         </div>
