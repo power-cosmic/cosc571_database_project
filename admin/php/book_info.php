@@ -61,7 +61,7 @@ class Book {
    */
   public function generateBookView() {
     $to_return = '<div class="book-view">
-          <img src="' . $cover . '" class="book-cover" /><div class="book-info-box">'
+          <img src="' . $this->cover . '" class="book-cover" /><div class="book-info-box">'
             . $this->generateBookInfoLine('Title', $this->title)
             . $this->generateBookInfoLine('Author', $this->first_name . ' ' . $this->last_name)
             . '</div>

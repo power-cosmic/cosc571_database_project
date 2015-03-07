@@ -19,7 +19,7 @@ session_start();
         <div id="top_picks" class="scrolling-view">
           <?php
           //get the top 10 number of sold books
-          $book = [
+          $book_info = [
               'id' => 1,
               'title' => 'Absolute Java Is The Best Book Around',
               'author' => 'Walter Savitch',
@@ -27,12 +27,14 @@ session_start();
               'quantity' => '2',
               'publisher' => 'Addison-Wesley',
               'isbn' => '978-0132834230',
-              'cover' => 'admin/images/cart.jpg'
+              'cover' => 'admin/images/icons/cart.jpg'
           ];
+          
+          $book = new Book($book_info);
 
           echo '<span class="v-align-helper"></span>';
           for ($i = 0; $i < 10; $i++) {
-            echo generateBookView($book);
+            echo $book->generateBookView();
           }
 
           ?>
