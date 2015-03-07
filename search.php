@@ -69,7 +69,6 @@ session_start();
               <th colspan="3">Results</th>
             </tr>
 
-            <!-- TODO: generate rows from db -->
             <?php
               $db = open_connection();
               $sql = "SELECT title, price, isbn, description,
@@ -84,7 +83,6 @@ session_start();
               $stmt->execute();
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $book = new Book($book_data);
-                print_r($book);
             ?>
             <tr>
               <td class="book-info">
