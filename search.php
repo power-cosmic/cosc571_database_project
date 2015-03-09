@@ -115,7 +115,15 @@ session_start();
 
                   $at_least_one = true;
                 }
-                $sql .= ");";
+                $sql .= ")";
+              }
+              if ($_GET['category']) {
+                $sql .= " AND (";
+                $sql .= "genre.name = '" . array_pop($_GET['category']) . "'";
+                foreach ($_GET['category'] as $selected_genre) {
+                  $sql .= " OR genre.name = '" . $selected_genre . "'";
+                }
+                $sql .= ")";
               }
               //echo $sql;
               $stmt = $db->prepare($sql);
@@ -135,7 +143,7 @@ session_start();
               <td class="book-info"><?=$book->generateBookInfo()?></td>
             </tr>
             <?php
-            }
+              }
             ?>
           </table>
 
