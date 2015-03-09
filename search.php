@@ -46,7 +46,7 @@ session_start();
               value="<?=$genre['name']?>" id="category-<?=$genre['name']?>"
               form="<?=$search_id?>"
               <?php
-                foreach ($_GET['catagory'] as $checked_genre) {
+                foreach ($_GET['category'] as $checked_genre) {
                   if ($genre['name'] == $checked_genre) {
                      echo ' checked="checked"';
                      break;
@@ -78,7 +78,9 @@ session_start();
                       WHERE author_id=author.id
                             AND publisher_id=publisher.id
                             AND genre_id=genre.id
+                            AND " . $_GET['criteria'] . " LIKE '%" . $_GET['query'] . "%'
                       LIMIT 10;";
+              //echo $sql;
               $stmt = $db->prepare($sql);
               $stmt->execute();
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -90,7 +92,8 @@ session_start();
                     value="Add to cart" name="add <?=$book->isbn?>">
               </td>
                 <td class="book-info">
-                  <a href="review.php?id=<?=$book->isbn?>" class="blue button centered-input">Reviews</a>
+                  <input type="button" class="blue button centered-input"
+                    value="Reviews" onclick="window.location.href='review.php?id=<?=$book->isbn?>'" />
                 </td>
               <td class="book-info"><?=$book->generateBookInfo()?></td>
             </tr>
