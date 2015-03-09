@@ -22,13 +22,13 @@ session_start();
 
         <div id="search-criteria-box">
           <h3>Search Criteria</h3>
-          <input type="checkbox" name="criteria" value="title" id="criteria-title" form="<?=$search_id?>" checked>
+          <input type="checkbox" name="criteria[title]" value="title" id="criteria-title" form="<?=$search_id?>" checked>
           <label for="criteria-title" checked>Title</label>
-          <input type="checkbox" name="criteria" value="author" id="criteria-author" form="<?=$search_id?>">
+          <input type="checkbox" name="criteria[author]" value="author" id="criteria-author" form="<?=$search_id?>">
           <label for="criteria-author">Author</label>
-          <input type="checkbox" name="criteria" value="publisher" id="criteria-publisher" form="<?=$search_id?>">
+          <input type="checkbox" name="criteria[publisher]" value="publisher" id="criteria-publisher" form="<?=$search_id?>">
           <label for="criteria-publisher">Publisher</label>
-          <input type="checkbox" name="criteria" value="isbn" id="criteria-isbn" form="<?=$search_id?>">
+          <input type="checkbox" name="criteria[isbn]" value="isbn" id="criteria-isbn" form="<?=$search_id?>">
           <label for="criteria-isbn">ISBN</label>
         </div>
         <div id="search-category-box">
@@ -40,9 +40,10 @@ session_start();
           $db = open_connection();
           $stmt = $db->prepare($sql);
           $stmt->execute();
+          $category_num = 0;
           while($genre = $stmt->fetch(PDO::FETCH_ASSOC)) {
           ?>
-          <input type="checkbox" name="category[]"
+          <input type="checkbox" name="category[<?=$category_num++?>]"
               value="<?=$genre['name']?>" id="category-<?=$genre['name']?>"
               form="<?=$search_id?>"
               <?php
@@ -77,9 +78,45 @@ session_start();
                       FROM book,author,publisher,genre
                       WHERE author_id=author.id
                             AND publisher_id=publisher.id
-                            AND genre_id=genre.id
-                            AND " . $_GET['criteria'] . " LIKE '%" . $_GET['query'] . "%'
-                      LIMIT 10;";
+                            AND genre_id=genre.id";
+
+              //              AND " . $_GET['criteria'] . " LIKE '%" . $_GET['query'] . "%'
+              //        LIMIT 10;";
+              if ($_GET['criteria']) {
+                $sql .= " AND (";
+                $at_least_one = false;
+                if ($_GET['criteria']['author']) {
+                  $sql .= "first_name LIKE '%" . $_GET['query'] . "%'";
+                  $sql .= " OR last_name LIKE '%" . $_GET['query'] . "%'";
+
+                  $at_least_one = true;
+                }
+                if ($_GET['criteria']['title']) {
+                  if ($at_least_one) {
+                    $sql .= " OR ";
+                  }
+                  $sql .= "title LIKE '%" . $_GET['query'] . "%'";
+
+                  $at_least_one = true;
+                }
+                if ($_GET['criteria']['publisher']) {
+                  if ($at_least_one) {
+                    $sql .= " OR ";
+                  }
+                  $sql .= "publisher.name LIKE '%" . $_GET['query'] . "%'";
+
+                  $at_least_one = true;
+                }
+                if ($_GET['criteria']['isbn']) {
+                  if ($at_least_one) {
+                    $sql .= " OR ";
+                  }
+                  $sql .= "isbn LIKE '%" . $_GET['query'] . "%'";
+
+                  $at_least_one = true;
+                }
+                $sql .= ");";
+              }
               //echo $sql;
               $stmt = $db->prepare($sql);
               $stmt->execute();
