@@ -21,6 +21,9 @@ CREATE FUNCTION isbn_check_digit(isbn_check CHAR(12))
 			END IF;
 		END LOOP;
 		SET check_digit = 10 - check_digit % 10;
+		IF (check_digit = 10) THEN
+			SET check_digit = 0;
+		END IF;
         RETURN CAST(check_digit AS CHAR(1));
     END //
 
