@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS isbn_with_check_digit;
+DROP FUNCTION IF EXISTS isbn_check_digit;
 DELIMITER //
 
-CREATE FUNCTION isbn_with_check_digit(isbn_check CHAR(12))
+CREATE FUNCTION isbn_check_digit(isbn_check CHAR(12))
     RETURNS CHAR(1)
     BEGIN
         DECLARE check_digit, temp_num, loop_index INT;
@@ -21,7 +21,7 @@ CREATE FUNCTION isbn_with_check_digit(isbn_check CHAR(12))
 			END IF;
 		END LOOP;
 		SET check_digit = 10 - check_digit % 10;
-        RETURN CONCAT(isbn_check, CAST(check_digit AS CHAR(1)));
+        RETURN CAST(check_digit AS CHAR(1));
     END //
 
 DELIMITER ;
