@@ -1,6 +1,6 @@
-DROP TRIGGER IF EXISTS update_publisher_book;
+DROP TRIGGER IF EXISTS on_insert_book;
 DELIMITER $$
-CREATE TRIGGER update_publisher_book
+CREATE TRIGGER on_insert_book
 	BEFORE INSERT
 	ON book
 	FOR EACH ROW
