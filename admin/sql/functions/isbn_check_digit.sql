@@ -4,9 +4,7 @@ DELIMITER //
 CREATE FUNCTION isbn_check_digit(isbn_check CHAR(12))
     RETURNS CHAR(1)
     BEGIN
-        DECLARE check_digit INT;
-        DECLARE temp_num INT;
-        DECLARE loop_index INT;
+        DECLARE check_digit, temp_num, loop_index INT;
         SET check_digit = 0;
         SET loop_index = 0;
         
