@@ -23,7 +23,7 @@ session_start();
         <div id="search-criteria-box">
           <h3>Search Criteria</h3>
           <input type="checkbox" name="criteria[title]" value="title" id="criteria-title" form="<?=$search_id?>" checked>
-          <label for="criteria-title" checked>Title</label>
+          <label for="criteria-title">Title</label>
           <input type="checkbox" name="criteria[author]" value="author" id="criteria-author" form="<?=$search_id?>">
           <label for="criteria-author">Author</label>
           <input type="checkbox" name="criteria[publisher]" value="publisher" id="criteria-publisher" form="<?=$search_id?>">
@@ -43,8 +43,9 @@ session_start();
           $category_num = 0;
           while($genre = $stmt->fetch(PDO::FETCH_ASSOC)) {
           ?>
+
           <input type="checkbox" name="category[<?=$category_num++?>]"
-              value="<?=$genre['name']?>" id="category-<?=$genre['name']?>"
+              value="<?=$genre['name']?>" id="category-<?=str_replace(' ', '_', $genre['name'])?>"
               form="<?=$search_id?>"
               <?php
                 foreach ($_GET['category'] as $checked_genre) {
@@ -54,7 +55,7 @@ session_start();
                   }
                 }
               ?>>
-          <label for="category-<?=$genre['name']?>"><?=$genre['name']?></label>
+          <label for="category-<?=str_replace(' ', '_', $genre['name'])?>"><?=$genre['name']?></label>
           <?php
           }
           ?>
@@ -116,6 +117,11 @@ session_start();
                   $at_least_one = true;
                 }
                 $sql .= ")";
+              } else {
+                $sql .= " AND (";
+                $sql .= "title LIKE '%" . $_GET['query'] . "%'";
+                $sql .= ")";
+
               }
               if ($_GET['category']) {
                 $sql .= " AND (";
@@ -125,7 +131,7 @@ session_start();
                 }
                 $sql .= ")";
               }
-              //echo $sql;
+              //echo "<tr><td colspan='3'>$sql</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
