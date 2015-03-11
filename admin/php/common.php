@@ -4,6 +4,7 @@ include_once 'constants.php';
 function createBasicHead($title = '', $script_location = null, $styles = []) {
   $toReturn = '<head>
     <title>' . $GLOBALS['name']['short'] . ' | ' . $title . '</title>
+    <meta charset="utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="'. $GLOBALS['locations']['favicon'] . '" />
     <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['main_style'] . '">';
 

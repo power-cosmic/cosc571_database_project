@@ -44,9 +44,9 @@ function createHeader($showCart = true, $showLogin = true) {
   $to_return .= '
           </div>
         </div>
-        <div style="position:absolute;bottom:5px;text-align:center;width:100%;">
+        <div style="position:absolute;bottom:10px;text-align:center;width:100%;">
           <form id="the-search" action="' . $GLOBALS['locations']['search'] . '" method="GET">
-            <input type="text" name="query" placeholder="search query" id="search-bar" 
+            <input type="text" name="query" placeholder="search query" id="search-bar"
                 value="' . $_GET['query'] . '">
             <input type="submit" value="search" class="green button">
           </form>
@@ -58,7 +58,7 @@ function createHeader($showCart = true, $showLogin = true) {
 function createFooter() {
   date_default_timezone_set('America/Detroit');
 
-  $to_return = '<div id="footer" class="bar">
+  $to_return = '<div id="footer" class="bar" style="position:fixed;">
         <div class="centered" id="footer-data">
           <div class="thin-box">&copy; 2013-' . date('Y') . '</div> |
           <div class="thin-box"><a href="' . $GLOBALS['locations']['admin'] . '">admin</a></div>
