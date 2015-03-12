@@ -13,8 +13,7 @@ function createBasicHead($title = '', $script_location = null, $styles = []) {
     <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['styles'] . $style . '">';
   }
 
-  if ($script_location) {
-    $toReturn .= '
+  $toReturn .= '
     <script src="' . $GLOBALS['locations']['lib'] . 'require.js"></script>
     <script>
       require.config({
@@ -22,13 +21,16 @@ function createBasicHead($title = '', $script_location = null, $styles = []) {
           lib: "' . $GLOBALS['admin_root'] . 'lib",
           js: "' . $GLOBALS['admin_root'] . 'js"
         }
-      });
-      require(["js/' . $script_location . '"]);
-    </script>';
+      });';
+  if ($script_location) {
+    $toReturn .= 'require(["js/' . $script_location . '"]);';
   }
+  $toReturn .= '
+      require(["js/stickyHeader"]);
+    </script>';
 
   $toReturn .= '
-  </head>' . "\n";
+    </head>' . "\n";
 
   return $toReturn;
 }
