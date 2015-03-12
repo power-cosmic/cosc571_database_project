@@ -3,7 +3,8 @@ session_start();
 include_once 'constants.php';
 
 function createHeader($showCart = true, $showLogin = true) {
-  $to_return = '<div id="header" class="bar">
+  $to_return = '<div id="header-replacer" class="collapsed bar"></div>
+      <div id="header" class="bar">
         <div class="centered box">
           <div id="title">
             <a class="no-decoration" href="' . $GLOBALS['locations']['home'] . '"><h1>' . $GLOBALS['name']['long'] . '</h1></a>

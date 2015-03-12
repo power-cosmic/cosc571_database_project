@@ -32,9 +32,20 @@ a.no-decoration:link, a.no-decoration:visited, a.no-decoration:hover, a.no-decor
   text-decoration: none;
 }
 
+#header-replacer.expanded {
+  height: 120px;
+}
+
 #header {
+  transition: all 0.4s;
+  z-index: 2;
   background-color: #f2f2f2;
   height: 120px;
+}
+
+#header.sticky {
+  top: -76px;
+  position: fixed;
 }
 
 #title {
@@ -198,6 +209,7 @@ div.form-row {
 .glow-link:hover {
   color: #75C101;
 }
+
 
 /*
 	References
