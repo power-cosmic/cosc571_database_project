@@ -73,7 +73,7 @@ session_start();
 
             <?php
               $db = open_connection();
-              $sql = "SELECT title, price, isbn, description,
+              $sql = "SELECT title, price, book.isbn as isbn, description,
                               publisher.name as publisher, genre.name as genre,
                               first_name, last_name
                       FROM book,author,publisher,genre,book_genre
