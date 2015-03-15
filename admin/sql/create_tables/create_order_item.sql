@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS order_item;
-
-CREATE TABLE order_item
+CREATE TABLE IF NOT EXISTS order_item
 (
   order_id INT(11) UNSIGNED,
   book_isbn CHAR(13),

@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS sales_order;
-
-CREATE TABLE sales_order
+CREATE TABLE IF NOT EXISTS sales_order
 (
   id INT(11) UNSIGNED PRIMARY KEY,
   

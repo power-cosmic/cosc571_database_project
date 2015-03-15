@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS wishlist;
-
-CREATE TABLE wishlist
+CREATE TABLE IF NOT EXISTS wishlist
 (
   book_isbn CHAR(13),
   customer_username VARCHAR(64),

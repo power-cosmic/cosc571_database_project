@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS coupon;
-
-CREATE TABLE coupon
+CREATE TABLE IF NOT EXISTS coupon
 (
   entry_code CHAR(10) PRIMARY KEY,
   customer_username VARCHAR(64),

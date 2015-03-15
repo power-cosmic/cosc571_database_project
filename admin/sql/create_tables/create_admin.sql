@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS admin;
-
-CREATE TABLE admin
+CREATE TABLE IF NOT EXISTS admin
 (
   username VARCHAR(64) PRIMARY KEY,
   password CHAR(41)
