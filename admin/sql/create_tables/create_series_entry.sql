@@ -1,6 +1,6 @@
 CREATE TABLE series_entry
 (
-	book_id INT(20) UNSIGNED,
+	book_id CHAR(13),
 	series_id INT(11) UNSIGNED,
 	position INT(5),
 
