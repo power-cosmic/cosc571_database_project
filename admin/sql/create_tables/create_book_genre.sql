@@ -1,6 +1,6 @@
 CREATE TABLE book_genre
 (
-	isbn INT(20) UNSIGNED,
+	isbn CHAR(13),
 	genre_id INT(11) UNSIGNED,
 
 	PRIMARY KEY (isbn, genre_id),
