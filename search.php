@@ -76,10 +76,11 @@ session_start();
               $sql = "SELECT title, price, isbn, description,
                               publisher.name as publisher, genre.name as genre,
                               first_name, last_name
-                      FROM book,author,publisher,genre
+                      FROM book,author,publisher,genre,book_genre
                       WHERE author_id=author.id
                             AND publisher_id=publisher.id
-                            AND genre_id=genre.id";
+                            AND book.isbn=book_genre.isbn
+                            AND book_genre.genre_id=genre.id";
 
               //              AND " . $_GET['criteria'] . " LIKE '%" . $_GET['query'] . "%'
               //        LIMIT 10;";
