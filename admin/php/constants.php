@@ -7,8 +7,10 @@ $user_status = array(
 $name = array(
   //'long' => 'Best-Buy-Books',
   //'short' => '3-B'
-  'long' => 'Titan Entertainment',
-  'short' => 'T &and; E'
+  //'long' => 'Titan Entertainment',
+  //'short' => 'T &and; E'
+  'long' => 'Power Cosmic ',
+  'short' => 'P &#8757; C'
 );
 
 $project_root_parts = explode('/', $_SERVER['SCRIPT_NAME']);
@@ -37,7 +39,8 @@ $locations = array(
   'search' => $project_root . 'search.php',
   'images' => $admin_root . 'images/',
   //'favicon' => $admin_root . 'images/icons/te_favicon.ico'
-  'favicon' => $admin_root . 'images/icons/t_e_favicon.ico'
+  //'favicon' => $admin_root . 'images/icons/t_e_favicon.ico'
+  'favicon' => $admin_root . 'images/icons/not_omega_oval.ico'
   //'favicon' => $admin_root . 'images/icons/b3_favicon.ico'
 );
 ?>
