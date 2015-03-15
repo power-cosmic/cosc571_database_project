@@ -1,4 +1,4 @@
-CREATE TABLE credit_card
+CREATE TABLE IF NOT EXISTS credit_card
 (
 	number INT(16) UNSIGNED PRIMARY KEY,
 	ccv VARCHAR(4),

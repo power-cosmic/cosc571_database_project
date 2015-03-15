@@ -1,4 +1,4 @@
-CREATE TABLE series_entry
+CREATE TABLE IF NOT EXISTS series_entry
 (
 	book_id INT(20) UNSIGNED,
 	series_id INT(11) UNSIGNED,

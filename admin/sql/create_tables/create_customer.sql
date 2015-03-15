@@ -1,4 +1,4 @@
-CREATE TABLE customer
+CREATE TABLE IF NOT EXISTS customer
 (
 	username VARCHAR(64) PRIMARY KEY,
 	password CHAR(41),  
