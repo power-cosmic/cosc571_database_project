@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS wishlist;
 
 CREATE TABLE wishlist
 (
-  book_isbn INT(20) UNSIGNED,
+  book_isbn CHAR(13),
   customer_username VARCHAR(64),
   
   FOREIGN KEY (customer_username) REFERENCES customer (username),
