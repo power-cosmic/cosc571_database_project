@@ -1,4 +1,4 @@
-CREATE TABLE book_genre
+CREATE TABLE  IF NOT EXISTS book_genre
 (
 	isbn CHAR(13),
 	genre_id INT(11) UNSIGNED,

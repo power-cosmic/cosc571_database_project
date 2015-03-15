@@ -1,4 +1,4 @@
-CREATE TABLE customer_address
+CREATE TABLE IF NOT EXISTS customer_address
 (
 	username VARCHAR(64),
 	address_id INT(11) UNSIGNED,

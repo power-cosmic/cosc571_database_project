@@ -1,4 +1,4 @@
-CREATE TABLE phone
+CREATE TABLE IF NOT EXISTS phone
 (
   area_code INT(3),
   number INT(7),
