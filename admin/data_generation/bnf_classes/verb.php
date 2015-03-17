@@ -21,11 +21,7 @@ class Verb extends Word_Type {
     }
     
     // present tense
-    if ($data['present'] != null) {
-      $this->present = $data['present'];
-    } else {
-      $this->present = $base . 's';
-    }
+    $this->present = $base . 's';
     
     // gerund
     if (substr($base, -1) == 'e') {
