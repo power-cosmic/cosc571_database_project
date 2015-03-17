@@ -1,5 +1,77 @@
 LOCK TABLES `book` WRITE;
-/*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1495393089,'The Shadow Over Innsmouth',NULL,5.90,1,1,1),(1926801059,'Call of Cthulhu',NULL,3.99,1,1,1);
-/*!40000 ALTER TABLE `book` ENABLE KEYS */;
+
+/*!40000
+ALTER TABLE `book`
+DISABLE KEYS                                                                */;
+
+INSERT INTO `book`
+        VALUES ('9780870450013', 'The Tomb', NULL, 8.13, 1, 1, 1),
+               ('9780870450020', 'Dagon', NULL, 6.45, 1, 1, 1),
+               ('9780870450037', 'A Reminiscence of Dr. Samuel Johnson', NULL, 19.84, 1, 1, 1),
+               ('9780870450044', 'Polaris', NULL, 11.84, 1, 1, 1),
+               ('9780870450051', 'Beyond the Wall of Sleep', NULL, 11.68, 1, 1, 1),
+               ('9780870450068', 'Memory', NULL, 18.87, 1, 1, 1),
+               ('9780870450075', 'Old Bugs', NULL, 7.33, 1, 1, 1),
+               ('9780870450082', 'The Transition of Juan Romero', NULL, 8.02, 1, 1, 1),
+               ('9780870450099', 'The White Ship', NULL, 14.12, 1, 1, 1),
+               ('9780870450105', 'The Doom that Came to Sarnath', NULL, 10.55, 1, 1, 1),
+               ('9780870450112', 'The Statement of Randolph Carter', NULL, 6.38, 1, 1, 1),
+               ('9780870450129', 'The Street', NULL, 12.27, 1, 1, 1),
+               ('9780870450136', 'The Terrible Old Man', NULL, 6.20, 1, 1, 1),
+               ('9780870450143', 'The Cats of Ulthar', NULL, 6.21, 1, 1, 1),
+               ('9780870450150', 'The Tree', NULL, 8.42, 1, 1, 1),
+               ('9780870450167', 'Celephaïs', NULL, 19.49, 1, 1, 1),
+               ('9780870450174', 'From Beyond', NULL, 4.19, 1, 1, 1),
+               ('9780870450181', 'The Temple', NULL, 6.47, 1, 1, 1),
+               ('9780870450198', 'Nyarlathotep', NULL, 15.77, 1, 1, 1),
+               ('9780870450204', 'The Picture in the House', NULL, 7.43, 1, 1, 1),
+               ('9780870450211', 'Facts Concerning the Late Arthur Jermyn and His Family', NULL, 17.87, 1, 1, 1),
+               ('9780870450228', 'The Nameless City', NULL, 15.03, 1, 1, 1),
+               ('9780870450235', 'The Quest of Iranon', NULL, 17.55, 1, 1, 1),
+               ('9780870450242', 'The Moon-Bog', NULL, 6.67, 1, 1, 1),
+               ('9780870450259', 'Ex Oblivione', NULL, 8.70, 1, 1, 1),
+               ('9780870450266', 'The Other Gods', NULL, 19.48, 1, 1, 1),
+               ('9780870450273', 'The Outsider', NULL, 19.30, 1, 1, 1),
+               ('9780870450280', 'The Music of Erich Zann', NULL, 18.07, 1, 1, 1),
+               ('9780870450297', 'Sweet Ermengarde', NULL, 12.45, 1, 1, 1),
+               ('9780870450303', 'Hypnos', NULL, 4.02, 1, 1, 1),
+               ('9780870450310', 'What the Moon Brings', NULL, 10.75, 1, 1, 1),
+               ('9780870450327', 'Azathoth', NULL, 5.70, 1, 1, 1),
+               ('9780870450334', 'Herbert West–Reanimator', NULL, 8.27, 1, 1, 1),
+               ('9780870450341', 'The Hound', NULL, 4.23, 1, 1, 1),
+               ('9780870450358', 'The Lurking Fear', NULL, 8.34, 1, 1, 1),
+               ('9780870450365', 'The Rats in the Walls', NULL, 9.00, 1, 1, 1),
+               ('9780870450372', 'The Unnamable', NULL, 15.97, 1, 1, 1),
+               ('9780870450389', 'The Festival', NULL, 16.88, 1, 1, 1),
+               ('9780870450396', 'The Shunned House', NULL, 16.49, 1, 1, 1),
+               ('9780870450402', 'The Horror at Red Hook', NULL, 11.80, 1, 1, 1),
+               ('9780870450419', 'He', NULL, 5.54, 1, 1, 1),
+               ('9780870450426', 'In the Vault', NULL, 4.31, 1, 1, 1),
+               ('9780870450433', 'Cool Air', NULL, 16.91, 1, 1, 1),
+               ('9780870450440', 'The Call of Cthulhu', NULL, 19.61, 1, 1, 1),
+               ('9780870450457', 'Pickman\'s Model', NULL, 11.35, 1, 1, 1),
+               ('9780870450464', 'The Strange High House in the Mist', NULL, 9.91, 1, 1, 1),
+               ('9780870450471', 'The Silver Key', NULL, 11.51, 1, 1, 1),
+               ('9780870450488', 'The Dream-Quest of Unknown Kadath', NULL, 7.80, 1, 1, 1),
+               ('9780870450495', 'The Case of Charles Dexter Ward', NULL, 16.49, 1, 1, 1),
+               ('9780870450501', 'The Colour Out of Space', NULL, 7.03, 1, 1, 1),
+               ('9780870450518', 'The Descendant', NULL, 13.71, 1, 1, 1),
+               ('9780870450525', 'The Very Old Folk', NULL, 11.43, 1, 1, 1),
+               ('9780870450532', 'History of the Necronomicon', NULL, 12.01, 1, 1, 1),
+               ('9780870450549', 'The Dunwich Horror', NULL, 5.79, 1, 1, 1),
+               ('9780870450556', 'Ibid', NULL, 4.92, 1, 1, 1),
+               ('9780870450563', 'The Whisperer in Darkness', NULL, 19.23, 1, 1, 1),
+               ('9780870450570', 'At the Mountains of Madness', NULL, 13.37, 1, 1, 1),
+               ('9780870450587', 'The Shadow Over Innsmouth', NULL, 5.18, 1, 1, 1),
+               ('9780870450594', 'The Dreams in the Witch House', NULL, 13.77, 1, 1, 1),
+               ('9780870450600', 'The Thing on the Doorstep', NULL, 17.30, 1, 1, 1),
+               ('9780870450617', 'The Book', NULL, 9.20, 1, 1, 1),
+               ('9780870450624', 'The Evil Clergyman', NULL, 6.08, 1, 1, 1),
+               ('9780870450631', 'The Shadow Out of Time', NULL, 14.83, 1, 1, 1),
+               ('9780870450648', 'The Haunter of the Dark', NULL, 19.88, 1, 1, 1);
+
+/*!40000
+ALTER TABLE `book`
+ENABLE KEYS                                                                 */;
+
 UNLOCK TABLES;
