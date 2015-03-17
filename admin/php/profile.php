@@ -33,8 +33,8 @@ function createProfileForm($username = null) {
       .generateGenericForRow("username", $user, $false, $username != null);
     
       if (!$user) {
-        $to_return .= generateGenericForRow("password", $user)
-            .generateGenericForRow("confirm password", $user);
+        $to_return .= generateGenericForRow("password", $user, true)
+            .generateGenericForRow("confirm password", $user, true);
       }
     
       $most_needed_fields = ['first name', 'last name', 'address', 'city'];
@@ -43,12 +43,11 @@ function createProfileForm($username = null) {
       }
             
       $to_return .= '<div class="form-row">
-          <label for="state">State</label>'
+            <label for="state">State</label>'
           .create_state_dropdown('state', 'mixed', $user['state'])
-          .'<label class="short" for="zip">Zip</label>
-          <input class="short" type="text" name="zip" id="zip" placeholder="12345" value="'.$user['zip'].'">
-         </div>
-         <div class="form-row">
+          .'</div>'
+          .generateGenericForRow('zip', $user)
+         .'<div class="form-row">
           <label for="card-type">Credit card</label>
           <select name="card-type">';
 
