@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS admin
-(
-  username VARCHAR(64) PRIMARY KEY,
-  password CHAR(41)
+( username VARCHAR(64) PRIMARY KEY
+
+, password CHAR(41)
 );

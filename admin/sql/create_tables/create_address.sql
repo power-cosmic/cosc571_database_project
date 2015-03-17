@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS address
-(
-	id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	street_address VARCHAR(128),
-	city VARCHAR(64),
-	state VARCHAR(32),
-	zip INT(5)
+( id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY
+
+, street_address VARCHAR(128)
+, city VARCHAR(64)
+, state VARCHAR(32)
+, zip INT(5)
 );
