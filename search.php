@@ -73,8 +73,8 @@ session_start();
 
             <?php
               $db = open_connection();
-              $sql = "SELECT title, price, book.isbn as isbn, description,
-                              publisher.name as publisher, genre.name as genre,
+              $sql = "SELECT DISTINCT title, price, book.isbn as isbn, description,
+                              publisher.name as publisher,
                               first_name, last_name
                       FROM book,author,publisher,genre,book_genre
                       WHERE author_id=author.id
