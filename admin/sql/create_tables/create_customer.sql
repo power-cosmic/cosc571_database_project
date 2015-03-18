@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS customer
 ( username VARCHAR(64) PRIMARY KEY
 
 , password CHAR(41)
+, email VARCHAR(64)
 , first_name VARCHAR(64)
 , last_name VARCHAR(64) NOT NULL
 , middle_initial VARCHAR(1)
