@@ -1,5 +1,7 @@
 admin(username, password)
-sales_order(id, customer_username, address_id, credit_card_number, contact_phone_area_code, contact_phone_number, total_cost, submit_date, shipping_cost, delivery_date, delivery_status, time)
+sales_order(id, customer_username, address_id, credit_card_number, 
+  contact_phone_area_code, contact_phone_number, total_cost, 
+  submit_date, shipping_cost, delivery_date, delivery_status, time)
 order_item(order_id, book_id, quantity)
 book_genre(id, name)
 author(id, first_name, last_name)
@@ -7,14 +9,16 @@ author(id, first_name, last_name)
 review(customer_id, book_isbn, content, rating, submit_time)
 book(isbn, author_id, publisher_id, price, description, title)
 customer(username, password, first_name, last_name, middle_initial,
-	date_of_birth, phone_area_code, phone_number, address_id,
-	card_number, loyalty_points, one_click_buying, prime_member)
+  date_of_birth, phone_area_code, phone_number, address_id,
+  card_number, loyalty_points, one_click_buying, prime_member)
 credit_card(number, customer_id, type, ccv, expiration_date, issuer, 
-	name_on_card, associated_zip, pin_number)
-addressid, (state, city, zipcode, street_address)
+  name_on_card, associated_zip, pin_number)
+address(id, state_name, city, zipcode, street_address)
+state(name, abbreviation, shipping_code)
+shipping_zone(code, price, time)
 wishlist(book_isbn, customer_id)
 coupon(entry_code, customer_username, order_id, expiration_date,
-	value, used;
+  value, used)
 customer_address(username, address_id)
 phone(area_code, number, carrier)
 publisher(id, name, code, num_books)
