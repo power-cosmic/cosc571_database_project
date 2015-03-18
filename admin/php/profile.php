@@ -29,7 +29,7 @@ function createProfileForm($username = null) {
     ];
   }
     
-  $to_return = '<form method="post" action="<?=$_SERVER[\'PHP_SELF\']?>">'
+  $to_return = '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">'
       .generateGenericForRow("username", $user, $false, $username != null);
     
       if (!$user) {
