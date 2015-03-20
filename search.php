@@ -22,14 +22,30 @@ session_start();
 
         <div id="search-criteria-box">
           <h3>Search Criteria</h3>
-          <input type="checkbox" name="criteria[title]" value="title" id="criteria-title" form="<?=$search_id?>" checked>
-          <label for="criteria-title">Title</label>
-          <input type="checkbox" name="criteria[author]" value="author" id="criteria-author" form="<?=$search_id?>">
-          <label for="criteria-author">Author</label>
-          <input type="checkbox" name="criteria[publisher]" value="publisher" id="criteria-publisher" form="<?=$search_id?>">
-          <label for="criteria-publisher">Publisher</label>
-          <input type="checkbox" name="criteria[isbn]" value="isbn" id="criteria-isbn" form="<?=$search_id?>">
-          <label for="criteria-isbn">ISBN</label>
+          <?php
+              $search_criteria = [
+                'title'=>'Title',
+                'author'=>'Author',
+                'publisher'=>'Publisher',
+                'isbn'=>'ISBN'
+              ];
+
+              foreach ($search_criteria as $criteria=>$criteria_display) {
+          ?>
+          <input type="checkbox" name="criteria[<?=$criteria?>]"
+                                  value="<?=$criteria?>" id="criteria-<?=$criteria?>"
+                                  form="<?=$search_id?>" <?php
+                foreach ($_GET['criteria'] as $checked_criteria) {
+                  if ($criteria == $checked_criteria) {
+                     echo ' checked="checked"';
+                     break;
+                  }
+                }
+              ?>>
+          <label for="criteria-<?=$criteria?>"><?=$criteria_display?></label>
+          <?php
+              }
+          ?>
         </div>
         <div id="search-category-box">
           <h3>Categories</h3>
@@ -40,14 +56,14 @@ session_start();
           $db = open_connection();
           $stmt = $db->prepare($sql);
           $stmt->execute();
+
           $category_num = 0;
           while($genre = $stmt->fetch(PDO::FETCH_ASSOC)) {
           ?>
 
           <input type="checkbox" name="category[<?=$category_num++?>]"
               value="<?=$genre['name']?>" id="category-<?=str_replace(' ', '_', $genre['name'])?>"
-              form="<?=$search_id?>"
-              <?php
+              form="<?=$search_id?>" <?php
                 foreach ($_GET['category'] as $checked_genre) {
                   if ($genre['name'] == $checked_genre) {
                      echo ' checked="checked"';
@@ -113,7 +129,7 @@ session_start();
                   if ($at_least_one) {
                     $sql .= " OR ";
                   }
-                  $sql .= "isbn LIKE '%" . $_GET['query'] . "%'";
+                  $sql .= "book.isbn LIKE '%" . $_GET['query'] . "%'";
 
                   $at_least_one = true;
                 }

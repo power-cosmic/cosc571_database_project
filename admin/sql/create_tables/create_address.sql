@@ -3,6 +3,9 @@ CREATE TABLE IF NOT EXISTS address
 
 , street_address VARCHAR(128)
 , city VARCHAR(64)
-, state VARCHAR(32)
 , zip INT(5)
+
+, state VARCHAR(20)
+
+, FOREIGN KEY (state) REFERENCES state (name)
 );
