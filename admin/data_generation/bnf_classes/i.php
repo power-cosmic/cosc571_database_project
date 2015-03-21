@@ -17,6 +17,8 @@ class I extends Noun {
       return parent::evaluate($context);
     } elseif ($context->is_plural) {
       return 'us';
+    } elseif ($context->subject instanceof I) {
+      return 'myself';
     } else {
       return 'me';
     }

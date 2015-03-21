@@ -1,4 +1,5 @@
 <?php 
+require_once 'bnf_classes/article.php';
 require_once 'bnf_classes/context.php';
 
 class Sentence implements Iterator {
@@ -14,10 +15,30 @@ class Sentence implements Iterator {
   }
   
   public function push_word($word) {
+    $context = $this->context_peek();
     array_push($this->word_context_pairs, [
       'word' => $word,
-      'context' => $this->context_peek()
+      'context' => $context
     ]);
+    
+    if ($context->sentence_start || $context->is_first_word) {
+      $context = clone $context;
+      $change = '';
+      
+      if ($context->sentence_start && $context->is_first_word) {
+        $change = '!sentence_start;!is_first_word';
+      }
+      elseif ($context->sentence_start) {
+        $change .= '!sentence_start';
+      } else {
+        $change .= '!first_word';
+      }
+      
+      
+      $context->set($change);
+      $this->push_context($context);
+    }
+    
   }
   
   public function push_context($context) {

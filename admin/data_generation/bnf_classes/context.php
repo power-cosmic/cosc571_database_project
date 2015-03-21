@@ -9,15 +9,19 @@ class Context {
   public $is_past;
   public $next_word;
   public $is_first_word;
+  public $is_end;
+  public $sentence_start;
   
   function __construct() {
     $this->subject = null;
     $this->is_plural = false;
     $this->is_specific = false;
     $this->is_subject = true;
+    $this->is_end = false;
     $this->is_first_word = true;
     $this->is_past = false;
     $this->next_word = null;
+    $this->sentence_start = true;
   }
   
   public function set($changer) {

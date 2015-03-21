@@ -2,6 +2,7 @@
   require_once '../php/connection.php';
   require_once 'bnf_classes/context.php';
   require_once 'bnf_classes/i.php';
+  require_once 'bnf_classes/noun.php';
   require_once 'bnf_classes/sentence.php';
   require_once 'bnf_classes/terminal_word.php';
   
@@ -84,8 +85,14 @@
     private function generate_from_database($symbol_name, $sentence) {
       $group = $this->word_database[$symbol_name];
       $index = rand(0, count($group) - 1);
-      $choice = $group[$index];
-      $sentence->push_word($group[$index]);
+      $word = $group[$index];
+      
+      $context = $sentence->context_peek();
+      if ($context->is_subject && $word instanceof Noun) {
+        $context->subject = $word;
+      }
+      
+      $sentence->push_word($word);
       return $sentence;
     }
     
@@ -149,12 +156,18 @@
         
         $word = $word_context_pair['word'];
         $context = $word_context_pair['context'];
-        $output .= $word->evaluate($context) . ' ';
+        $new_word = $word->evaluate($context);
         
-        if ($word instanceof Noun && $context->is_subject) {
-          $context->subject = $word;
+        // add a space if needed
+        if (!$context->is_first_word && !$context->is_end) {
+          $output .= ' ';
         }
         
+        // capitalize if needed
+        if ($context->sentence_start) {
+          $new_word = ucfirst($new_word);
+        }
+        $output .= $new_word;
       }
       
       return $output;

@@ -1,7 +1,7 @@
 <?php 
-require_once 'word_type.php';
+require_once 'article.php';
 
-class The extends Word_Type {
+class The extends Article {
   
   function __construct() {
     parent::__construct('the');
