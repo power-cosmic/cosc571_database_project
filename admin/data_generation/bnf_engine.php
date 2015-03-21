@@ -137,12 +137,12 @@
           $this->generate_word($word_id, $sentence);
           break;
             
-        case '>':
+        case '{':
           $context_id = substr($symbol_name, 1);
           $sentence = $this->push_context($context_id, $sentence);
           break;
           
-        case '<':
+        case '}':
           $context_id = substr($symbol_name, 1);
           $sentence->pop_context();
           break;
