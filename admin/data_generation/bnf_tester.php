@@ -86,9 +86,9 @@
   $bnf->add_symbol('thing', '{is_proper;!is_single $proper_noun }');
   $bnf->add_symbol('subject', '{is_subject #thing }', 2);
   $bnf->add_symbol('subject', '{is_subject #thing #parenthetical }');
-  $bnf->add_symbol('subject', '{is_subject #list }');
+  $bnf->add_symbol('subject', '{is_subject;is_plural #list }');
   $bnf->add_symbol('object', '{!is_subject #thing }');
-  $bnf->add_symbol('list', '#thing and #thing {is_plural', 2);
+  $bnf->add_symbol('list', '#thing and #thing', 2);
   $bnf->add_symbol('list', '#thing $comma #list');
 
   $bnf->add_symbol('tense', '{is_past');
