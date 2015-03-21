@@ -13,7 +13,10 @@ INSERT INTO `address`
             (6, '1600 Amphitheatre Pkwy', 'Mountain View', 94043, 'CA'),
             (7, '1313 Disneyland Dr.', 'Anaheim', 92802, 'CA'),
             (8, '219 South Main Street', 'Ann Arbor', 48104, 'MI'),
-            (9, '910 Pittman Hall', 'Ypsilanti', 48197, 'MI');
+            (9, '910 Pittman Hall', 'Ypsilanti', 48197, 'MI'),
+            (10, '703 Pearl St', 'Ypsilanti', 48197, 'MI'),
+            (11, '1122 Ferdon Rd', 'Ann Arbor', 48104, 'MI'),
+            (12, '1601 Packard St', 'Ann Arbor', 48104, 'MI');
 
 /*!40000
 ALTER TABLE `address`
