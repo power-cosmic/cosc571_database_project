@@ -23,23 +23,27 @@
       return $this->evaluate($sentence);
     }
     
-    public function add_word($type, $word) {
+    public function add_word($type, $word, $frequency = 1) {
       
       // add type if needed
       if ($this->word_database[$type] == null) {
         $this->word_database[$type] = [];
       }
-      array_push($this->word_database[$type], $word);
+      
+      for ($i = 0; $i < $frequency; $i++) {
+        array_push($this->word_database[$type], $word);
+      }
     }
     
-    public function add_symbol($symbol, $expression) {
+    public function add_symbol($symbol, $expression, $frequency = 1) {
 
       // add symbol if needed
       if ($this->symbol_table[$symbol] == null) {
         $this->symbol_table[$symbol] = [];
       }
-      
-      array_push($this->symbol_table[$symbol], $expression);
+      for ($i = 0; $i < $frequency; $i++) {
+        array_push($this->symbol_table[$symbol], $expression);
+      }
     }
     
     /**

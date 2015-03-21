@@ -73,7 +73,7 @@
   $bnf->add_word('article', new The());
   
   // punctuation
-  $bnf->add_word('end_marker', new End_Marker('.'));
+  $bnf->add_word('end_marker', new End_Marker('.'), 3);
   $bnf->add_word('end_marker', new End_Marker('!'));
   
   // rules
