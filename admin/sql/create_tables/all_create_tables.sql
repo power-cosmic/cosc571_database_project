@@ -11,10 +11,10 @@ set FOREIGN_KEY_CHECKS=0;
 \. create_customer.sql
 \. create_genre.sql
 \. create_order_item.sql
-\. create_order.sql
 \. create_phone.sql
 \. create_publisher.sql
 \. create_review.sql
+\. create_sales_order.sql
 \. create_series_entry.sql
 \. create_series.sql
 \. create_shipping_zone.sql
