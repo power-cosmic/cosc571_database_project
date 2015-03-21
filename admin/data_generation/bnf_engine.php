@@ -3,6 +3,7 @@
   require_once 'bnf_classes/context.php';
   require_once 'bnf_classes/i.php';
   require_once 'bnf_classes/noun.php';
+  require_once 'bnf_classes/punctuation.php';
   require_once 'bnf_classes/sentence.php';
   require_once 'bnf_classes/terminal_word.php';
   
@@ -163,7 +164,7 @@
         $new_word = $word->evaluate($context);
         
         // add a space if needed
-        if (!$context->is_first_word && !$context->is_end) {
+        if (!$context->is_first_word && !($word instanceof Punctuation)) {
           $output .= ' ';
         }
         
