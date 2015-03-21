@@ -12,9 +12,10 @@ class A extends Article {
     $next_word = $context->next_word;
     if ($context->is_plural) {
       return 'some';
-    } elseif (!is_null($next_word)
-        && is_vowel(substr($next_word, 0, 1))) {
-     return 'an';
+    } elseif (!is_null($next_word)) {
+      if (is_vowel(substr($next_word->base, 0, 1))) {
+        return 'an';
+      }
     }
     
     return $this->base;

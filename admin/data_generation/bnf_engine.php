@@ -161,6 +161,11 @@
         
         $word = $word_context_pair['word'];
         $context = $word_context_pair['context'];
+        
+        $next_word = $sentence->peek_next_word();
+        if ($next_word) {
+          $context->next_word = $next_word;
+        }
         $new_word = $word->evaluate($context);
         
         // add a space if needed

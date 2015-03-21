@@ -73,7 +73,7 @@ class Sentence implements Iterator {
     return isset($this->word_context_pairs[$this->position]);
   }
   
-  function peek_next() {
+  function peek_next_word() {
     if (isset($this->word_context_pairs[$this->position + 1])) {
       return $this->word_context_pairs[$this->position + 1]['word'];
     }

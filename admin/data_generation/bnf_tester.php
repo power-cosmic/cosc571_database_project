@@ -76,24 +76,34 @@
   $bnf->add_word('end_marker', new Punctuation('.'), 3);
   $bnf->add_word('end_marker', new Punctuation('!'));
   $bnf->add_word('comma', new Punctuation(','));
+  $bnf->add_word('semicolon', new Punctuation(';'));
   
   // rules
   $bnf->add_symbol('end_marker', '$end_marker >;sentence_start');
   $bnf->add_symbol('common_noun', '$article $noun');
   $bnf->add_symbol('common_noun', '$article $adjective $noun');
   $bnf->add_symbol('thing', '#common_noun');
-  $bnf->add_symbol('thing', '>is_proper;!is_single $proper_noun');
-  $bnf->add_symbol('subject', '>is_subject #thing');
-  $bnf->add_symbol('subject', '>is_subject #list');
-  $bnf->add_symbol('object', '>!is_subject #thing');
+  $bnf->add_symbol('thing', '>is_proper;!is_single $proper_noun <');
+  $bnf->add_symbol('subject', '>is_subject #thing <', 2);
+  $bnf->add_symbol('subject', '>is_subject #thing #parenthetical <');
+  $bnf->add_symbol('subject', '>is_subject #list <');
+  $bnf->add_symbol('object', '>!is_subject #thing <');
   $bnf->add_symbol('list', '#thing and #thing >is_plural', 2);
   $bnf->add_symbol('list', '#thing $comma #list');
-  
-  $bnf->add_symbol('statement', '>sentence_start;is_past #subject $verb #object #end_marker');
-  $bnf->add_symbol('statement', '>sentence_start #subject $verb #object #end_marker');
-  $bnf->add_symbol('statement', '>sentence_start #subject /be $adjective #end_marker');
 
-  $bnf->add_symbol('statement_list', '#statement');
+  $bnf->add_symbol('tense', '>is_past');
+  $bnf->add_symbol('tense', '', 2);
+  
+  $bnf->add_symbol('parenthetical', '>!is_subject $comma #thing $comma <');
+  
+  $bnf->add_symbol('independent_clause', '#subject $verb #object', 4);
+  $bnf->add_symbol('independent_clause', '#subject /be $adjective', 6);
+
+  $bnf->add_symbol('statement', '#tense >sentence_start #independent_clause #end_marker <', 4);
+  $bnf->add_symbol('statement', '#tense >sentence_start #independent_clause $comma and #independent_clause #end_marker <');
+  $bnf->add_symbol('statement', '#tense >sentence_start #independent_clause $semicolon however $comma #independent_clause #end_marker <');
+
+  $bnf->add_symbol('statement_list', '#statement', 2);
   $bnf->add_symbol('statement_list', '#statement_list #statement');
   $bnf->add_symbol('review', '#statement_list');
   print($bnf->generate('#review'));
