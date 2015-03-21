@@ -16,6 +16,8 @@ class Verb extends Word_Type {
     // past tense
     if ($data['past'] != null) {
       $this->past = $data['past'];
+    } elseif (substr($base, -1) == 'e') {
+      $this->past = $base . 'd';
     } else {
       $this->past = $base . 'ed';
     }

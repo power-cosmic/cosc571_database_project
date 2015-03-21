@@ -24,6 +24,7 @@ class Be extends Verb {
       return 'am';
     } elseif (!$context->is_past) {
       return 'is';
+    } else {
       return parent::evaluate($context);
     }
     

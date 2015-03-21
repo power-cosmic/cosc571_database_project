@@ -2,6 +2,8 @@
   require_once '../php/connection.php';
   require_once 'bnf_classes/context.php';
   require_once 'bnf_classes/i.php';
+  require_once 'bnf_classes/sentence.php';
+  require_once 'bnf_classes/terminal_word.php';
   
   class BNF_Engine {
     
@@ -15,8 +17,9 @@
     }
 
     public function generate($symbol_name) {
-      $list = $this->generate_next($symbol_name, []);
-      return $this->evaluate($list);
+      $sentence = new Sentence();
+      $sentence = $this->generate_next($symbol_name, $sentence);
+      return $this->evaluate($sentence);
     }
     
     public function add_word($type, $word) {
@@ -34,7 +37,7 @@
       if ($this->symbol_table[$symbol] == null) {
         $this->symbol_table[$symbol] = [];
       }
-
+      
       array_push($this->symbol_table[$symbol], $expression);
     }
     
@@ -44,18 +47,32 @@
      * @param String $symbol_name Symbol name | terminal | variable name from $wordDatabase
      * @return string
      */
-    private function generate_from_symbols($symbol_name, $list) {
-      
+    private function generate_from_symbols($symbol_name, $sentence) {
       $choices = $this->symbol_table[$symbol_name];
       $index = rand(0, sizeof($choices) - 1);
       $choice = $choices[$index];
       $expressions = explode(' ', $choice);
-
       foreach ($expressions as $expression) {
-        $list = $this->generate_next($expression, $list);
+        $sentence = $this->generate_next($expression, $sentence);
       }
       
-      return $list;
+      return $sentence;
+    }
+    
+    private function generate_word($word_id, $sentence) {
+      $word = $this->get_word($word_id);
+      $sentence->push_word($word);
+      return $sentence;
+    }
+    
+    private function get_word($literal) {
+      foreach ($this->word_database as $type) {
+        foreach ($type as $word) {
+          if ($literal == $word->base) {
+            return $word;
+          }
+        }
+      }
     }
     
     /**
@@ -64,14 +81,22 @@
      * @param String $symbol_name Identifier
      * @return String
      */
-    private function generate_from_database($symbol_name, $list) {
+    private function generate_from_database($symbol_name, $sentence) {
       $group = $this->word_database[$symbol_name];
       $index = rand(0, count($group) - 1);
       $choice = $group[$index];
-      array_push($list, $group[$index]);
-      return $list;
+      $sentence->push_word($group[$index]);
+      return $sentence;
     }
     
+    private function push_context($context_changer, $sentence) {
+      
+      $new_context = clone $sentence->context_peek();
+      
+      $new_context->set($context_changer);
+      $sentence->push_context($new_context);
+      return $sentence;
+    }
     
     /**
      * Generate stuff using bnf and word bank.
@@ -80,43 +105,56 @@
      * @param unknown $symbol_name Identifier
      * @return string
      */
-    private function generate_next($symbol_name, $list) {
+    private function generate_next($symbol_name, $sentence) {
       
       switch(substr($symbol_name, 0, 1)) {
         # from database arrays
         case '$':
           $database_id = substr($symbol_name, 1);
-          $list = $this->generate_from_database($database_id, $list);
+          $this->generate_from_database($database_id, $sentence);
           break;
           
         # from symbol table
         case '#':
           $symbol_id = substr($symbol_name, 1);
-          $list = $this->generate_from_symbols($symbol_id, $list);
+          $this->generate_from_symbols($symbol_id, $sentence);
+          break;
+
+        case '/':
+          $word_id = substr($symbol_name, 1);
+          $this->generate_word($word_id, $sentence);
+          break;
+            
+        case '>':
+          $context_id = substr($symbol_name, 1);
+          $sentence = $this->push_context($context_id, $sentence);
+          break;
+          
+        case '<':
+          $context_id = substr($symbol_name, 1);
+          $sentence->pop_context();
           break;
           
         # terminal
         default:
-          array_push($list, $symbol_name);
+          $sentence->push_word(new Terminal_Word($symbol_name));
       }
-      return $list;
+      
+      return $sentence;
     }
     
-    public function evaluate($list) {
-      $context = new Context();
-      $context->is_subject = true;
-      
+    public function evaluate($sentence) {
       $output = '';
-      foreach ($list as $word) {
+      foreach ($sentence as $word_context_pair) {
         
-        // update context
-        if ($word instanceof Noun) {
+        $word = $word_context_pair['word'];
+        $context = $word_context_pair['context'];
+        $output .= $word->evaluate($context) . ' ';
+        
+        if ($word instanceof Noun && $context->is_subject) {
           $context->subject = $word;
-        } elseif ($word instanceof Verb) {
-          $context->is_subject = false;
         }
         
-        $output .= $word->evaluate($context) . ' ';
       }
       
       return $output;
