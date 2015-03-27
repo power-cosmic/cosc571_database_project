@@ -1,5 +1,5 @@
 <?php
-  require_once '../php/connection.php';
+  //require_once '../php/connection.php';
   require_once 'bnf_classes/context.php';
   require_once 'bnf_classes/i.php';
   require_once 'bnf_classes/noun.php';

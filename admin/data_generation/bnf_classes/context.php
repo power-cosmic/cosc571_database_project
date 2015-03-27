@@ -16,7 +16,7 @@ class Context {
     $this->subject = null;
     $this->is_plural = false;
     $this->is_specific = false;
-    $this->is_subject = true;
+    $this->is_subject = false;
     $this->is_end = false;
     $this->is_first_word = true;
     $this->is_past = false;

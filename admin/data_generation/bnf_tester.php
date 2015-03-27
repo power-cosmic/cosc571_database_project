@@ -1,5 +1,6 @@
 <?php
   require_once '../php/connection.php';
+  require_once 'word_loader.php';
   require_once 'bnf_engine.php';
   require_once 'bnf_classes/a.php';
   require_once 'bnf_classes/adjective.php';
@@ -11,23 +12,6 @@
   require_once 'bnf_classes/the.php';
   require_once 'bnf_classes/verb.php';
   require_once 'bnf_classes/word_type.php';
-  
-  /**
-   * Generate an array of words from a database
-   * @param unknown $db Database to use
-   * @param unknown $query Query to run
-   * @param unknown $field Field to select
-   * @return Array of words
-   */
-  function get_words($db, $query) {
-    $words = [];
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      array_push($words, $row);
-    }
-    return $words;
-  }
   
   $db = open_connection('bnf_generator');
   
@@ -83,25 +67,25 @@
   $bnf->add_symbol('common_noun', '$article $noun');
   $bnf->add_symbol('common_noun', '$article $adjective $noun');
   $bnf->add_symbol('thing', '#common_noun');
-  $bnf->add_symbol('thing', '{is_proper;!is_single $proper_noun }');
+  $bnf->add_symbol('thing', '{is_proper;is_single $proper_noun }');
   $bnf->add_symbol('subject', '{is_subject #thing }', 2);
-  $bnf->add_symbol('subject', '{is_subject #thing #parenthetical }');
-  $bnf->add_symbol('subject', '{is_subject;is_plural #list }');
+  //$bnf->add_symbol('subject', '{is_subject #thing #parenthetical }');
+  //$bnf->add_symbol('subject', '{is_subject #list } {is_plural');
   $bnf->add_symbol('object', '{!is_subject #thing }');
-  $bnf->add_symbol('list', '#thing and #thing', 2);
-  $bnf->add_symbol('list', '#thing $comma #list');
+  $bnf->add_symbol('list', '#thing {!is_subject and #thing }', 2);
+  $bnf->add_symbol('list', '#thing {!is_subject $comma #list }');
 
   $bnf->add_symbol('tense', '{is_past');
-  $bnf->add_symbol('tense', '', 2);
+  $bnf->add_symbol('tense', '{', 2);
   
   $bnf->add_symbol('parenthetical', '{!is_subject $comma #thing $comma }');
   
   $bnf->add_symbol('independent_clause', '#subject $verb #object', 4);
   $bnf->add_symbol('independent_clause', '#subject /be $adjective', 6);
 
-  $bnf->add_symbol('statement', '#tense {sentence_start #independent_clause #end_marker }', 4);
-  $bnf->add_symbol('statement', '#tense {sentence_start #independent_clause $comma and #independent_clause #end_marker }');
-  $bnf->add_symbol('statement', '#tense {sentence_start #independent_clause $semicolon however $comma #independent_clause #end_marker }');
+  $bnf->add_symbol('statement', '#tense {sentence_start #independent_clause #end_marker } }', 4);
+  $bnf->add_symbol('statement', '#tense {sentence_start #independent_clause $comma and #independent_clause #end_marker } }');
+  $bnf->add_symbol('statement', '#tense {sentence_start #independent_clause $semicolon however $comma #independent_clause #end_marker } }');
 
   $bnf->add_symbol('pros', "{sentence_start pros:\n<ul> #pros_list </ul> }");
   $bnf->add_symbol('cons', "{sentence_start cons:\n<ul> #cons_list </ul> }");
