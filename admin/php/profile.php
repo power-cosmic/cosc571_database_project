@@ -1,4 +1,5 @@
 <?php
+include_once 'admin/php/connection.php';
 include_once 'admin/php/us_state_dropdown.php';
 
 /* 
@@ -12,6 +13,37 @@ function createProfileForm($username = null) {
   $disabled = ($username == null)? 'disabled': '';
   
   $card_types = ['MasterCard', 'VISA'];
+  
+  // check post
+  if(!$username && count($_POST) > 0) {
+    // TODO: validation
+    
+    $db = open_connection();
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    $insert_customer = "INSERT INTO customer (
+              username, 
+              password,
+              first_name,
+              last_name
+            ) VALUES (
+              :username,
+              PASSWORD(:password),
+              :first_name,
+              :last_name
+          );";
+    
+    $stmt = $db->prepare($insert_customer);
+    
+    $stmt->execute([
+        'username' => $_POST['username'],
+        'password' => $_POST['password'],
+        'first_name' => $_POST['first-name'],
+        'last_name' => $_POST['last-name']
+    ]);
+    
+  }
+  
   
   if ($username) {
     /* TODO: get user data from db */
