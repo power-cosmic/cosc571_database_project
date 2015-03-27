@@ -22,5 +22,5 @@ sales_order(id, total_cost, submit_date, shipping_cost, delivery_date,
 series_entry(book_isbn, series_id, position)
 series(id, name)
 shipping_zone(code, price, time)
-state(name, abbreviation, shipping_code)
+state(abbreviation, name, shipping_code)
 wishlist(book_isbn, customer_id)
