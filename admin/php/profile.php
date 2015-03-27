@@ -1,6 +1,8 @@
 <?php
 include_once 'admin/php/connection.php';
 include_once 'admin/php/us_state_dropdown.php';
+include_once 'admin/php/inserters/address_inserter.php';
+include_once 'admin/php/inserters/credit_card_inserter.php';
 
 /* 
  * TODO: select credit card type based on $user
@@ -21,27 +23,49 @@ function createProfileForm($username = null) {
     $db = open_connection();
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
+    $address_info = [
+        'street_address' => $_POST['address'],
+        'city' => $_POST['city'],
+        'zip' => $_POST['zip'],
+        'state' => $_POST['state'],
+    ];
+    $address_inserter = new Address_inserter($db);
+    $address_id = $address_inserter->insert($address_info)['id'];
+    
     $insert_customer = "INSERT INTO customer (
-              username, 
-              password,
-              first_name,
-              last_name
-            ) VALUES (
-              :username,
-              PASSWORD(:password),
-              :first_name,
-              :last_name
-          );";
+          username, 
+          password,
+          first_name,
+          last_name,
+          address_id
+        ) VALUES (
+          :username,
+          PASSWORD(:password),
+          :first_name,
+          :last_name,
+          :address_id
+      );";
     
     $stmt = $db->prepare($insert_customer);
+    
     
     $stmt->execute([
         'username' => $_POST['username'],
         'password' => $_POST['password'],
         'first_name' => $_POST['first-name'],
-        'last_name' => $_POST['last-name']
+        'last_name' => $_POST['last-name'],
+        'address_id' => $address_id
     ]);
     
+    $card_inserter = new Credit_card_inserter($db);
+    
+    $card_id = $card_inserter->insert([
+        'username' => $_POST['username'],
+        'number' => $_POST['card-number'],
+        'issuer' => $_POST['card-type'],
+        'expiration' => $_POST['card-expiration']
+    ]);
+  
   }
   
   
@@ -51,6 +75,7 @@ function createProfileForm($username = null) {
         'username' => 'coolguy49',
         'first_name' => 'Luke',
         'last_name' => 'Skywalker',
+        'email' => 'a@a.a',
         'address' => '48 Williams St.',
         'city' => 'Tatooine',
         'state' => 'MI',
@@ -69,7 +94,7 @@ function createProfileForm($username = null) {
             .generateGenericForRow("confirm password", $user, true);
       }
     
-      $most_needed_fields = ['first name', 'last name', 'address', 'city'];
+      $most_needed_fields = ['first name', 'last name', 'email', 'address', 'city'];
       foreach ($most_needed_fields as $field) {
         $to_return .= generateGenericForRow($field, $user);
       }
