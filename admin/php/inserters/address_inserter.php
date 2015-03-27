@@ -1,5 +1,4 @@
 <?php
-include_once 'admin/php/connection.php';
 
 class Address_inserter {
   
