@@ -1,4 +1,5 @@
 <?php
+include_once 'admin/php/cart.php';
 include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 include_once 'admin/php/book_info.php';
@@ -7,7 +8,7 @@ session_start();
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Cart', null, ['book_table.css'])?>
+  <?=createBasicHead('Cart', 'cart_updater', ['book_table.css'])?>
   <body>
     <div id="container">
       <?=createHeader()?>
@@ -24,6 +25,14 @@ session_start();
 
               <!-- TODO: generate rows from db -->
               <?php
+                $cart = Cart::get_instance();
+                $cart_contents = $cart->get_items();
+                
+                $books = [];
+                $quantities = [];
+                
+                
+                
                 $test_book_data = [
                     'id' => 1,
                     'title' => 'Absolute Java',
@@ -43,11 +52,11 @@ session_start();
                   $cost = $book->price * $quantities[$i];
                   $total += $cost;
               ?>
-                <tr>
+                <tr class="book-row">
                   <td class="book-info">
                     <input type="button" 
-                        class="purple button centered-input" 
-                        value="Delete" name="delete <?=$book->id?>">
+                        class="purple button centered-input delete-button" 
+                        value="Delete" name="delete <?=$book->isbn?>">
                   </td>
                   <td class="book-info"><?=$book->generateBookInfo()?></td>
                   <td class="book-info">
@@ -56,7 +65,7 @@ session_start();
                         value="<?=$quantities[$i]?>">
                   </td>
                   <td class="book-info">
-                    <div class="centered-input">$<?=$cost?></div>
+                    <div class="book-cost centered-input">$<?=$cost?></div>
                   </td>
                 </tr>
               <?php
