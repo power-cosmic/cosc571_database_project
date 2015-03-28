@@ -83,14 +83,14 @@ class Cart {
       $quantity = 0;
     }
     
-    $previous_quantity = $this->items[$isbn];
+    $change = $quantity - $this->items[$isbn];
     $this->items[$isbn] = $quantity;
 
     if ($this->items[$isbn] == 0) {
       $this->remove_item($isbn);
+    } else {
+      $this->subtotal += $change * $this->get_price($isbn);
     }
-    
-    $this->subtotal += $quantity - $previous_quantity;
     
   }
   

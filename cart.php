@@ -39,7 +39,7 @@ session_start();
                     'author' => 'Walter Savitch',
                     'price' => '149.99',
                     'publisher' => 'Addison-Wesley',
-                    'isbn' => '978-0132834230'
+                    'isbn' => '9780870450013'
                 ];
                 $books = [new Book($test_book_data), new Book($test_book_data)];
                 $quantities = [1, 2];
@@ -62,7 +62,8 @@ session_start();
                   <td class="book-info">
                     <input type="number" name="quantity" 
                         class="quantity-box right-aligned centered-input" 
-                        value="<?=$quantities[$i]?>">
+                        value="<?=$quantities[$i]?>"
+                        name="quantity <?=$book->isbn?>">
                   </td>
                   <td class="book-info">
                     <div class="book-cost centered-input">$<?=$cost?></div>
