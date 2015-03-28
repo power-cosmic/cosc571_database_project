@@ -10,6 +10,7 @@
 class Cart {
   
   private $items;
+  private $subtotal;
   
   /**
    * Get cart singleton
@@ -24,6 +25,7 @@ class Cart {
   
   private function __construct($items = null) {
     $this->items = $items? $items : [];
+    $this->subtotal = 0;
   }
   
   /**
@@ -31,6 +33,13 @@ class Cart {
    */
   public function get_items() {
     return $this->items;
+  }
+  
+  /**
+   * Get subtotal
+   */
+  public function get_subtotal() {
+    return $this->subtotal;
   }
   
   /**
@@ -43,6 +52,7 @@ class Cart {
       $this->increment_quantity($isbn, $quantity);
     } else {
       $this->items[$isbn] = $quantity;
+      $this->subtotal += $this->get_price($isbn) * $quantity;
     }
   }
   
@@ -53,10 +63,12 @@ class Cart {
    * @param number $increment Amount to change
    */
   public function increment_quantity($isbn, $increment = 1) {
-    echo 'incrementing';
+    
     $this->items[$isbn] += $increment;
     if ($this->items[$isbn] <= 0) {
       $this->remove_item($isbn);
+    } else {
+      $this->subtotal += $this->get_price($isbn) * $increment;
     }
   }
   
@@ -67,11 +79,19 @@ class Cart {
    * @param number $quantity Quantity
    */
   public function set_quantity($isbn, $quantity) {
+    if ($quantity < 0) {
+      $quantity = 0;
+    }
+    
+    $previous_quantity = $this->items[$isbn];
     $this->items[$isbn] = $quantity;
 
-    if ($this->items[$isbn] <= 0) {
+    if ($this->items[$isbn] == 0) {
       $this->remove_item($isbn);
     }
+    
+    $this->subtotal += $quantity - $previous_quantity;
+    
   }
   
   /**
@@ -79,7 +99,20 @@ class Cart {
    * @param String $isbn Book ISBN
    */
   public function remove_item($isbn) {
+    $this->subtotal -= $this->get_price($isbn) * $this->items[$isbn];
     unset($this->items[$isbn]);
+  }
+  
+  private function get_price($isbn) {
+    $db = open_connection();
+    $stmt = $db->prepare("SELECT price
+      FROM book
+      WHERE isbn=:isbn;"
+    );
+    $stmt->execute(['isbn' => $isbn]);
+    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      return $result['price'];
+    }
   }
   
 }
