@@ -1,4 +1,5 @@
 <?php
+include_once 'admin/php/cart.php';
 include_once 'constants.php';
 
 function createBasicHead($title = '', $script_location = null, $styles = []) {
