@@ -21,25 +21,10 @@ define(['lib/jquery'], function() {
 			success: function(response) {
 				if (response.status == 'success') {
 					if (callback) {
-						callback();
+						callback(response);
 					}
 					console.log(response);
-					$('#total').html('Subtotal: ' + response.subtotal);
-				}
-			}
-		});
-	}
-	
-	var alterItem = function(row, isbn) {
-		$.ajax({
-			url: 'admin/php/handlers/cart_handler.php',
-			dataType: 'json',
-			method: 'POST',
-			data: {action: 'delete', isbn: isbn},
-			success: function(response) {
-				if (response.status == 'success') {
-					row.remove();
-					$('#total').html('Subtotal: ' + response.subtotal);
+					$('#total').html('Subtotal: $' + response.subtotal.toFixed(2));
 				}
 			}
 		});
@@ -57,6 +42,13 @@ define(['lib/jquery'], function() {
 			});
 		});
 		
+		// add listener
+		$('.add-button').click(function() {
+			var row = getBookRow($(this));
+			var isbn = getIsbn($(this).attr('name'));
+			updateCart('add', {'isbn': isbn});
+		});
+		
 		// quantity listener
 		$('.quantity-box').change(function() {
 			
@@ -68,11 +60,15 @@ define(['lib/jquery'], function() {
 			}
 			
 			var row = getBookRow($(this));
+			var cost = row.find('.book-cost');
 			var isbn = getIsbn($(this).attr('name'));
 			updateCart('alter', {
-				'isbn': isbn, 
-				'quantity': value
-			});
+					'isbn': isbn, 
+					'quantity': value
+				}, function(response) {
+					$(cost).html('$' + response.lineCost.toFixed(2));
+				}
+			);
 		});
 		
 	});

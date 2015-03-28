@@ -1,5 +1,6 @@
 <?php
 require_once '../connection.php';
+require_once '../book_info.php';
 require_once '../cart.php';
 
 session_start();
@@ -11,13 +12,16 @@ $isbn = $_POST['isbn'];
 switch($_POST['action']) {
   case 'delete':
     $cart->remove_item($isbn);
+    $line_cost = 0;
     break;
   case 'add':
     $cart->add_item($isbn);
+    $line_cost = $cart->get_price($isbn);
     break;
   case 'alter':
-    $quantity = $_POST['quantity'];
+    $quantity = intval($_POST['quantity']);
     $cart->set_quantity($isbn, $quantity);
+    $line_cost = $cart->get_price($isbn);
     break;
   default:
     $status = 'fail';
@@ -26,6 +30,7 @@ switch($_POST['action']) {
 
 echo json_encode([
     'status' => $status,
+    'lineCost' => $line_cost,
     'subtotal' => $cart->get_subtotal()
 ]);
 

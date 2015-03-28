@@ -18,6 +18,24 @@ class Book {
     }
   }
   
+  public static function get_book($isbn) {
+    $db = open_connection();
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $db->prepare("SELECT title, first_name, last_name, price,
+        publisher.name as publisher, isbn
+      FROM book, author, publisher
+      WHERE book.author_id=author.id
+        AND book.publisher_id=publisher.id
+        AND isbn=:isbn;"
+    );
+    $stmt->execute(['isbn' => $isbn]);
+    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      $output = new Book($result);
+      
+      return $output;
+    }
+  }
+  
   /**
    * Generate content for a cell in tables holding book information.
    * For use in Cart, Order-confirmation, etc.

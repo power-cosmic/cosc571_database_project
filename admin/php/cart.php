@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Singleton pattern for Cart.
  * This item will be assigned to $_SESSION['cart']
@@ -7,6 +6,8 @@
  * 
  * To use: call static function Cart::get_instance()
  */
+
+
 class Cart {
   
   private $items;
@@ -17,8 +18,11 @@ class Cart {
    * @return Cart
    */
   public static function get_instance() {
+    //session_unset();
+
     if (!isset($_SESSION['cart'])) {
       $_SESSION['cart'] = new Cart();
+    } else {
     }
     return $_SESSION['cart'];
   }
@@ -51,8 +55,11 @@ class Cart {
     if (isset($this->items[$isbn])) {
       $this->increment_quantity($isbn, $quantity);
     } else {
-      $this->items[$isbn] = $quantity;
-      $this->subtotal += $this->get_price($isbn) * $quantity;
+      $item = $this->items[$isbn] = [
+          'book' => Book::get_book($isbn),
+          'quantity' => $quantity
+      ];
+      $this->subtotal += $item['book']->price * $quantity;
     }
   }
   
@@ -63,12 +70,13 @@ class Cart {
    * @param number $increment Amount to change
    */
   public function increment_quantity($isbn, $increment = 1) {
-    
-    $this->items[$isbn] += $increment;
-    if ($this->items[$isbn] <= 0) {
+
+    $item = $this->items[$isbn];
+    $this->items[$isbn]['quantity'] += $increment;
+    if ($item['quantity'] <= 0) {
       $this->remove_item($isbn);
     } else {
-      $this->subtotal += $this->get_price($isbn) * $increment;
+      $this->subtotal += $item['book']->price * $increment;
     }
   }
   
@@ -83,15 +91,16 @@ class Cart {
       $quantity = 0;
     }
     
-    $change = $quantity - $this->items[$isbn];
-    $this->items[$isbn] = $quantity;
-
-    if ($this->items[$isbn] == 0) {
+    $item = $this->items[$isbn];
+    
+    if ($quantity == 0) {
       $this->remove_item($isbn);
     } else {
-      $this->subtotal += $change * $this->get_price($isbn);
+      $change = $quantity - $this->items[$isbn]['quantity'];
+      $this->items[$isbn]['quantity'] = $quantity;
+      $this->subtotal += $item['book']->price * $change;
     }
-    
+    return $item;
   }
   
   /**
@@ -99,20 +108,14 @@ class Cart {
    * @param String $isbn Book ISBN
    */
   public function remove_item($isbn) {
-    $this->subtotal -= $this->get_price($isbn) * $this->items[$isbn];
+    $item = $this->items[$isbn];
+    $this->subtotal -= $item['book']->price * $item['quantity'];
     unset($this->items[$isbn]);
   }
   
-  private function get_price($isbn) {
-    $db = open_connection();
-    $stmt = $db->prepare("SELECT price
-      FROM book
-      WHERE isbn=:isbn;"
-    );
-    $stmt->execute(['isbn' => $isbn]);
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      return $result['price'];
-    }
+  public function get_price($isbn) {
+    $item = $this->items[$isbn];
+    return $item['book']->price * $item['quantity'];
   }
   
 }

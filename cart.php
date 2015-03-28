@@ -28,29 +28,9 @@ session_start();
                 $cart = Cart::get_instance();
                 $cart_contents = $cart->get_items();
                 
-                $books = [];
-                $quantities = [];
-                
-                
-                
-                $test_book_data = [
-                    'id' => 1,
-                    'title' => 'Absolute Java',
-                    'author' => 'Walter Savitch',
-                    'price' => '149.99',
-                    'publisher' => 'Addison-Wesley',
-                    'isbn' => '9780870450013'
-                ];
-                $books = [new Book($test_book_data), new Book($test_book_data)];
-                $quantities = [1, 2];
-                $total = 0;
-              ?>
-              <?php
-                $total = 0;
-                for ($i = 0; $i < count($books); $i++) {
-                  $book = $books[$i];
-                  $cost = $book->price * $quantities[$i];
-                  $total += $cost;
+                foreach ($cart_contents as $item) {
+                  $book = $item['book'];
+                  $cost = $book->price * $item['quantity'];
               ?>
                 <tr class="book-row">
                   <td class="book-info">
@@ -60,13 +40,12 @@ session_start();
                   </td>
                   <td class="book-info"><?=$book->generateBookInfo()?></td>
                   <td class="book-info">
-                    <input type="number" name="quantity" 
+                    <input type="number" name="quantity <?=$book->isbn?>" 
                         class="quantity-box right-aligned centered-input" 
-                        value="<?=$quantities[$i]?>"
-                        name="quantity <?=$book->isbn?>">
+                        value="<?=$item['quantity']?>">
                   </td>
                   <td class="book-info">
-                    <div class="book-cost centered-input">$<?=$cost?></div>
+                    <div class="book-cost centered-input">$<?=sprintf("%.2f", $cost)?></div>
                   </td>
                 </tr>
               <?php
@@ -75,7 +54,7 @@ session_start();
 
             </table>
             <div id="total" class="box right-aligned">
-              Subtotal: $<?=$total?>
+              Subtotal: $<?=$cart->get_subtotal()?>
             </div>
             <div id="buttons" class="box right-aligned">
               <input type="submit" class="blue button" value="Update">

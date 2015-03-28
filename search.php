@@ -23,6 +23,7 @@ session_start();
         <div id="search-criteria-box">
           <h3>Search Criteria</h3>
           <?php
+            $cart = Cart::get_instance();
               $search_criteria = [
                 'title'=>'Title',
                 'author'=>'Author',
@@ -154,9 +155,9 @@ session_start();
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $book = new Book($book_data);
             ?>
-            <tr>
+            <tr class="book-row">
               <td class="book-info">
-                <input type="button" class="green button centered-input"
+                <input type="button" class="green button centered-input add-button"
                     value="Add to cart" name="add <?=$book->isbn?>">
               </td>
                 <td class="book-info">
