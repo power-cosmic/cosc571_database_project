@@ -1,4 +1,5 @@
 <?php
+include_once 'admin/php/cart.php';
 include_once 'admin/php/connection.php';
 include_once 'admin/php/us_state_dropdown.php';
 include_once 'admin/php/inserters/address_inserter.php';
@@ -17,52 +18,6 @@ function createProfileForm($username = null) {
   
   $card_types = ['MasterCard', 'VISA'];
   
-  // check post
-  if(!$username && count($_POST) > 0) {
-    // TODO: validation
-    
-    $success = false;
-    
-    // open db connection and create db interaction elements
-    $db = open_connection();
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $address_inserter = new Address_inserter($db);
-    $card_inserter = new Credit_card_inserter($db);
-    $customer_inserter = new Customer_inserter($db);
-    
-    if ($customer_inserter->does_exist($_POST['username'])) {
-      // USER EXISTS
-      
-      
-    } else {
-      $address_info = [
-          'street_address' => $_POST['address'],
-          'city' => $_POST['city'],
-          'zip' => $_POST['zip'],
-          'state' => $_POST['state'],
-      ];
-      $address_id = $address_inserter->insert($address_info)['id'];
-      
-      $customer_inserter->insert([
-          'username' => $_POST['username'],
-          'password' => $_POST['password'],
-          'first_name' => $_POST['first-name'],
-          'last_name' => $_POST['last-name'],
-          'address_id' => $address_id
-      ]);
-      
-      $card_id = $card_inserter->insert([
-          'username' => $_POST['username'],
-          'number' => $_POST['card-number'],
-          'issuer' => $_POST['card-type'],
-          'expiration' => $_POST['card-expiration']
-      ]);
-      
-      $success = true;
-    }
-  }
-  
-  
   if ($username) {
     /* TODO: get user data from db */
     $user = [
@@ -80,7 +35,7 @@ function createProfileForm($username = null) {
     ];
   }
     
-  $to_return = '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">'
+  $to_return = '<form id="register" method="post" action="' . $_SERVER['PHP_SELF'] . '">'
       .generateGenericForRow("username", $user, $false, $username != null);
     
       if (!$user) {
@@ -111,7 +66,7 @@ function createProfileForm($username = null) {
          </div>'
          .generateGenericForRow('card number', $user)
          .generateGenericForRow('card expiration', $user)
-         .'<input type="submit" value="Register" class="green button">
+         .'<input type="submit" value="Register" id="submit" class="green button">
       </form>'; 
   
   return $to_return;

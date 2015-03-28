@@ -9,7 +9,7 @@ session_start();
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Register', 'register_check')?>
+  <?=createBasicHead('Register', 'registerCheck')?>
   <body>
     <div id="container">
       <?=createHeader(true, false)?>
