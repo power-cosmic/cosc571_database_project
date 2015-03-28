@@ -3,7 +3,9 @@
 /**
  * Singleton pattern for Cart.
  * This item will be assigned to $_SESSION['cart']
- * Holds an associative array where book->quantity
+ * Holds an associative array where book->quantity.
+ * 
+ * To use: call static function Cart::get_instance()
  */
 class Cart {
   
