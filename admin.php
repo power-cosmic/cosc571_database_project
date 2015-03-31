@@ -10,7 +10,7 @@ session_start();
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Admin', 'adminLogin')?>
+  <?=createBasicHead('Admin', ['adminLogin', 'admin'])?>
   <body>
     <div id="container">
       <?=createHeader()?>

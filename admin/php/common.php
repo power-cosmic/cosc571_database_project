@@ -26,7 +26,15 @@ function createBasicHead($title = '', $script_location = null, $styles = []) {
         }
       });';
   if ($script_location) {
-    $toReturn .= 'require(["js/' . $script_location . '"]);';
+    if (is_array($script_location)) {
+      $locations = '"js/' . $script_location[0] . '"';
+      for ($i = 1; $i < count($script_location); $i++) {
+        $locations .= ', "js/' . $script_location[$i] . '"';
+      }
+      $toReturn .= 'require([' . $locations . ']);';
+    } else {
+      $toReturn .= 'require(["js/' . $script_location . '"]);';
+    }
   }
   $toReturn .= '
       require(["js/stickyHeader"]);
