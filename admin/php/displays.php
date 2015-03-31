@@ -11,7 +11,7 @@ function createHeader($showCart = true, $showLogin = true) {
           </div>
           <div id="user-info">';
 
-  if (!$_SESSION['logged_in']) {
+  if (!$_SESSION['login']) {
     if ($showLogin) {
       $to_return .= '
             <div id="logInButton">
@@ -21,7 +21,7 @@ function createHeader($showCart = true, $showLogin = true) {
             </div>';
     }
   } else {
-    switch($_SESSION['logged_in']) {
+    switch($_SESSION['login']->get_user_type()) {
       case $GLOBALS['user_status']['admin']:
         $to_return .= '
             <div id="adminLogoutButton">
