@@ -11,7 +11,7 @@ session_start();
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Admin', 'adminLogin')?>
+  <?=createBasicHead('Admin', ['adminLogin', 'admin'])?>
   <body>
     <div id="container">
       <?=createHeader()?>
@@ -75,7 +75,16 @@ session_start();
               <td>$234</td>
             </tr>
           </table>
-          <p><a href="book_records.php">View Book Records</a></p>
+          <br>
+          <table id="books">
+            <tr>
+              <th>Book</th>
+              <th>Number of reviews</th>
+            </tr>
+          </table>
+          <br>
+          <a href="#" id="previous" class="blue button">previous</a>
+          <a href="#" id="next" class="blue button">next</a>
         </div>
 
         <?php
