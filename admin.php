@@ -7,10 +7,6 @@ include_once 'admin/php/login.php';
 
 session_start();
 
-if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
-  $_SESSION['logged_in'] = $GLOBALS['user_status']['admin'];
-}
-
 ?>
 <!doctype html>
 <html>
@@ -21,6 +17,7 @@ if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
       <div class="content">
 
         <?php if (Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin']) { ?>
+        <?php print_r(Login::get_instance()); ?>
           <!-- display admin page -->
         <div id="login" class="centered box">
           <p>
