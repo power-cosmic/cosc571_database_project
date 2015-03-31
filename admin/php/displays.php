@@ -31,7 +31,7 @@ function createHeader($showCart = true, $showLogin = true) {
       case $GLOBALS['user_status']['user']:
         $to_return .= '
             <div id="nameAndLogoutButtons">
-              <a href="' . $GLOBALS['locations']['logout'] . '" class="glow-link">logout</a>
+              <a href="' . $GLOBALS['locations']['logout'] . '" class="glow-link">logout</a> |
               <a href="' . $GLOBALS['locations']['cart'] . '" class="glow-link">cart</a>
             </div>';
         break;
