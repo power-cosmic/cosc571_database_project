@@ -8,6 +8,7 @@ function generate_admin_login() {
             <input type="text" name="username" id="username" placeholder="username">
             <input type="password" name="password" id="password" placeholder="password">
             <input type="submit" value="login" class="green button">
+            <div id="errors" class="error-message"></div>
           </form>
         </div>' . "\n";
 }

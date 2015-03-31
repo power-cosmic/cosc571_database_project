@@ -19,7 +19,7 @@ switch($_POST['action']) {
     }
     break;
   case 'admin_login':
-    $success = false;
+    $success = $login->admin_login($_POST['username'], $_POST['password']);
     if ($success) {
       $status = 'success';
     } else {

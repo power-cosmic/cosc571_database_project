@@ -3,6 +3,7 @@ include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 include_once 'admin/php/admin_login.php';
 include_once 'admin/php/constants.php';
+include_once 'admin/php/login.php';
 
 session_start();
 
@@ -13,13 +14,13 @@ if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Admin')?>
+  <?=createBasicHead('Admin', 'adminLogin')?>
   <body>
     <div id="container">
       <?=createHeader()?>
       <div class="content">
 
-        <?php if ($_SESSION['logged_in'] == $GLOBALS['user_status']['admin']) { ?>
+        <?php if (Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin']) { ?>
           <!-- display admin page -->
         <div id="login" class="centered box">
           <p>
