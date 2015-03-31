@@ -11,7 +11,7 @@ function createHeader($showCart = true, $showLogin = true) {
           </div>
           <div id="user-info">';
 
-  if (!$_SESSION['logged_in']) {
+  if (!isset($_SESSION['login'])) {
     if ($showLogin) {
       $to_return .= '
             <div id="logInButton">
@@ -21,7 +21,7 @@ function createHeader($showCart = true, $showLogin = true) {
             </div>';
     }
   } else {
-    switch($_SESSION['logged_in']) {
+    switch($_SESSION['login']->get_user_type()) {
       case $GLOBALS['user_status']['admin']:
         $to_return .= '
             <div id="adminLogoutButton">
@@ -31,7 +31,7 @@ function createHeader($showCart = true, $showLogin = true) {
       case $GLOBALS['user_status']['user']:
         $to_return .= '
             <div id="nameAndLogoutButtons">
-              <a href="' . $GLOBALS['locations']['home'] . '" class="glow-link">logout</a>
+              <a href="' . $GLOBALS['locations']['logout'] . '" class="glow-link">logout</a>
               <a href="' . $GLOBALS['locations']['cart'] . '" class="glow-link">cart</a>
             </div>';
         break;
