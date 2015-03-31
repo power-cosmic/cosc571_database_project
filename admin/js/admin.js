@@ -43,6 +43,13 @@ define(['lib/jquery'], function() {
 			load(currentIndex, numToDisplay);
 		});
 		
+		$('#previous').click(function(e) {
+			e.preventDefault();
+			currentIndex -= numToDisplay;
+			currentIndex = Math.max(0, currentIndex);
+			load(currentIndex, numToDisplay);
+		});
+		
 	});
 	
 });
