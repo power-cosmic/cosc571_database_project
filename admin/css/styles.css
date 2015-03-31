@@ -8,6 +8,10 @@ div.thin-box {
   display: inline;
 }
 
+.error-message {
+  color: #dd2222;
+}
+
 .centered {
   width: 60%;
   margin: 0px auto;

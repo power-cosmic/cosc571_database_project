@@ -15,7 +15,7 @@ switch($_POST['action']) {
     if ($success) {
       $status = 'success';
     } else {
-      $message = 'Invalide username or password';
+      $message = 'Invalid username or password';
     }
     break;
   case 'admin_login':
@@ -23,7 +23,7 @@ switch($_POST['action']) {
     if ($success) {
       $status = 'success';
     } else {
-      $message = 'Invalide username or password';
+      $message = 'Invalid username or password';
     }
     break;
   case 'logout' :
