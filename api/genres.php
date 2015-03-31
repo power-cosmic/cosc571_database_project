@@ -11,14 +11,12 @@ if ($login->get_user_type() == $user_status['admin']) {
   try {
     $db = open_connection();
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $query = "SELECT genre, count(*) AS count
-      FROM (
-        SELECT genre.name AS genre
-        FROM book_genre, genre
-        WHERE genre.id = book_genre.genre_id
-      ) AS T
-      GROUP BY genre
-      ORDER BY genre DESC;";
+    $query = "SELECT count(book.isbn) AS count,name
+      FROM book,genre,book_genre
+      WHERE book.isbn=book_genre.isbn
+        AND genre.id=book_genre.genre_id
+      GROUP BY name
+      ORDER BY count(book.isbn) DESC;";
     
     $stmt = $db->prepare($query);
     $stmt->execute();
