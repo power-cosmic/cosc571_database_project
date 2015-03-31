@@ -27,6 +27,16 @@ while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
   ]);
 }
 
-echo json_encode($books);
+$query = 'SELECT count(*) AS count FROM book';
+
+$stmt = $db->prepare($query);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$total = $result['count'];
+
+echo json_encode([
+    'books' => $books,
+    'total' => $total
+]);
 
 ?>

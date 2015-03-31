@@ -78,6 +78,7 @@ session_start();
           <br>
           <table id="books">
             <tr>
+              <th>Id</th>
               <th>Book</th>
               <th>Number of reviews</th>
             </tr>
