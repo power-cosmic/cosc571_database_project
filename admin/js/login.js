@@ -16,10 +16,7 @@ define(['js/formUtils', 'lib/jquery'], function(formUtils) {
 				action: 'customer_login' 
 			}),
 			success: function(response) {
-				console.log(response);
-				console.log(response.status);
 				if (response.status == 'success') {
-					console.log('redirecting');
 					window.location.href = 'index.php';
 				} else {
 					console.log('Failure: ', response);
