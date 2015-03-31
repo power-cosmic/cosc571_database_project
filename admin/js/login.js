@@ -7,7 +7,7 @@ define([
         	'lib/jquery'
         ], function(formUtils, ErrorAdder) {
 	
-	return function Login(action) {
+	return function Login(action, callback) {
 		errorAdder = new ErrorAdder('#errors');
 		
 		$('form').submit(function(e) {
@@ -24,7 +24,7 @@ define([
 				}),
 				success: function(response) {
 					if (response.status == 'success') {
-						window.location.href = 'index.php';
+						callback();
 					} else {
 						errorAdder.showError(response.message);
 						console.log(errorAdder);

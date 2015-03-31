@@ -1,5 +1,4 @@
 <?php
-
 class Login {
   private $username;
   private $user_type;  // customer/admin
@@ -34,25 +33,41 @@ class Login {
   }
 
   public function customer_login($username, $password) {
-    $db = open_connection();
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $db->prepare("SELECT username
-        FROM customer
-        WHERE username=:username
-          AND password=PASSWORD(:password);"
-    );
+    $query = "SELECT username
+      FROM customer
+      WHERE username=:username
+        AND password=PASSWORD(:password);";
+    return $this->login($username, $password, $query, 'user');
+  }
+  
+  public function admin_login($username, $password) {
+    $query = "SELECT username
+      FROM admin
+      WHERE username=:username
+        AND password=PASSWORD(:password);";
+    return $this->login($username, $password, $query, 'admin');
+  }
+  
+  private function login($username, $password, $query, $type) {
 
-    $stmt->execute([
-      'username' => $username,
-      'password' => $password
-    ]);
-
-    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      $this->username = $username;
-      $this->user_type = 'user';
-      return true;
-    } else {
-      return false;
+    try {
+      $db = open_connection();
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $stmt = $db->prepare($query);
+      $stmt->execute([
+        'username' => $username,
+        'password' => $password
+      ]);
+  
+      if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $this->username = $username;
+        $this->user_type = $type;
+        return true;
+      } else {
+        return false;
+      }
+    } catch (PDOException $e) {
+      print_r($e);
     }
   }
 
