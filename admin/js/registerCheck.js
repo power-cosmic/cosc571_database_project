@@ -13,6 +13,7 @@ define(['lib/jquery'], function() {
 		return data;
 	}
 	
+	// validate input
 	var validate = function (data) {
 		var passwordLength = /.{8}.*/;
 		var passwordSpecial = /[\.!@#$%^&*()?<>/\\{}]/;
@@ -82,6 +83,7 @@ define(['lib/jquery'], function() {
 				success: function(response) {
 					if (response.status == 'success') {
 						console.log('Success: ', response);
+						window.location = 'registration_confirmation.php';
 					} else {
 						console.log('Failure: ', response);
 					}

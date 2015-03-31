@@ -1,6 +1,7 @@
 <?php
 include_once 'admin/php/book_info.php';
 include_once 'admin/php/cart.php';
+include_once 'admin/php/login.php';
 include_once 'constants.php';
 
 function createBasicHead($title = '', $script_location = null, $styles = []) {

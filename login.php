@@ -6,7 +6,7 @@ session_start();
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Login')?>
+  <?=createBasicHead('Login', 'login')?>
   <body>
     <div id="container">
       <?=createHeader(true, false)?>
