@@ -1,7 +1,13 @@
 /**
  * 
  */
-define(['js/formUtils', 'lib/jquery'], function(formUtils) {
+define([
+        	'js/formUtils', 
+        	'js/ErrorAdder', 
+        	'lib/jquery'
+        ], function(formUtils, ErrorAdder) {
+	
+	errorAdder = new ErrorAdder('#errors');
 	
 	$('form').submit(function(e) {
 		e.preventDefault();
@@ -19,6 +25,8 @@ define(['js/formUtils', 'lib/jquery'], function(formUtils) {
 				if (response.status == 'success') {
 					window.location.href = 'index.php';
 				} else {
+					errorAdder.showError(response.message);
+					console.log(errorAdder);
 					console.log('Failure: ', response);
 				}
 			}
