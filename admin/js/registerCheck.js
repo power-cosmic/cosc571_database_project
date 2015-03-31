@@ -82,7 +82,6 @@ define(['lib/jquery'], function() {
 				data: data,
 				success: function(response) {
 					if (response.status == 'success') {
-						console.log('Success: ', response);
 						window.location = 'registration_confirmation.php';
 					} else {
 						console.log('Failure: ', response);
