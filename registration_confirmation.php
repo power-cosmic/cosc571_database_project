@@ -14,7 +14,7 @@ session_start();
         <div id="review" class="centered box">
           <h2>You're now registered!</h2>
           <?php
-            print_r($_POST); 
+             
           ?>
         </div>
       </div>
