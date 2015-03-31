@@ -17,7 +17,6 @@ session_start();
       <div class="content">
 
         <?php if (Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin']) { ?>
-        <?php print_r(Login::get_instance()); ?>
           <!-- display admin page -->
         <div id="login" class="centered box">
           <p>
