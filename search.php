@@ -51,7 +51,9 @@ session_start();
         <div id="search-category-box">
           <h3>Categories</h3>
           <input type="button" id="toggle-category-button" class="purple button" value="Select all">
-          <!-- TODO: generate these from database -->
+          <div id="catagory-holder" style="position:relative; left:10%;">
+          <table>
+          <tr>
           <?php
           $sql = "SELECT name FROM genre;";
           $db = open_connection();
@@ -61,7 +63,7 @@ session_start();
           $category_num = 0;
           while($genre = $stmt->fetch(PDO::FETCH_ASSOC)) {
           ?>
-
+          <td>
           <input type="checkbox" name="category[<?=$category_num++?>]"
               value="<?=$genre['name']?>" id="category-<?=str_replace(' ', '_', $genre['name'])?>"
               form="<?=$search_id?>" <?php
@@ -73,9 +75,16 @@ session_start();
                 }
               ?>>
           <label for="category-<?=str_replace(' ', '_', $genre['name'])?>"><?=$genre['name']?></label>
+          </td>
           <?php
+            if ($category_num % 4 == 0) {
+              echo "</tr><tr>";
+            }
           }
           ?>
+             </tr>
+            </table>
+          </div>
         </div>
 
         <!-- </form> -->
