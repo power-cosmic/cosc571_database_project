@@ -99,56 +99,78 @@ session_start();
                             AND book.isbn=book_genre.isbn
                             AND book_genre.genre_id=genre.id";
 
-              //              AND " . $_GET['criteria'] . " LIKE '%" . $_GET['query'] . "%'
-              //        LIMIT 10;";
-              if ($_GET['criteria']) {
-                $sql .= " AND (";
-                $at_least_one = false;
-                if ($_GET['criteria']['author']) {
-                  $sql .= "first_name LIKE '%" . $_GET['query'] . "%'";
-                  $sql .= " OR last_name LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
+              function get_specific_clauses($query, $criteria, $genres) {
+                $toReturn = "
+                              AND (
+                                  (";
+                $toReturn .= get_clauses_for_query_item(array_pop($query), $criteria, $genres);
+                foreach ($query as $query_item) {
+                  $toReturn .= " )
+                                OR
+                                  (";
+                  $toReturn .= get_clauses_for_query_item($query_item, $criteria, $genres);
                 }
-                if ($_GET['criteria']['title']) {
-                  if ($at_least_one) {
-                    $sql .= " OR ";
-                  }
-                  $sql .= "title LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
-                }
-                if ($_GET['criteria']['publisher']) {
-                  if ($at_least_one) {
-                    $sql .= " OR ";
-                  }
-                  $sql .= "publisher.name LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
-                }
-                if ($_GET['criteria']['isbn']) {
-                  if ($at_least_one) {
-                    $sql .= " OR ";
-                  }
-                  $sql .= "book.isbn LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
-                }
-                $sql .= ")";
-              } else {
-                $sql .= " AND (";
-                $sql .= "title LIKE '%" . $_GET['query'] . "%'";
-                $sql .= ")";
-
+                $toReturn .= " )
+                                )";
+                return $toReturn;
               }
-              if ($_GET['category']) {
-                $sql .= " AND (";
-                $sql .= "genre.name = '" . array_pop($_GET['category']) . "'";
-                foreach ($_GET['category'] as $selected_genre) {
-                  $sql .= " OR genre.name = '" . $selected_genre . "'";
+
+              function get_clauses_for_query_item($query_item, $criteria, $genres) {
+                $toReturn = '';
+                if ($criteria) {
+                  $toReturn .= " (";
+                  $at_least_one = false;
+                  if ($criteria['author']) {
+                    $toReturn .= "first_name LIKE '%" . $query_item . "%'";
+                    $toReturn .= " OR last_name LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  if ($criteria['title']) {
+                    if ($at_least_one) {
+                      $toReturn .= " OR ";
+                    }
+                    $toReturn .= "title LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  if ($criteria['publisher']) {
+                    if ($at_least_one) {
+                      $toReturn .= " OR ";
+                    }
+                    $toReturn .= "publisher.name LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  if ($criteria['isbn']) {
+                    if ($at_least_one) {
+                      $toReturn .= " OR ";
+                    }
+                    $toReturn .= "book.isbn LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  $toReturn .= ")";
+                } else {
+                  $toReturn .= " AND (";
+                  $toReturn .= "title LIKE '%" . $query_item . "%'";
+                  $toReturn .= " )";
+
                 }
-                $sql .= ")";
+                if ($genres) {
+                  $toReturn .= " AND (";
+                  $toReturn .= "genre.name = '" . array_pop($genres) . "'";
+                  foreach ($genres as $selected_genre) {
+                    $toReturn .= " OR genre.name = '" . $selected_genre . "'";
+                  }
+                  $toReturn .= " )";
+                }
+                return $toReturn;
               }
+
+              $matches = explode(',', $_GET['query']);
+              //print_r($matches);
+              $sql .= get_specific_clauses($matches, $_GET['criteria'], $_GET['category']);
               //echo "<tr><td colspan='3'>$sql</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
