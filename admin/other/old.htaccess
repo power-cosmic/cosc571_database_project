@@ -1,0 +1,19 @@
+#ErrorDocument 404 index.php
+<IfModule mod_rewrite.c>
+</IfModule>
+
+
+  RewriteBase /~eddie/database
+
+  RewriteEngine On
+  RewriteRule   ^/~([^/]+)/?(.*)    /u/$1/$2 [R]
+  
+  #RewriteCond %{QUERY_STRING} query=([-a-zA-Z0-9_+]+)  
+  #RewriteRule ^/?search.php$ %1? [R=301,L]  
+  RewriteRule ^/?search/([A-Za-z0-9-]+)/?$ search.php?query=$1 [NC,L]  
+
+  RewriteCond %{REQUEST_FILENAME} !-f  
+  RewriteCond %{REQUEST_FILENAME} !-d  
+  RewriteRule ^/?(.*)$ 404page.php?url=$1 [L]
+  RewriteRule ^/?([a-z]+)$ $1.php [L]
+  
