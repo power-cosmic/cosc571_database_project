@@ -31,7 +31,9 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
       'publisher' => 'Addison-Wesley',
       'isbn' => '978-0132834230'
   ];
-
+  
+  $cart = Cart::get_instance();
+  $cart_contents = $cart->get_items();
   $books = [
       new Book($dummy_book), new Book($dummy_book)
   ];
@@ -52,14 +54,14 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
     $to_return .= $user['card_type'] . ': ' . $user['card_number'] . '</div>';
   } else {
     $to_return .= '<input type="radio" name="card-selection" value="current-card">
-                <div id="current-card" class="user-info-box">
-                  Use card on file<br>' . $user['card_type'] . ': ' . $user['card_number']
-                .'</div>
-                <br>
-                <input type="radio" name="card-selection" value="new-card">
-                <div id="new-card" class="user-info-box">
-                  <input type="text" placeholder="Card number">
-                  <select name="card-type">';
+      <div id="current-card" class="user-info-box">
+        Use card on file<br>' . $user['card_type'] . ': ' . $user['card_number']
+      .'</div>
+      <br>
+      <input type="radio" name="card-selection" value="new-card">
+      <div id="new-card" class="user-info-box">
+        <input type="text" placeholder="Card number">
+        <select name="card-type">';
 
     foreach($card_types as $card_type) {
       $value = strtolower($card_type);
@@ -67,8 +69,8 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
     }
 
     $to_return .= '</select>
-            </div>
-          </div>';
+        </div>
+      </div>';
   }
 
   if ($confirmation) {
@@ -90,22 +92,24 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
                 <th class="thin-cell">Price</th>
               </tr>';
 
-  for($i = 0; $i < count($books); $i++) {
-    $book = $books[$i];
-    $cost = $quantities[$i] * $book->price;
-    $subtotal += $cost;
+  $subtotal = $cart->get_subtotal();
+  
+  foreach ($cart_contents as $item) {
+    $book = $item['book'];
+    $quantity = $item['quantity'];
+    $cost = $quantity * $book->price;
     $to_return .= '<tr>
-                  <td class="book-info">' . $book->generateBookInfo() . '</td>
-                  <td class="book-info">';
+      <td class="book-info">' . $book->generateBookInfo() . '</td>
+      <td class="book-info">';
     if ($confirmation) {
       $to_return .= $book->quantity;
     } else {
       $to_return .= '<input type="number" name="quantity" 
-          class="quantity-box centered-input" value="' . $quantities[$i] . '">';
+        class="quantity-box centered-input" value="' . $quantity . '">';
     }
     $to_return .= '</td>
-                  <td class="book-info">$' . $cost . '</td>
-                </tr>';
+        <td class="book-info">$' . $cost . '</td>
+      </tr>';
   }
 
   $to_return .= '</table>';
@@ -118,19 +122,19 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
                     <table id="total" class="right-aligned">
                       <tr>
                         <td class="book-info">Subtotal</td>
-                        <td class="right-aligned book-info">' . 
+                        <td class="right-aligned book-info" id="subtotal-cost">' . 
                           sprintf("$%.2f", $subtotal) . 
                         '</td>
                       </tr>
                       <tr>
                         <td class="book-info">Subtotal</td>
-                        <td class="right-aligned book-info">' . 
+                        <td class="right-aligned book-info" id="shipping-cost">' . 
                           sprintf("$%.2f", $shipping) . 
                         '</td>
                       </tr>
                       <tr>
                         <td class="book-info">Total</td>
-                        <td class="right-aligned book-info">' . 
+                        <td class="right-aligned book-info" id="total-cost">' . 
                           sprintf("$%.2f", $subtotal + $shipping) . 
                         '</td>
                       </tr>

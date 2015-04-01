@@ -22,8 +22,7 @@ session_start();
                 <th class="thin-cell">Qty</th>
                 <th class="thin-cell">Price</th>
               </tr>
-
-              <!-- TODO: generate rows from db -->
+              
               <?php
                 $cart = Cart::get_instance();
                 $cart_contents = $cart->get_items();
@@ -57,7 +56,7 @@ session_start();
               Subtotal: $<?=$cart->get_subtotal()?>
             </div>
             <div id="buttons" class="box right-aligned">
-              <input type="submit" class="blue button" value="Update">
+              <!-- <input type="submit" class="blue button" value="Update"> -->
               <input type="submit" class="green button" value="Checkout">
             </div>
           </form>
