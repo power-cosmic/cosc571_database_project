@@ -2,6 +2,7 @@
 include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 include_once 'admin/php/constants.php';
+include_once 'admin/php/connection.php';
 include_once 'admin/php/review_info.php';
 
 session_start();
@@ -14,55 +15,55 @@ session_start();
       <?=createHeader()?>
       <div id="content">
         <?php
-          if ($_GET['id']) {
-            $review = [
-              'customer_id' => 1,
-              'book_id'=> 1,
-              'rating' => 4,
-              'text' => 'This book is definitely my favorite book ever!'
-            ];
-            $test_book = [
-              'id' => 1,
-              'title' => 'Absolute Java',
-              'author' => 'Walter Savitch',
-              'price' => '149.99',
-              'quantity' => '2',
-              'publisher' => 'Addison-Wesley',
-              'isbn' => '978-0132834230'
-            ];
-            $user = [
-              'customer_id' => 1,
-              'username' => 'coolguy49',
-              'first_name' => 'Luke',
-              'last_name' => 'Skywalker',
-              'address' => '48 Williams St.',
-              'city' => 'Tatooine',
-              'state' => 'MI',
-              'zip' => '48197',
-              'card_type' => 'VISA',
-              'card_number' => '1111222233334444',
-              'card_expiration' => '04/16'
-            ];
+            $db = open_connection();
+            $sql = "SELECT title, CONCAT(first_name, ' ', last_name) as author
+                      FROM book,author
+                      WHERE isbn='" . $_GET['isbn'] . "' AND book.author_id=author.id";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $book = $stmt->fetch(PDO::FETCH_ASSOC);
             ?>
             <div id="cart" class="centered box">
+              <div style="position:relative">
+                <h3>Reviews for <?= $book['title']?> by <?= $book['author']?></h3>
+                <input type="submit" style="position:absolute;right:0px;top:0px;"
+                    class="purple button centered-input"
+                    value="Write review" name="review <?=$book->isbn?>">
+              </div>
+
+            <?php
+
+            $sql = "SELECT customer_username AS username,rating,content,submit_time
+                      FROM reveiw
+                      WHERE book_isbn='" . $_GET['isbn'] . "'
+                      ORDER BY submit_time DESC";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+
+            if ($count = $stmt->rowCount()) {
+            ?>
+
               <table id="reviews" class="wide">
                 <tr>
                   <th class="thin-cell">Username</th>
                   <th>Review</th>
                   <th class="thin-cell">Rating</th>
                 </tr>
-                <tr>
-                  <td class="book-info"><?=$user['username']?></td>
-                  <td class="book-info"><?=$review['text']?></td>
-                  <td class="book-info"><div class="centered-input"><?=generateReviewRating($review)?></div></td>
-                </tr>
-              </table>
-            </div>
-            <?php
-          } else {
 
-          }
-        ?>
+                <?php
+                  while($review = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo generateReview($review);
+                  }
+                ?>
+              </table>
+            <?php
+            } else {
+            ?>
+              <header>Oops, there's no reviews for this book! Why don't you write one?!</header>
+            <?php
+            }
+            ?>
+            </div>
       </div>
       <?=createFooter()?>
     </div>

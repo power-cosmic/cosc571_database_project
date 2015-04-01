@@ -51,7 +51,9 @@ session_start();
         <div id="search-category-box">
           <h3>Categories</h3>
           <input type="button" id="toggle-category-button" class="purple button" value="Select all">
-          <!-- TODO: generate these from database -->
+          <div id="catagory-holder" style="position:relative; left:10%;">
+          <table>
+          <tr>
           <?php
           $sql = "SELECT name FROM genre;";
           $db = open_connection();
@@ -61,7 +63,7 @@ session_start();
           $category_num = 0;
           while($genre = $stmt->fetch(PDO::FETCH_ASSOC)) {
           ?>
-
+          <td>
           <input type="checkbox" name="category[<?=$category_num++?>]"
               value="<?=$genre['name']?>" id="category-<?=str_replace(' ', '_', $genre['name'])?>"
               form="<?=$search_id?>" <?php
@@ -73,9 +75,16 @@ session_start();
                 }
               ?>>
           <label for="category-<?=str_replace(' ', '_', $genre['name'])?>"><?=$genre['name']?></label>
+          </td>
           <?php
+            if ($category_num % 5 == 0) {
+              echo "</tr><tr>";
+            }
           }
           ?>
+             </tr>
+            </table>
+          </div>
         </div>
 
         <!-- </form> -->
@@ -99,56 +108,77 @@ session_start();
                             AND book.isbn=book_genre.isbn
                             AND book_genre.genre_id=genre.id";
 
-              //              AND " . $_GET['criteria'] . " LIKE '%" . $_GET['query'] . "%'
-              //        LIMIT 10;";
-              if ($_GET['criteria']) {
-                $sql .= " AND (";
-                $at_least_one = false;
-                if ($_GET['criteria']['author']) {
-                  $sql .= "first_name LIKE '%" . $_GET['query'] . "%'";
-                  $sql .= " OR last_name LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
+              function get_specific_clauses($query, $criteria, $genres) {
+                $toReturn = "
+                              AND (
+                                  (";
+                $toReturn .= get_clauses_for_query_item(trim(array_pop($query)), $criteria, $genres);
+                foreach ($query as $query_item) {
+                  $toReturn .= " )
+                                OR
+                                  (";
+                  $toReturn .= get_clauses_for_query_item(trim($query_item), $criteria, $genres);
                 }
-                if ($_GET['criteria']['title']) {
-                  if ($at_least_one) {
-                    $sql .= " OR ";
-                  }
-                  $sql .= "title LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
-                }
-                if ($_GET['criteria']['publisher']) {
-                  if ($at_least_one) {
-                    $sql .= " OR ";
-                  }
-                  $sql .= "publisher.name LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
-                }
-                if ($_GET['criteria']['isbn']) {
-                  if ($at_least_one) {
-                    $sql .= " OR ";
-                  }
-                  $sql .= "book.isbn LIKE '%" . $_GET['query'] . "%'";
-
-                  $at_least_one = true;
-                }
-                $sql .= ")";
-              } else {
-                $sql .= " AND (";
-                $sql .= "title LIKE '%" . $_GET['query'] . "%'";
-                $sql .= ")";
-
+                $toReturn .= " )
+                                )";
+                return $toReturn;
               }
-              if ($_GET['category']) {
-                $sql .= " AND (";
-                $sql .= "genre.name = '" . array_pop($_GET['category']) . "'";
-                foreach ($_GET['category'] as $selected_genre) {
-                  $sql .= " OR genre.name = '" . $selected_genre . "'";
+
+              function get_clauses_for_query_item($query_item, $criteria, $genres) {
+                $toReturn = '';
+                if ($criteria) {
+                  $toReturn .= " (";
+                  $at_least_one = false;
+                  if ($criteria['author']) {
+                    $toReturn .= "first_name LIKE '%" . $query_item . "%'";
+                    $toReturn .= " OR last_name LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  if ($criteria['title']) {
+                    if ($at_least_one) {
+                      $toReturn .= " OR ";
+                    }
+                    $toReturn .= "title LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  if ($criteria['publisher']) {
+                    if ($at_least_one) {
+                      $toReturn .= " OR ";
+                    }
+                    $toReturn .= "publisher.name LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  if ($criteria['isbn']) {
+                    if ($at_least_one) {
+                      $toReturn .= " OR ";
+                    }
+                    $toReturn .= "book.isbn LIKE '%" . $query_item . "%'";
+
+                    $at_least_one = true;
+                  }
+                  $toReturn .= ")";
+                } else {
+                  $toReturn .= "title LIKE '%" . $query_item . "%'";
+                  $toReturn .= " OR first_name LIKE '%" . $query_item . "%'";
+                  $toReturn .= " OR last_name LIKE '%" . $query_item . "%'";
                 }
-                $sql .= ")";
+                if ($genres) {
+                  $toReturn .= " AND (";
+                  $toReturn .= "genre.name = '" . array_pop($genres) . "'";
+                  foreach ($genres as $selected_genre) {
+                    $toReturn .= " OR genre.name = '" . $selected_genre . "'";
+                  }
+                  $toReturn .= " )";
+                }
+                return $toReturn;
               }
+
+              $matches = explode(',', $_GET['query']);
+              //print_r($matches);
+              $sql .= get_specific_clauses($matches, $_GET['criteria'], $_GET['category']);
               //echo "<tr><td colspan='3'>$sql</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
@@ -162,7 +192,7 @@ session_start();
               </td>
                 <td class="book-info">
                   <input type="button" class="blue button centered-input"
-                    value="Reviews" onclick="window.location.href='review.php?id=<?=$book->isbn?>'" />
+                    value="Reviews" onclick="window.location.href='review.php?isbn=<?=$book->isbn?>'" />
                 </td>
               <td class="book-info"><?=$book->generateBookInfo()?></td>
             </tr>
