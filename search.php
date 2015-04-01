@@ -161,10 +161,9 @@ session_start();
                   }
                   $toReturn .= ")";
                 } else {
-                  $toReturn .= " AND (";
                   $toReturn .= "title LIKE '%" . $query_item . "%'";
-                  $toReturn .= " )";
-
+                  $toReturn .= " OR first_name LIKE '%" . $query_item . "%'";
+                  $toReturn .= " OR last_name LIKE '%" . $query_item . "%'";
                 }
                 if ($genres) {
                   $toReturn .= " AND (";
@@ -180,7 +179,7 @@ session_start();
               $matches = explode(',', $_GET['query']);
               //print_r($matches);
               $sql .= get_specific_clauses($matches, $_GET['criteria'], $_GET['category']);
-              //echo "<tr><td colspan='3'>$sql</td></tr>";
+              echo "<tr><td colspan='3'>$sql</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
