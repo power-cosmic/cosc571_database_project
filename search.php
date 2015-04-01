@@ -77,7 +77,7 @@ session_start();
           <label for="category-<?=str_replace(' ', '_', $genre['name'])?>"><?=$genre['name']?></label>
           </td>
           <?php
-            if ($category_num % 4 == 0) {
+            if ($category_num % 5 == 0) {
               echo "</tr><tr>";
             }
           }
@@ -112,12 +112,12 @@ session_start();
                 $toReturn = "
                               AND (
                                   (";
-                $toReturn .= get_clauses_for_query_item(array_pop($query), $criteria, $genres);
+                $toReturn .= get_clauses_for_query_item(trim(array_pop($query)), $criteria, $genres);
                 foreach ($query as $query_item) {
                   $toReturn .= " )
                                 OR
                                   (";
-                  $toReturn .= get_clauses_for_query_item($query_item, $criteria, $genres);
+                  $toReturn .= get_clauses_for_query_item(trim($query_item), $criteria, $genres);
                 }
                 $toReturn .= " )
                                 )";
