@@ -2,6 +2,7 @@
 include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 include_once 'admin/php/constants.php';
+include_once 'admin/php/connection.php';
 include_once 'admin/php/review_info.php';
 
 session_start();
@@ -14,12 +15,12 @@ session_start();
       <?=createHeader()?>
       <div id="content">
         <?php
-          if ($_GET['id']) {
             $review = [
               'customer_id' => 1,
               'book_id'=> 1,
+              'customer' => 'someone different',
               'rating' => 4,
-              'text' => 'This book is definitely my favorite book ever!'
+              'content' => 'This book is definitely my favorite book ever!'
             ];
             $test_book = [
               'id' => 1,
@@ -43,7 +44,15 @@ session_start();
               'card_number' => '1111222233334444',
               'card_expiration' => '04/16'
             ];
+            $sql = "SELECT customer_username AS username,rating,content,submit_time
+                      FROM reveiw
+                      WHERE book_isbn='" . $_GET['isbn'] . "'
+                      ORDER BY submit_time DESC";
+            $db = open_connection();
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
             ?>
+
             <div id="cart" class="centered box">
               <table id="reviews" class="wide">
                 <tr>
@@ -51,18 +60,14 @@ session_start();
                   <th>Review</th>
                   <th class="thin-cell">Rating</th>
                 </tr>
-                <tr>
-                  <td class="book-info"><?=$user['username']?></td>
-                  <td class="book-info"><?=$review['text']?></td>
-                  <td class="book-info"><div class="centered-input"><?=generateReviewRating($review)?></div></td>
-                </tr>
+
+                <?php
+                  while($review = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo generateReview($review);
+                  }
+                ?>
               </table>
             </div>
-            <?php
-          } else {
-
-          }
-        ?>
       </div>
       <?=createFooter()?>
     </div>

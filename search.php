@@ -193,7 +193,7 @@ session_start();
               </td>
                 <td class="book-info">
                   <input type="button" class="blue button centered-input"
-                    value="Reviews" onclick="window.location.href='review.php?id=<?=$book->isbn?>'" />
+                    value="Reviews" onclick="window.location.href='review.php?isbn=<?=$book->isbn?>'" />
                 </td>
               <td class="book-info"><?=$book->generateBookInfo()?></td>
             </tr>
