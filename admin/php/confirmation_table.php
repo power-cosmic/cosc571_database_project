@@ -58,12 +58,14 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
   if ($confirmation) {
     $to_return .= $user['card_type'] . ': ' . $user['card_number'] . '</div>';
   } else {
-    $to_return .= '<input type="radio" name="card-selection" value="current-card">
+    $to_return .= '<input type="radio" name="card-selection" 
+        value="current-card" id="current-card-radio">
       <div id="current-card" class="user-info-box">
         Use card on file<br>' . $user['card_type'] . ': ' . $user['card_number']
       .'</div>
       <br>
-      <input type="radio" name="card-selection" value="new-card">
+      <input type="radio" name="card-selection" value="new-card"
+          id="new-card-radio">
       <div id="new-card" class="user-info-box">
         <input type="text" placeholder="Card number">
         <select name="card-type">';

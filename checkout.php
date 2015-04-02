@@ -10,7 +10,7 @@ session_start();
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Checkout', null, ['book_table.css'])?>
+  <?=createBasicHead('Checkout', 'checkout', ['book_table.css'])?>
   <body>
     <div id="container">
       <?=createHeader()?>

@@ -44,6 +44,17 @@ if ($customer_inserter->does_exist($_POST['username'])) {
   $stmt = $db->prepare($query);
   $stmt->execute();
   
+  // put card number into customer
+  // TODO: do this when initially adding customer
+  $query = 'UPDATE customer
+      SET card_number = :card_number
+      WHERE username = :username;';
+  $stmt = $db->prepare($query);
+  $stmt->execute([
+      'card_number' => $_POST['card-number'],
+      'username' => $_POST['username']
+  ]);
+  
   $success = true;
 }
 

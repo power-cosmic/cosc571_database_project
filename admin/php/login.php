@@ -136,7 +136,7 @@ class Login {
   private function get_credit_cards() {
     $query = 'SELECT number, expiration, issuer
         FROM credit_card, customer
-        WHERE customer.username = credit_card.username
+        WHERE customer.card_number = credit_card.number
         AND customer.username = :username';
     $db = open_connection();
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
