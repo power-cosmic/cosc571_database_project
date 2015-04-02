@@ -116,7 +116,7 @@ input {
   height: 15px;
 }
 
-input[type="submit"]:disabled {
+input[type="submit"]:disabled, input[type="button"]:disabled {
   background-color: #cccccc;
   color: #999999;
   cursor: default;
