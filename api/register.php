@@ -4,6 +4,8 @@ require_once '../admin/php/inserters/address_inserter.php';
 require_once '../admin/php/inserters/credit_card_inserter.php';
 require_once '../admin/php/inserters/customer_inserter.php';
 
+session_start();
+
 // open db connection and create db interaction elements
 $db = open_connection();
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -61,12 +63,14 @@ if ($customer_inserter->does_exist($_POST['username'])) {
 if ($success) {
   echo json_encode([
       'status' => 'success',
-      'info' => $_POST
+      'info' => $_POST,
+      'previousPage' => $_SESSION['previous']
   ]);
 } else {
   echo json_encode([
       'status' => 'fail',
-      'info' => $error_message
+      'info' => $error_message,
+      'previousPage' => $_SESSION['previous']
   ]);
 }
 ?>

@@ -82,7 +82,7 @@ define(['lib/jquery'], function() {
 				data: data,
 				success: function(response) {
 					if (response.status == 'success') {
-						window.location = 'registration_confirmation.php';
+						window.location = response.previousPage;
 					} else {
 						console.log('Failure: ', response);
 					}

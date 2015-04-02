@@ -24,7 +24,7 @@ define([
 				}),
 				success: function(response) {
 					if (response.status == 'success') {
-						callback();
+						callback(response);
 					} else {
 						errorAdder.showError(response.message);
 						console.log(errorAdder);

@@ -6,9 +6,13 @@ include_once 'admin/php/profile.php';
 include_once 'admin/php/us_state_dropdown.php';
 
 session_start();
+
+$_SESSION['previous'] = $_SERVER['HTTP_REFERER'];
+
 ?>
 <!doctype html>
 <html>
+  <?=$_SESSION['previous']?>
   <?=createBasicHead('Register', 'registerCheck')?>
   <body>
     <div id="container">
@@ -19,6 +23,7 @@ session_start();
         </div>
       </div>
       <?=createFooter()?>
+      <?=$_SESSION['previous']?>
     </div>
   </body>
 </html>
