@@ -8,13 +8,26 @@ include_once 'admin/php/login.php';
 
 session_start();
 
+if (!Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin']) {
+  header('Location: ' . $project_root . '/admin.php');
+  die();
+}
 ?>
 <!doctype html>
 <html>
-  <?=createBasicHead('Admin', ['adminLogin', 'admin'])?>
+  <head>
+    <style>
+      table: {
+        border-collapse: collapse;
+      }
+      table, td, th, tr {
+        border: 1px solid black;
+        border-spacing: 0px;
+      }
+    </style>
+  </head>
   <body>
     <div id="container">
-      <?=createHeader()?>
       <div class="content">
 
         <?php if (Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin']) {
@@ -24,6 +37,7 @@ session_start();
         
         <!-- display admin page -->
         <div id="login" class="centered box">
+          <h1>Admin Summary</h1>
           <p>
             Registered users:
             <?php
@@ -78,15 +92,32 @@ session_start();
           <br>
           <table id="books">
             <tr>
-              <th>Id</th>
               <th>Book</th>
               <th>Number of reviews</th>
             </tr>
+            
+            <?php
+            $query = 'SELECT title, COUNT(reveiw.book_isbn) AS reviews
+              FROM book
+              LEFT JOIN reveiw
+              ON book.isbn = reveiw.book_isbn
+              GROUP BY book.isbn';
+                        
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+            
+            while($result = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+            ?>
+              <tr>
+                <td><?=$result['title']?></td>
+                <td><?=intval($result['reviews'])?></td>
+              </tr>
+            <?php
+            }
+            ?>
+            
           </table>
           <br>
-          <a href="#" id="previous" class="blue button">previous</a>
-          <a href="#" id="next" class="blue button">next</a>
-          <a href="admin_printable.php" class="purple button">Printable</a>
         </div>
 
         <?php
@@ -94,8 +125,8 @@ session_start();
           echo generate_admin_login();
         }
         ?>
+
       </div>
-      <?=createFooter()?>
     </div>
   </body>
 </html>
