@@ -4,13 +4,16 @@ include_once 'admin/php/cart.php';
 include_once 'admin/php/login.php';
 include_once 'constants.php';
 
-function createBasicHead($title = '', $script_location = null, $styles = []) {
+function createBasicHead($title = '', $script_location = null, $styles = [], $no_css = false) {
   $toReturn = '<head>
     <title>' . $GLOBALS['name']['short'] . ' | ' . $title . '</title>
     <meta charset="utf-8">
-    <link rel="shortcut icon" type="image/x-icon" href="'. $GLOBALS['locations']['favicon'] . '" />
-    <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['main_style'] . '">';
-
+    <link rel="shortcut icon" type="image/x-icon" href="'. $GLOBALS['locations']['favicon'] . '" />';
+  
+  if (!$no_css) {
+    $toReturn .= '<link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['main_style'] . '">';
+  }
+        
   foreach($styles as $style) {
     $toReturn .= '
     <link rel="stylesheet" type="text/css" href="' . $GLOBALS['locations']['styles'] . $style . '">';
