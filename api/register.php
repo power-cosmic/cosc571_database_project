@@ -17,17 +17,19 @@ $success = false;
 if ($customer_inserter->does_exist($_POST['username'])) {
   $error_message = 'Username is taken: '. $_POST['username'];
 } else {
+
   $address_info = [
     'street_address' => $_POST['address'],
     'city' => $_POST['city'],
     'zip' => $_POST['zip'],
-    'state' => $_POST['state'],
+    'state' => $_POST['state']
   ];
   $address_id = $address_inserter->insert($address_info)['id'];
 
   $customer_inserter->insert([
     'username' => $_POST['username'],
     'password' => $_POST['password'],
+    'email' => $_POST['email'],
     'first_name' => $_POST['first-name'],
     'last_name' => $_POST['last-name'],
     'address_id' => $address_id
@@ -39,13 +41,16 @@ if ($customer_inserter->does_exist($_POST['username'])) {
     'issuer' => $_POST['card-type'],
     'expiration' => $_POST['card-expiration']
   ]);
-  
+
   // insert customer, address into lookup table
   $query = 'INSERT INTO customer_address
-      VALUES("' . $_POST['username'] . '", ' . $address_id . ');';
+      VALUES (:username, :address_id);';
   $stmt = $db->prepare($query);
-  $stmt->execute();
-  
+  $stmt->execute([
+      'username' => $_POST['username'],
+      'address_id' => $address_id
+  ]);
+
   // put card number into customer
   // TODO: do this when initially adding customer
   $query = 'UPDATE customer
@@ -56,7 +61,7 @@ if ($customer_inserter->does_exist($_POST['username'])) {
       'card_number' => $_POST['card-number'],
       'username' => $_POST['username']
   ]);
-  
+
   $success = true;
 }
 

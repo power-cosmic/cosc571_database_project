@@ -10,6 +10,7 @@ define(['lib/jquery'], function() {
 				data[$element.attr('name')] = $element.val();
 			}
 		});
+		console.log(data);
 		return data;
 	}
 	
