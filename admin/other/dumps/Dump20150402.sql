@@ -497,7 +497,7 @@ DROP TABLE IF EXISTS `sales_order`;
 CREATE TABLE `sales_order` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `total_cost` decimal(6,2) NOT NULL DEFAULT '0.00',
-  `submit_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `submit_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `shipping_cost` decimal(6,2) NOT NULL DEFAULT '0.00',
   `delivery_date` date DEFAULT NULL,
   `delivery_status` enum('pending','shipped','delivered') NOT NULL DEFAULT 'pending',
