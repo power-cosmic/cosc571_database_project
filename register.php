@@ -12,7 +12,6 @@ $_SESSION['previous'] = $_SERVER['HTTP_REFERER'];
 ?>
 <!doctype html>
 <html>
-  <?=$_SESSION['previous']?>
   <?=createBasicHead('Register', 'registerCheck')?>
   <body>
     <div id="container">
@@ -23,7 +22,6 @@ $_SESSION['previous'] = $_SERVER['HTTP_REFERER'];
         </div>
       </div>
       <?=createFooter()?>
-      <?=$_SESSION['previous']?>
     </div>
   </body>
 </html>

@@ -14,7 +14,7 @@ class Customer_inserter {
           address_id
         ) VALUES (
           :username,
-          PASSWORD(:password),
+          :password,
           :email,
           :first_name,
           :last_name,

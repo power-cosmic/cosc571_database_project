@@ -31,13 +31,14 @@ switch($_POST['action']) {
     $status = 'success';
     break;
   default:
-    
+
     break;
 }
 
 echo json_encode([
     'status' => $status,
-    'message' => $message
+    'message' => $message,
+    'previousPage' => $_SESSION['previous']
 ]);
 
 ?>

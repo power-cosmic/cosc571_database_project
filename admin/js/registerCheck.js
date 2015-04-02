@@ -10,7 +10,6 @@ define(['lib/jquery'], function() {
 				data[$element.attr('name')] = $element.val();
 			}
 		});
-		console.log(data);
 		return data;
 	}
 	
@@ -83,7 +82,20 @@ define(['lib/jquery'], function() {
 				data: data,
 				success: function(response) {
 					if (response.status == 'success') {
-						window.location = response.previousPage;
+						data.action = 'customer_login';
+						$.ajax({
+							url: 'admin/php/handlers/login_handler.php',
+							dataType: 'json',
+							method: 'post',
+							data: data,
+							success: function(response) {
+								if (response.status == 'success') {
+									window.location = response.previousPage;
+								} else {
+									console.log('Failure: ', response);
+								}
+							}
+						});
 					} else {
 						console.log('Failure: ', response);
 					}

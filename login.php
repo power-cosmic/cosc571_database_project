@@ -3,6 +3,8 @@ include_once 'admin/php/common.php';
 include_once 'admin/php/displays.php';
 
 session_start();
+
+$_SESSION['previous'] = $_SERVER['HTTP_REFERER'];
 ?>
 <!doctype html>
 <html>
