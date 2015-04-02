@@ -467,7 +467,7 @@ DROP TABLE IF EXISTS `reveiw`;
 CREATE TABLE `reveiw` (
   `book_isbn` char(13) NOT NULL DEFAULT '',
   `customer_username` varchar(64) NOT NULL DEFAULT '',
-  `submit_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `submit_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `rating` int(1) NOT NULL,
   `content` varchar(255) NOT NULL,
   PRIMARY KEY (`book_isbn`,`customer_username`),
