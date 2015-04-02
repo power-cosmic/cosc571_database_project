@@ -103,7 +103,7 @@ class Login {
     $db = open_connection();
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $this->addresses = [];
-    $address_query = "SELECT street_address, city, state, zip
+    $address_query = "SELECT id, street_address, city, state, zip
         FROM address, customer_address
         WHERE address.id = customer_address.address_id
           AND customer_address.username = :username;";
@@ -115,16 +115,17 @@ class Login {
     }
     
     // get primary address
-    $address_query = "SELECT street_address, city, state, zip
+    $address_query = "SELECT id, street_address, city, state, zip
         FROM address, customer
         WHERE address.id = customer.address_id
           AND customer.username = :username;";
     $stmt = $db->prepare($address_query);
     $stmt->execute(['username' => $this->username]);
     
-    $this->primary_address = 'hello';
+    $this->primary_address = null;
     if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
       $this->primary_address = [
+          'id' => $result['id'],
           'street_address' => $result['street_address'],
           'city' => $result['city'],
           'state' => $result['state'],

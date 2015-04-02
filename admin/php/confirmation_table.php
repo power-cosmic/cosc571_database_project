@@ -26,18 +26,6 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
       'card_expiration' => $primary_card['expiration']
   ];
   
-
-  /* TODO: generate rows from db */
-  $dummy_book = [
-      'id' => 1,
-      'title' => 'Absolute Java',
-      'author' => 'Walter Savitch',
-      'price' => '149.99',
-      'quantity' => '2',
-      'publisher' => 'Addison-Wesley',
-      'isbn' => '978-0132834230'
-  ];
-  
   $cart_contents = $cart->get_items();
   $books = [
       new Book($dummy_book), new Book($dummy_book)
@@ -67,7 +55,7 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
       <input type="radio" name="card-selection" value="new-card"
           id="new-card-radio">
       <div id="new-card" class="user-info-box">
-        <input type="text" placeholder="Card number">
+        <input name="new-card-number" type="text" placeholder="Card number">
         <select name="card-type">';
 
     foreach($card_types as $card_type) {
