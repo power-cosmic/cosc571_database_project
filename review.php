@@ -49,6 +49,9 @@ if (isset($_POST['rating'])) {
             <div id="cart" class="centered box">
               <div style="position:relative;" class="wide">
                 <h3 style="text-align:left;">Reviews for <?= $book['title']?> by <?= $book['author']?></h3>
+                <?php
+                if ($_SESSION['login']) {
+                ?>
                 <input type="button" style="position:absolute;right:0px;top:0px;"
                     class="purple button centered-input"
                     value="Write review" name="review <?=$book->isbn?>" onclick="showReviewForm(this);">
@@ -95,6 +98,9 @@ if (isset($_POST['rating'])) {
                   <input type="submit" class="green button centered-input"
                       style="display:block;float:right;clear:both;margin-bottom:5px;">
                 </form>
+                <?php
+                }
+                ?>
               </div>
 
             <?php
@@ -124,9 +130,16 @@ if (isset($_POST['rating'])) {
               </table>
             <?php
             } else {
+                if ($_SESSION['login']) {
             ?>
-              <div class="wide" style="clear:both;">Oops, there's no reviews for this book! Why don't you write one?</div>
+            <div class="wide" style="clear:both;">Oops, there's no reviews for this book! Why don't you write one?</div>
+
             <?php
+                } else {
+            ?>
+            <div class="wide" style="clear:both;">This book hasn't been reviewed yet.</div>
+            <?php
+                }
             }
             ?>
             </div>
