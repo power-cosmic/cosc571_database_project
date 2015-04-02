@@ -3,16 +3,16 @@
  * Singleton pattern for Cart.
  * This item will be assigned to $_SESSION['cart']
  * Holds an associative array where book->quantity.
- * 
+ *
  * To use: call static function Cart::get_instance()
  */
 
 
 class Cart {
-  
+
   private $items;
   private $subtotal;
-  
+
   /**
    * Get cart singleton
    * @return Cart
@@ -26,26 +26,26 @@ class Cart {
     }
     return $_SESSION['cart'];
   }
-  
+
   private function __construct($items = null) {
     $this->items = $items? $items : [];
     $this->subtotal = 0;
   }
-  
+
   /**
    * Get the item array
    */
   public function get_items() {
     return $this->items;
   }
-  
+
   /**
    * Get subtotal
    */
   public function get_subtotal() {
     return $this->subtotal;
   }
-  
+
   /**
    * Add an Item to the cart
    * @param String $isbn Book ISBN
@@ -62,7 +62,7 @@ class Cart {
       $this->subtotal += $item['book']->price * $quantity;
     }
   }
-  
+
   /**
    * Increment/decrement item quantity.
    * If quantity is set to below 1, item is removed.
@@ -79,7 +79,7 @@ class Cart {
       $this->subtotal += $item['book']->price * $increment;
     }
   }
-  
+
   /**
    * Set the quantity of an item.
    * If quantity is set to less than 1, it is removed.
@@ -90,9 +90,9 @@ class Cart {
     if ($quantity < 0) {
       $quantity = 0;
     }
-    
+
     $item = $this->items[$isbn];
-    
+
     if ($quantity == 0) {
       $this->remove_item($isbn);
     } else {
@@ -102,7 +102,7 @@ class Cart {
     }
     return $item;
   }
-  
+
   /**
    * Remove an item from the cart.
    * @param String $isbn Book ISBN
@@ -112,12 +112,16 @@ class Cart {
     $this->subtotal -= $item['book']->price * $item['quantity'];
     unset($this->items[$isbn]);
   }
-  
+
   public function get_price($isbn) {
     $item = $this->items[$isbn];
     return $item['book']->price * $item['quantity'];
   }
-  
+
+  public function empty_cart() {
+    $this->items = null;
+    unset($this->items);
+  }
 }
 
 ?>

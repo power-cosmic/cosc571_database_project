@@ -110,4 +110,7 @@ session_start();
       <?=createFooter()?>
     </div>
   </body>
+  <?php
+  $cart->empty_cart();
+  ?>
 </html>
