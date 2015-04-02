@@ -4,7 +4,8 @@ class Login {
   private $first_name;
   private $last_name;
   private $user_type;  // customer/admin
-  public $primary_address;
+  private $primary_address;
+  private $primary_card;
   private $addresses;
 
   public static function get_instance() {
@@ -34,6 +35,10 @@ class Login {
     return $this->username;
   }
 
+  public function get_primary_card() {
+    return $this->primary_card;
+  }
+  
   public function get_user_type() {
     return $this->user_type;
   }
@@ -71,6 +76,7 @@ class Login {
         'user');
 
     $this->get_addresses();
+    $this->get_credit_cards();
     $this->first_name = $output['first_name'];
     $this->last_name = $output['last_name'];
     
@@ -124,6 +130,21 @@ class Login {
           'state' => $result['state'],
           'zip' => $result['zip']
       ];
+    }
+  }
+  
+  private function get_credit_cards() {
+    $query = 'SELECT number, expiration, issuer
+        FROM credit_card, customer
+        WHERE customer.username = credit_card.username
+        AND customer.username = :username';
+    $db = open_connection();
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $db->prepare($query);
+    $stmt->execute(['username' => $this->username]);
+    
+    if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      $this->primary_card = $result;
     }
   }
   

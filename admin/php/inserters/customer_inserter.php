@@ -31,6 +31,7 @@ class Customer_inserter {
     if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
       return true;
     }
+    
     return false;
   }
   

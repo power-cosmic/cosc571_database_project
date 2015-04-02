@@ -37,7 +37,13 @@ if ($customer_inserter->does_exist($_POST['username'])) {
     'issuer' => $_POST['card-type'],
     'expiration' => $_POST['card-expiration']
   ]);
-
+  
+  // insert customer, address into lookup table
+  $query = 'INSERT INTO customer_address
+      VALUES("' . $_POST['username'] . '", ' . $address_id . ');';
+  $stmt = $db->prepare($query);
+  $stmt->execute();
+  
   $success = true;
 }
 

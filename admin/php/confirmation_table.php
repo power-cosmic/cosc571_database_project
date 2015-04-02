@@ -11,10 +11,7 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
   $cart = Cart::get_instance();
   
   $current_address = $login->get_primary_address();
-
-  echo '[';
-  print_r($login);
-  echo ']';
+  $primary_card = $login->get_primary_card();
   
   $user = [
       'username' => $login->get_username(),
@@ -24,9 +21,9 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
       'city' => $current_address['city'],
       'state' => $current_address['state'],
       'zip' => $current_address['zip'],
-      'card_type' => 'VISA',
-      'card_number' => '1111222233334444',
-      'card_expiration' => '04/16'
+      'card_type' => $primary_card['issuer'],
+      'card_number' => $primary_card['number'],
+      'card_expiration' => $primary_card['expiration']
   ];
   
 
