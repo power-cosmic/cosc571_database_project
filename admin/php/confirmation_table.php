@@ -6,20 +6,29 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
       'MasterCard',
       'VISA'
   ];
+  
+  $login = Login::get_instance();
+  $cart = Cart::get_instance();
+  
+  $current_address = $login->get_primary_address();
 
-  /* TODO: receive $user from arguments */
+  echo '[';
+  print_r($login);
+  echo ']';
+  
   $user = [
-      'username' => 'coolguy49',
-      'first_name' => 'Luke',
-      'last_name' => 'Skywalker',
-      'address' => '48 Williams St.',
-      'city' => 'Tatooine',
-      'state' => 'MI',
-      'zip' => '48197',
+      'username' => $login->get_username(),
+      'first_name' => $login->get_first_name(),
+      'last_name' => $login->get_last_name(),
+      'address' => $current_address['street_address'],
+      'city' => $current_address['city'],
+      'state' => $current_address['state'],
+      'zip' => $current_address['zip'],
       'card_type' => 'VISA',
       'card_number' => '1111222233334444',
       'card_expiration' => '04/16'
   ];
+  
 
   /* TODO: generate rows from db */
   $dummy_book = [
@@ -32,7 +41,6 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
       'isbn' => '978-0132834230'
   ];
   
-  $cart = Cart::get_instance();
   $cart_contents = $cart->get_items();
   $books = [
       new Book($dummy_book), new Book($dummy_book)
@@ -101,12 +109,12 @@ function generate_confirmation_table($title, $user, $books, $confirmation = null
     $to_return .= '<tr>
       <td class="book-info">' . $book->generateBookInfo() . '</td>
       <td class="book-info">';
-    if ($confirmation) {
-      $to_return .= $book->quantity;
-    } else {
+    //if ($confirmation) {
+      $to_return .= '<div class="quantity-box centered-input">' . $quantity . '</div>';
+    /* } else {
       $to_return .= '<input type="number" name="quantity" 
         class="quantity-box centered-input" value="' . $quantity . '">';
-    }
+    } */
     $to_return .= '</td>
         <td class="book-info">$' . $cost . '</td>
       </tr>';
