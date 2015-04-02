@@ -29,7 +29,7 @@ session_start();
               $card_number = $login->get_primary_card()['number'];
 
               try {
-                
+
                 if ($_POST['card-selection'] == 'new-card') {
                   $card_number = $_POST['new-card-number'];
                   $card_inserter = new Credit_card_inserter($db);
@@ -40,75 +40,67 @@ session_start();
                       'username' => $login->get_username()
                   ]);
                 }
-                
+
                 $subtotal = $cart->get_subtotal();
-                
+
                 $query = 'INSERT INTO sales_order
                     ( customer_username,
                       address_id,
-                      credit_card_number,
-                      total_cost,
-                      shipping_cost,
-                      submit_date
-                    ) values (
+                      credit_card_number
+                    ) VALUES (
                       :username,
                       :address_id,
-                      :credit_card_number,
-                      :total_cost,
-                      :shipping_cost,
-                      NOW()
+                      :credit_card_number
                     );
                   ';
                 $stmt = $db->prepare($query);
                 $stmt->execute([
                     'username' => $login->get_username(),
-                    'address_id' => $card_number,
-                    'credit_card_number' => $login->get_primary_card(),
-                    'total_cost' => $subtotal + 4,
-                    'shipping_cost' => 4
+                    'address_id' => $login->get_primary_address()['id'],
+                    'credit_card_number' => $card_number
                 ]);
-                
-                $order_id = $this->db->lastInsertId();
+
+                $order_id = $db->lastInsertId();
                 $cart_contents = $cart->get_items();
                 $sql = 'INSERT INTO order_item VALUES
                         ( :order_id
                         , :isbn
                         , :quantity);';
                 $stmt = $db->prepare($sql);
-                
+
                 foreach ($cart_contents as $item) {
                   $book = $item['book'];
-                  
+
                   $stmt->execute([
                       'order_id' => $order_id,
                       'isbn' => $book->isbn,
                       'quantity' => $item['quantity']
                   ]);
-                  
+
                 }
-                
+
                 // get some info
-                
+
               } catch (PDOException $e) {
                 print_r($e);
               }
-              
+
               $sql = 'SELECT submit_date
                   FROM sales_order
                   WHERE id = ' . $order_id . ';';
               $stmt = $db->prepare($sql);
               $stmt->execute();
-              
+
               if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $date_and_time = explode(' ', $result['submit_date']);
                 $confirmation=[
-                    'username' => $login->get_username,
+                    'username' => $login->get_username(),
                     'date' => $date_and_time[0],
                     'time' => $date_and_time[1]
                 ];
               }
-              
-              
+
+
             ?>
 
             <?=generate_confirmation_table("Confirmation", null, null, $confirmation)?>
