@@ -236,7 +236,15 @@ session_start();
                   <input type="button" class="blue button centered-input"
                     value="Reviews" onclick="window.location.href='review.php?isbn=<?=$book->isbn?>'" />
                 </td>
-              <td class="book-info"><?=$book->generateBookInfo()?></td>
+              <td class="book-info" style="position:relative;width:100%;">
+                <?=$book->generateBookInfo()?>
+                <!--
+                <div style="position:absolute;float:right;
+                              top:2px;right:3px;
+                              width:40px;height:10px;background-color:red;">
+                </div>
+                -->
+              </td>
             </tr>
             <?php
               }
