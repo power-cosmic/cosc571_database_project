@@ -43,7 +43,7 @@ function createProfileForm($username = null) {
             .generateGenericForRow("confirm password", $user, true);
       }
     
-      $most_needed_fields = ['first name', 'last name', 'email', 'address', 'city'];
+      $most_needed_fields = ['first name', 'last name', 'email', 'street_address', 'city'];
       foreach ($most_needed_fields as $field) {
         $to_return .= generateGenericForRow($field, $user);
       }

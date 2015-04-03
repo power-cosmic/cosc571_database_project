@@ -8,6 +8,14 @@ div.thin-box {
   display: inline;
 }
 
+.profile-indent {
+  padding-left: 140px;
+}
+
+.profile-hidden {
+  display: none;
+}
+
 .error-message {
   color: #dd2222;
 }

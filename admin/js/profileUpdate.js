@@ -5,8 +5,11 @@ define(['lib/jquery'], function() {
 		var data = {};
 		$('#register :input').each(function() {
 			var $element = $(this);
+			var type = $element.attr('type');
+			var checked = $element.prop('checked');
 			var key = $element.attr('name');
-			if (key) {
+			
+			if ((type != 'radio' || checked) && key) {
 				data[$element.attr('name')] = $element.val();
 			}
 		});
@@ -51,6 +54,20 @@ define(['lib/jquery'], function() {
 	}
 	
 	$(function() {
+		
+		$('.address-radio').change(function() {
+			console.log(this);
+			$('.address-box').addClass('profile-hidden');
+		});
+		$('#current-address-radio').change(function() {
+			$('#current-address').removeClass('profile-hidden');
+		});
+		$('#other-address-radio').change(function() {
+			$('#other-address').removeClass('profile-hidden');
+		});
+		$('#new-address-radio').change(function() {
+			$('#new-address').removeClass('profile-hidden');
+		});
 		
 		// username check
 		$('#username').focusout(function() {
