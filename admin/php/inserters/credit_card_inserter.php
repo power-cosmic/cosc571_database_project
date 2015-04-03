@@ -55,11 +55,15 @@ class Credit_card_inserter {
     }
 
     // regardless if the number is new or not, link it to the user in the lookup table
-    $stmt = $this->db->prepare($this->insert_lookup_sql);
-    $stmt->execute([
-        'username' => $card['username'],
-        'card_number' => $card['number']
-    ]);
+    try {
+      $stmt = $this->db->prepare($this->insert_lookup_sql);
+      $stmt->execute([
+          'username' => $card['username'],
+          'card_number' => $card['number']
+      ]);
+    } catch (PDOException $e) {
+      // not a problem if you can't insert (this happens for duplicates)
+    }
 
     // return both the card number, and if it was new
     return [

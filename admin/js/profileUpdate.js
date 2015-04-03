@@ -55,6 +55,7 @@ define(['lib/jquery'], function() {
 	
 	$(function() {
 		
+		// address listeners
 		$('.address-radio').change(function() {
 			console.log(this);
 			$('.address-box').addClass('profile-hidden');
@@ -71,6 +72,24 @@ define(['lib/jquery'], function() {
 
 		$("#current-address-radio").prop("checked", true);
 		$('#current-address').removeClass('profile-hidden');
+		
+		// card listeners
+		$('.card-radio').change(function() {
+			console.log(this);
+			$('.card-box').addClass('profile-hidden');
+		});
+		$('#current-card-radio').change(function() {
+			$('#current-card').removeClass('profile-hidden');
+		});
+		$('#other-card-radio').change(function() {
+			$('#other-card').removeClass('profile-hidden');
+		});
+		$('#new-card-radio').change(function() {
+			$('#new-card').removeClass('profile-hidden');
+		});
+
+		$("#current-card-radio").prop("checked", true);
+		$('#current-card').removeClass('profile-hidden');
 		
 		
 		// username check
