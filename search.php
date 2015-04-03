@@ -217,9 +217,13 @@ session_start();
 
               $sql .= get_specific_clauses($matches, $_GET['criteria'], $_GET['category']);
               //echo "<tr><td colspan='3'>$sql</td></tr>";
-              echo "<tr><td colspan='3'>" . "Removed: " . implode(', ', $removed) . "</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
+              echo "<tr><td colspan='3'>"
+                        . $stmt->rowCount() . ' results found for "'
+                        . implode('", "', $matches) . '"</td></tr>';
+              echo "<tr><td colspan='3'>" . "Search terms removed: "
+                        . implode(', ', $removed) . "</td></tr>";
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $book = new Book($book_data);
             ?>
