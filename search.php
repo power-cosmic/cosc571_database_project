@@ -178,8 +178,20 @@ session_start();
 
               $matches = explode(',', $_GET['query']);
               //print_r($matches);
+              $removed = array();
+
+              foreach ($matches as $key => $value) {
+                $value = trim($value);
+                $matches[$key] = trim($value);
+                if (strlen($value) <= 3) {
+                  array_push($removed, $value);
+                  unset($matches[$key]);
+                }
+              }
+
               $sql .= get_specific_clauses($matches, $_GET['criteria'], $_GET['category']);
               //echo "<tr><td colspan='3'>$sql</td></tr>";
+              echo "<tr><td colspan='3'>" . "Removed: " . implode(', ', $removed) . "</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
