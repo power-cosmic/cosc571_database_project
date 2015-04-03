@@ -4,6 +4,7 @@ class Login {
   private $first_name;
   private $last_name;
   private $user_type;  // customer/admin
+  private $email;
   private $primary_address;
   private $primary_card;
   private $addresses;
@@ -21,6 +22,7 @@ class Login {
     $this->user_type = null;
     $this->first_name = null;
     $this->last_name = null;
+    $this->email = null;
     $this->primary_address = null;
     $this->addresses = [];
     $this->primary_card = null;
@@ -44,6 +46,10 @@ class Login {
     return $this->primary_card;
   }
 
+  public function get_email() {
+    return $this->email;
+  }
+  
   public function get_user_type() {
     return $this->user_type;
   }
@@ -73,7 +79,7 @@ class Login {
   }
 
   public function customer_login($username, $password) {
-    $query = "SELECT username, first_name, last_name
+    $query = "SELECT username, first_name, last_name, email
       FROM customer
       WHERE username=:username
         AND password=PASSWORD(:password);";
@@ -88,6 +94,7 @@ class Login {
     $this->load_credit_cards();
     $this->first_name = $output['first_name'];
     $this->last_name = $output['last_name'];
+    $this->email = $output['email'];
 
     return $output? true: false;
   }

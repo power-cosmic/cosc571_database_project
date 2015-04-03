@@ -20,6 +20,14 @@ class Customer_inserter {
           :last_name,
           :address_id
       );";
+  
+  private $update_sql = 'UPDATE customer SET
+          password = :password,
+          email = :email,
+          first_name = :first_name,
+          last_name = :last_name,
+          address_id = :address_id
+        WHERE username = :username;';
 
   private $db;
 
@@ -37,6 +45,12 @@ class Customer_inserter {
     return false;
   }
 
+  public function update($customer) {
+    $stmt = $this->db->prepare($this->update_sql);
+    $stmt->execute($customer);
+    return ['username' => $customer['username']];
+  }
+  
   public function insert($customer) {
     $stmt = $this->db->prepare($this->insert_sql);
     $stmt->execute($customer);

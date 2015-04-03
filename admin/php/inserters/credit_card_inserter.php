@@ -34,6 +34,7 @@ class Credit_card_inserter {
         'number' => $card['number']
     ]);
 
+    
     // check if card is already in db
     if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
       $number = $result['number'];
@@ -51,13 +52,13 @@ class Credit_card_inserter {
 
       $number = $card['number'];
       $new_entry = true;
+      
+      $stmt = $this->db->prepare($this->insert_lookup_sql);
+      $stmt->execute([
+          'username' => $card['username'],
+          'card_number' => $card['number']
+      ]);
     }
-
-    $stmt = $this->db->prepare($this->insert_lookup_sql);
-    $stmt->execute([
-        'username' => $card['username'],
-        'card_number' => $card['number']
-    ]);
 
     // return both the card number, and if it was new
     return [
