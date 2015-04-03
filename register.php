@@ -7,7 +7,7 @@ include_once 'admin/php/us_state_dropdown.php';
 
 session_start();
 
-$_SESSION['previous'] = $_SERVER['HTTP_REFERER'];
+$_SESSION['previous'] = $_SERVER['PHP_SELF'];
 
 ?>
 <!doctype html>

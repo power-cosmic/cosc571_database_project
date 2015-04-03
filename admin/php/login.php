@@ -75,7 +75,7 @@ class Login {
   }
 
   public function is_logged_in() {
-    return $this->use_type != null;
+    return $this->username != null;
   }
 
   public function customer_login($username, $password) {
