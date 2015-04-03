@@ -20,7 +20,7 @@ session_start();
             <?=generate_confirmation_table("Checkout", null, null, null)?>
             <div id="buttons" class="box align-right">
               <!-- <input type="submit" class="purple button" value="Edit Cart"> -->
-              <input type="submit" class="green button" value="Submit Order">
+              <input type="submit" class="green button" value="Submit Order" style="top:-50px;right:50px;position:absolute;">
             </div>
           </form>
         </div>
