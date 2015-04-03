@@ -6,10 +6,10 @@ $count = isset($_GET['count'])? $_GET['count'] : 20;
 
 $db = open_connection();
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$query = 'SELECT title, COUNT(reveiw.book_isbn) AS reviews
+$query = 'SELECT title, COUNT(review.book_isbn) AS reviews
   FROM book
-  LEFT JOIN reveiw
-  ON book.isbn = reveiw.book_isbn
+  LEFT JOIN review
+  ON book.isbn = review.book_isbn
   GROUP BY book.isbn
   LIMIT :index, :count';
 

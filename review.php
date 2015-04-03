@@ -17,7 +17,7 @@ if (isset($_POST['rating'])) {
 
   $db = open_connection();
   try {
-  $sql = "INSERT INTO reveiw
+  $sql = "INSERT INTO review
             (book_isbn, customer_username, rating, content)
             VALUES
             (:book_isbn, :customer_username, :rating, :content)";
@@ -106,7 +106,7 @@ if (isset($_POST['rating'])) {
             <?php
 
             $sql = "SELECT customer_username AS username,rating,content,submit_time
-                      FROM reveiw
+                      FROM review
                       WHERE book_isbn='" . $_GET['isbn'] . "'
                       ORDER BY submit_time DESC";
             $stmt = $db->prepare($sql);

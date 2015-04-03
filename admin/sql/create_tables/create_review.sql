@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS reveiw
+CREATE TABLE IF NOT EXISTS review
 ( book_isbn CHAR(13)
 , customer_username VARCHAR(64)
 

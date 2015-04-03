@@ -34,7 +34,7 @@ if (!Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin'])
           $db = open_connection();
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         ?>
-        
+
         <!-- display admin page -->
         <div id="login" class="centered box">
           <h1>Admin Summary</h1>
@@ -79,8 +79,8 @@ if (!Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin'])
               <th>Month</th>
               <th>Average Monthly Sales</th>
             </tr>
-            
-            <?php 
+
+            <?php
             $sql = 'SELECT
               YEAR(submit_date) AS year
             , MONTH(submit_date) AS month
@@ -90,26 +90,26 @@ if (!Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin'])
               YEAR(submit_date)
             , MONTH(submit_date)
             HAVING year >= :year;';
-            
+
             $stmt = $db->prepare($sql);
             $year = date('Y');
             $month = date('M');
             $stmt->execute(['year' => date('Y')]);
-            
+
             $month_totals = [];
             while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
               if ($result['month'] <= $month) {
                 array_push($month_totals, $result);
               }
             }
-            
+
             for ($i = $month_totals[0]['month'] - 1; $i > 0; $i--) {
               array_unshift($month_totals, [
                 'month' => $i,
                 'total' => '0.00'
               ]);
             }
-            
+
             foreach ($month_totals as $result) {
               $date = mktime(0, 0, 0, $result['month'], 1, 1)
             ?>
@@ -120,7 +120,7 @@ if (!Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin'])
             <?php
             }
             ?>
-            
+
           </table>
           <br>
           <table id="books">
@@ -128,18 +128,18 @@ if (!Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin'])
               <th>Book</th>
               <th>Number of reviews</th>
             </tr>
-            
+
             <?php
-            $query = 'SELECT title, COUNT(reveiw.book_isbn) AS reviews
+            $query = 'SELECT title, COUNT(review.book_isbn) AS reviews
               FROM book
-              LEFT JOIN reveiw
-              ON book.isbn = reveiw.book_isbn
+              LEFT JOIN review
+              ON book.isbn = review.book_isbn
               GROUP BY book.isbn';
-                        
+
             $stmt = $db->prepare($query);
             $stmt->execute();
-            
-            while($result = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+
+            while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
             ?>
               <tr>
                 <td><?=$result['title']?></td>
@@ -148,7 +148,7 @@ if (!Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin'])
             <?php
             }
             ?>
-            
+
           </table>
           <br>
         </div>

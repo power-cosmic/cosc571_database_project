@@ -31,7 +31,7 @@ CREATE TABLE `address` (
   PRIMARY KEY (`id`),
   KEY `address_ibfk_1` (`state`),
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`state`) REFERENCES `state` (`abbreviation`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'1600 Pennsylvania Avenue','Washington DC',20006,'DC'),(2,'11 Wall Street','New York',10005,'NY'),(3,'350 Fifth Avenue','New York',10118,'NY'),(4,'4059 Mt Lee Dr.','Hollywood',90068,'CA'),(5,'900 Oakwood St.','Ypsilanti',48197,'MI'),(6,'1600 Amphitheatre Pkwy','Mountain View',94043,'CA'),(7,'1313 Disneyland Dr.','Anaheim',92802,'CA'),(8,'219 South Main Street','Ann Arbor',48104,'MI'),(9,'910 Pittman Hall','Ypsilanti',48197,'MI'),(10,'703 Pearl St','Ypsilanti',48197,'MI'),(11,'1122 Ferdon Rd','Ann Arbor',48104,'MI'),(12,'1601 Packard St','Ann Arbor',48104,'MI'),(13,'909 Elms Road','Killeen',76542,'TX'),(14,'909 Elms Road','Killeen',76542,'TX'),(15,'909 Elms Road','Killeen',76542,'TX'),(16,'432 Trowbridge','North Hampton',80108,'CO'),(17,'111 Santa Monica Blvd','Santa Monica',90401,'CA');
+INSERT INTO `address` VALUES (1,'1600 Pennsylvania Avenue','Washington DC',20006,'DC'),(2,'11 Wall Street','New York',10005,'NY'),(3,'350 Fifth Avenue','New York',10118,'NY'),(4,'4059 Mt Lee Dr.','Hollywood',90068,'CA'),(5,'900 Oakwood St.','Ypsilanti',48197,'MI'),(6,'1600 Amphitheatre Pkwy','Mountain View',94043,'CA'),(7,'1313 Disneyland Dr.','Anaheim',92802,'CA'),(8,'219 South Main Street','Ann Arbor',48104,'MI'),(9,'910 Pittman Hall','Ypsilanti',48197,'MI'),(10,'703 Pearl St','Ypsilanti',48197,'MI'),(11,'1122 Ferdon Rd','Ann Arbor',48104,'MI'),(12,'1601 Packard St','Ann Arbor',48104,'MI'),(13,'909 Elms Road','Killeen',76542,'TX'),(14,'909 Elms Road','Killeen',76542,'TX'),(15,'909 Elms Road','Killeen',76542,'TX'),(16,'432 Trowbridge','North Hampton',80108,'CO'),(17,'111 Santa Monica Blvd','Santa Monica',90401,'CA'),(18,'320 E Arctic Ave','Palmer',99645,'AK');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +280,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('crusader_with_a_cape','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','not_bruce_wayne@WayneEnterprises.com','Bruce','Wayne',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('egurnee','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','egurnee@emich.edu','Eddie','Gurnee','P','1990-10-27',0,0,1,NULL,NULL,9,'4929563856339756'),('LastSonOfKrypton','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','ckent@dailyplanet.com','Kal','El',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('LordOfTheSith','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','dark_lord@theforce.com','Anakin','Skywalker',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('macbook_man','*E3353DC671D3348CCF4698E672790B279E08FE60','kdrogo@dothrak.org','Khal','Drogo',NULL,NULL,0,0,0,NULL,NULL,16,'5593546245774207'),('OurOnlyHope','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','last_knight@theforce.com','Obi-Wan','Kenobi',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('polymorph','*E3353DC671D3348CCF4698E672790B279E08FE60','egurnee@emich.edu','Edward','Gurnee',NULL,NULL,0,0,0,NULL,NULL,13,'4485542706843825'),('thefastestmanalive','*E3353DC671D3348CCF4698E672790B279E08FE60','ballen@ccpd.gov','Barry','Allen',NULL,NULL,0,0,0,NULL,NULL,17,'5347021254537894');
+INSERT INTO `customer` VALUES ('crusader_with_a_cape','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','not_bruce_wayne@WayneEnterprises.com','Bruce','Wayne',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('egurnee','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','egurnee@emich.edu','Eddie','Gurnee','P','1990-10-27',0,0,1,NULL,NULL,9,'4929563856339756'),('LastSonOfKrypton','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','ckent@dailyplanet.com','Kal','El',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('LordOfTheSith','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','dark_lord@theforce.com','Anakin','Skywalker',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('macbook_man','*E3353DC671D3348CCF4698E672790B279E08FE60','kdrogo@dothrak.org','Khal','Drogo',NULL,NULL,0,0,0,NULL,NULL,16,'5593546245774207'),('OurOnlyHope','*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19','last_knight@theforce.com','Obi-Wan','Kenobi',NULL,NULL,0,0,0,NULL,NULL,NULL,NULL),('pegurnee','*E3353DC671D3348CCF4698E672790B279E08FE60','pegurnee@gmail.com','Another','Gurnee',NULL,NULL,0,0,0,NULL,NULL,18,'5593546245774207'),('polymorph','*E3353DC671D3348CCF4698E672790B279E08FE60','egurnee@emich.edu','Edward','Gurnee',NULL,NULL,0,0,0,NULL,NULL,13,'4485542706843825'),('thefastestmanalive','*E3353DC671D3348CCF4698E672790B279E08FE60','ballen@ccpd.gov','Barry','Allen',NULL,NULL,0,0,0,NULL,NULL,17,'5347021254537894');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -325,7 +325,7 @@ CREATE TABLE `customer_address` (
 
 LOCK TABLES `customer_address` WRITE;
 /*!40000 ALTER TABLE `customer_address` DISABLE KEYS */;
-INSERT INTO `customer_address` VALUES ('egurnee',5),('crusader_with_a_cape',7),('LastSonOfKrypton',7),('LordOfTheSith',8),('OurOnlyHope',8),('egurnee',9),('polymorph',13),('macbook_man',16),('thefastestmanalive',17);
+INSERT INTO `customer_address` VALUES ('egurnee',5),('crusader_with_a_cape',7),('LastSonOfKrypton',7),('LordOfTheSith',8),('OurOnlyHope',8),('egurnee',9),('polymorph',13),('macbook_man',16),('thefastestmanalive',17),('pegurnee',18);
 /*!40000 ALTER TABLE `customer_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +352,7 @@ CREATE TABLE `customer_credit_card` (
 
 LOCK TABLES `customer_credit_card` WRITE;
 /*!40000 ALTER TABLE `customer_credit_card` DISABLE KEYS */;
-INSERT INTO `customer_credit_card` VALUES ('LordOfTheSith','4024007166219237'),('egurnee','4295917786396557'),('polymorph','4485542706843825'),('LastSonOfKrypton','4532848537371669'),('OurOnlyHope','4539968239906597'),('egurnee','4929563856339756'),('OurOnlyHope','4929563856339756'),('thefastestmanalive','5347021254537894'),('macbook_man','5593546245774207');
+INSERT INTO `customer_credit_card` VALUES ('LordOfTheSith','4024007166219237'),('egurnee','4295917786396557'),('polymorph','4485542706843825'),('LastSonOfKrypton','4532848537371669'),('OurOnlyHope','4539968239906597'),('egurnee','4929563856339756'),('OurOnlyHope','4929563856339756'),('thefastestmanalive','5347021254537894'),('macbook_man','5593546245774207'),('pegurnee','5593546245774207');
 /*!40000 ALTER TABLE `customer_credit_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -806,4 +806,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-02  5:49:32
+-- Dump completed on 2015-04-02 23:25:57

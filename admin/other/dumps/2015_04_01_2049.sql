@@ -458,13 +458,13 @@ INSERT INTO `publisher` VALUES (1,'Arkham House','87045',64),(2,'Scholastic','43
 UNLOCK TABLES;
 
 --
--- Table structure for table `reveiw`
+-- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `reveiw`;
+DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `reveiw` (
+CREATE TABLE `review` (
   `book_isbn` char(13) NOT NULL DEFAULT '',
   `customer_username` varchar(64) NOT NULL DEFAULT '',
   `submit_time` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -472,19 +472,19 @@ CREATE TABLE `reveiw` (
   `content` varchar(255) NOT NULL,
   PRIMARY KEY (`book_isbn`,`customer_username`),
   KEY `customer_username` (`customer_username`),
-  CONSTRAINT `reveiw_ibfk_1` FOREIGN KEY (`customer_username`) REFERENCES `customer` (`username`),
-  CONSTRAINT `reveiw_ibfk_2` FOREIGN KEY (`book_isbn`) REFERENCES `book` (`isbn`)
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`customer_username`) REFERENCES `customer` (`username`),
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`book_isbn`) REFERENCES `book` (`isbn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `reveiw`
+-- Dumping data for table `review`
 --
 
-LOCK TABLES `reveiw` WRITE;
-/*!40000 ALTER TABLE `reveiw` DISABLE KEYS */;
-INSERT INTO `reveiw` VALUES ('9780439000307','OurOnlyHope','2015-04-01 20:02:14',5,'This book is simply splendid; a must read!'),('9780870450440','egurnee','2015-04-01 20:15:06',5,'Seriously one of the most glorious books ever written.');
-/*!40000 ALTER TABLE `reveiw` ENABLE KEYS */;
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES ('9780439000307','OurOnlyHope','2015-04-01 20:02:14',5,'This book is simply splendid; a must read!'),('9780870450440','egurnee','2015-04-01 20:15:06',5,'Seriously one of the most glorious books ever written.');
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
