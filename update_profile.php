@@ -40,7 +40,7 @@ $username = ($_SESSION['username']) ? $_SESSION['username'] : 'unknown';
                 'card_number' => $primary_card['number'],
                 'card_expiration' => $primary_card['expiration']
             ];
-            print_r($user);
+            
             echo generateGenericForRow('username', $user, false, true);
             echo generateGenericForRow('password', $user, true);
             echo generateGenericForRow('confirm password', $user, true);

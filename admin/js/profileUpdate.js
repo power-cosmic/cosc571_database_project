@@ -68,6 +68,10 @@ define(['lib/jquery'], function() {
 		$('#new-address-radio').change(function() {
 			$('#new-address').removeClass('profile-hidden');
 		});
+
+		$("#current-address-radio").prop("checked", true);
+		$('#current-address').removeClass('profile-hidden');
+		
 		
 		// username check
 		$('#username').focusout(function() {
