@@ -32,6 +32,7 @@ function createHeader($showCart = true, $showLogin = true) {
         $to_return .= '
             <div id="nameAndLogoutButtons">
               <a href="' . $GLOBALS['locations']['logout'] . '" class="glow-link">logout</a> |
+              <a href="' . $GLOBALS['locations']['profile'] . '" class="glow-link">profile</a> |
               <a href="' . $GLOBALS['locations']['cart'] . '" class="glow-link">cart</a>
             </div>';
         break;

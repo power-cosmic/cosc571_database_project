@@ -32,6 +32,7 @@ $locations = array(
   'lib' => $admin_root . 'lib/',
   'home' => $project_root . 'index.php',
   'cart' => $project_root . 'cart.php',
+  'profile' => $project_root . 'update_profile.php',
   'admin' => $project_root . 'admin.php',
   'register' => $project_root . 'register.php',
   'login' => $project_root . 'login.php',
