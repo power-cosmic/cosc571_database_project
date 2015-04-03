@@ -179,11 +179,37 @@ session_start();
               $matches = explode(',', $_GET['query']);
               //print_r($matches);
               $removed = array();
+              $no_good_search_terms = [
+                  'a',
+                  'the',
+                  'in',
+                  'of',
+                  'is',
+                  'as',
+                  'that',
+                  'which',
+                  'also',
+                  'about',
+                  'around',
+                  'because',
+                  'became',
+                  'been',
+                  'behind',
+                  'both',
+                  'best',
+                  'better',
+                  'cases',
+                  'cannot',
+                  'clearly',
+                  'could'
+
+              ];
 
               foreach ($matches as $key => $value) {
                 $value = trim($value);
                 $matches[$key] = trim($value);
-                if (strlen($value) <= 3) {
+                //
+                if (strlen($value) <= 3 || in_array($value, $no_good_search_terms)) {
                   array_push($removed, $value);
                   unset($matches[$key]);
                 }
