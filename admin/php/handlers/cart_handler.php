@@ -31,6 +31,7 @@ switch($_POST['action']) {
 echo json_encode([
     'status' => $status,
     'lineCost' => $line_cost,
+    'num_items' => $cart->num_in_cart(),
     'subtotal' => $cart->get_subtotal()
 ]);
 

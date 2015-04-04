@@ -122,6 +122,14 @@ class Cart {
     $this->items = null;
     unset($this->items);
   }
+
+  public function num_in_cart() {
+    $to_return = 0;
+    foreach ($this->items as $item) {
+      $to_return += $item['quantity'];
+    }
+    return $to_return;
+  }
 }
 
 ?>

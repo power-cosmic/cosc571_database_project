@@ -25,6 +25,7 @@ define(['lib/jquery'], function() {
 					}
 					console.log(response);
 					$('#total').html('Subtotal: $' + response.subtotal.toFixed(2));
+					$('.cart-update-num').html(response.num_items);
 				}
 			}
 		});
