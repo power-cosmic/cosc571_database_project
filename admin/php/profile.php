@@ -43,7 +43,7 @@ function createProfileForm($username = null) {
             .generateGenericForRow("confirm password", $user, true);
       }
     
-      $most_needed_fields = ['first name', 'last name', 'email', 'address', 'city'];
+      $most_needed_fields = ['first name', 'last name', 'email', 'street_address', 'city'];
       foreach ($most_needed_fields as $field) {
         $to_return .= generateGenericForRow($field, $user);
       }
@@ -67,6 +67,7 @@ function createProfileForm($username = null) {
          .generateGenericForRow('card number', $user)
          .generateGenericForRow('card expiration', $user)
          .'<input type="submit" value="Register" id="submit" class="green button">
+         <div id="error-log"></div>
       </form>'; 
   
   return $to_return;

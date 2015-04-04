@@ -13,6 +13,14 @@ define(['lib/jquery'], function() {
 		return data;
 	}
 	
+	var addErrors = function(errors) {
+		var errorInfo = '';
+		$.each(errors, function(key, error) {
+			errorInfo += error + "<br>";
+		});
+		$('#error-log').html(errorInfo);
+	}
+	
 	// validate input
 	var validate = function (data) {
 		var passwordLength = /.{8}.*/;
@@ -69,10 +77,12 @@ define(['lib/jquery'], function() {
 		$('#register').submit(function(e) {
 			e.preventDefault();
 			
+			$('#error-log').text('');
+			
 			var data = extractData();
 			var errors = validate(data);
 			if (errors.length) {
-				console.log(errors);
+				addErrors(errors);
 			}
 			
 			$.ajax({
@@ -97,6 +107,7 @@ define(['lib/jquery'], function() {
 							}
 						});
 					} else {
+						$('#error-log').html(response.info);
 						console.log('Failure: ', response);
 					}
 				}

@@ -30,8 +30,9 @@ $username = ($_SESSION['username']) ? $_SESSION['username'] : 'unknown';
                 'username' => $login->get_username(),
                 'first_name' => $login->get_first_name(),
                 'last_name' => $login->get_last_name(),
-                'address' => $current_address['street_address'],
+                'street_address' => $current_address['street_address'],
                 'email' => $login->get_email(),
+                'address' => $current_address['address'],
                 'city' => $current_address['city'],
                 'state' => $current_address['state'],
                 'zip' => $current_address['zip'],
@@ -39,7 +40,7 @@ $username = ($_SESSION['username']) ? $_SESSION['username'] : 'unknown';
                 'card_number' => $primary_card['number'],
                 'card_expiration' => $primary_card['expiration']
             ];
-
+            
             echo generateGenericForRow('username', $user, false, true);
             echo generateGenericForRow('password', $user, true);
             echo generateGenericForRow('confirm password', $user, true);
@@ -49,33 +50,106 @@ $username = ($_SESSION['username']) ? $_SESSION['username'] : 'unknown';
             }
             
             ?>
-            
-            <div id="new-address">
-              <?php 
-                echo generateGenericForRow('city', $user);
-                echo '<div class="form-row"><label for="state">State</label>';
-                echo create_state_dropdown('state', 'mixed', $user['state']);
-                echo '</div>';
-                echo generateGenericForRow('zip', $user);
-              ?>
+            <div class="form-row">
+              <label>Address</label>
+              <div class="profile-indent">
+                <input type="radio" name="address-selection"
+                  value="current-address" id="current-address-radio"
+                  class="address-radio">
+                Current
+                <input type="radio" name="address-selection"
+                  value="other-address" id="other-address-radio"
+                  class="address-radio">
+                Other
+                <input type="radio" name="address-selection"
+                  value="new-address" id="new-address-radio"
+                  class="address-radio">
+                New
+                <br>
+              </div>
+              <div id="current-address" class="profile-hidden address-box">
+                <?php
+                  echo generateGenericForRow('street address', $user, false, true);
+                  echo generateGenericForRow('city', $user, false, true);
+                  echo generateGenericForRow('state', $user, false, true);
+                  echo generateGenericForRow('zip', $user, false, true);
+                ?>
+              </div>
+              <div id="other-address" class="profile-indent profile-hidden address-box">
+                <select name="other-address">
+                  <?php
+                    foreach ($login->get_addresses() as $address) {
+                      echo '<option value="'.$address['id'].'">'.
+                          $address['street_address'].' : '.
+                          $address['city'].', '.$address['state'].
+                          '</option>';
+                    }
+                  ?>
+                </select>
+              </div>
+              <div id="new-address" class="profile-hidden address-box">
+                <?php 
+                  echo generateGenericForRow('street address', []);
+                  echo generateGenericForRow('city', []);
+                  echo '<div class="form-row"><label for="state">State</label>';
+                  echo create_state_dropdown('state', 'mixed', $user['state']);
+                  echo '</div>';
+                  echo generateGenericForRow('zip', []);
+                ?>
+              </div>
             </div>
-            
-            <div id="new-card">
-              <?php 
-                $card_types = ['MasterCard', 'VISA'];
-                
-                echo '<div class="form-row"><label for="card-type">Credit card</label>';
-                echo '<select name="card-type">';
-                foreach ($card_types as $card_type) {
-                  $value = strtolower($card_type);
-                  $selected = (!strcmp($card_type, $user['card_type']))? 'selected = "selected"': '';
-                  echo "<option value=\"$value\" $selected>$card_type</option>";
-                }
-                echo '</select></div>';
-                echo generateGenericForRow('card number', $user);
-                echo generateGenericForRow('card expiration', $user);
-              ?>
-            </div>
+            <br>
+            <div class="form-row">
+              <label>Credit Card</label>
+              <div class="profile-indent">
+                <input type="radio" name="card-selection"
+                  value="current-card" id="current-card-radio"
+                  class="card-radio">
+                Current
+                <input type="radio" name="card-selection"
+                  value="other-card" id="other-card-radio"
+                  class="card-radio">
+                Other
+                <input type="radio" name="card-selection"
+                  value="new-card" id="new-card-radio"
+                  class="card-radio">
+                New
+                <br>
+              </div>
+              <div id="current-card" class="profile-hidden card-box">
+                <?php 
+                  echo generateGenericForRow('card number', $user, false, true);
+                  echo generateGenericForRow('card type', $user, false, true);
+                  echo generateGenericForRow('card expiration', $user, false, true);
+                ?>
+              </div>
+              <div id="other-card" class="profile-indent profile-hidden card-box">
+                <select name="other-address">
+                  <?php
+                    foreach ($login->get_credit_cards() as $card) {
+                      echo '<option value="'.$card['number'].'">'.
+                          $card['issuer'] .': '.$card['number'].
+                          '</option>';
+                    }
+                  ?>
+                </select>
+              </div>
+              <div id="new-card" class="profile-hidden card-box">
+                <?php 
+                  $card_types = ['MasterCard', 'VISA'];
+                  
+                  echo '<div class="form-row"><label for="card-type">Credit card</label>';
+                  echo '<select name="card-type">';
+                  foreach ($card_types as $card_type) {
+                    $value = strtolower($card_type);
+                    $selected = (!strcmp($card_type, $user['card_type']))? 'selected = "selected"': '';
+                    echo "<option value=\"$value\" $selected>$card_type</option>";
+                  }
+                  echo '</select></div>';
+                  echo generateGenericForRow('card number', $user);
+                  echo generateGenericForRow('card expiration', $user);
+                ?>
+              </div>
             <input type="submit" value="Update" id="submit" class="green button">
           </form>
         

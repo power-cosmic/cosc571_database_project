@@ -7,6 +7,14 @@ include_once 'admin/php/confirmation_table.php';
 include_once 'admin/php/login.php';
 
 session_start();
+$_SESSION['previous'] = $GLOBALS['locations']['checkout'];
+
+$login = Login::get_instance();
+// redirect if needed
+if (!$login->is_logged_in()) {
+  header('Location: ' . $GLOBALS['locations']['login']);
+}
+
 ?>
 <!doctype html>
 <html>

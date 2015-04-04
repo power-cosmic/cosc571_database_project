@@ -1,5 +1,6 @@
 <?php
 include_once '../admin/php/connection.php';
+include_once '../admin/php/login.php';
 require_once '../admin/php/inserters/address_inserter.php';
 require_once '../admin/php/inserters/credit_card_inserter.php';
 require_once '../admin/php/inserters/customer_inserter.php';
@@ -7,6 +8,7 @@ require_once '../admin/php/inserters/customer_inserter.php';
 session_start();
 
 // open db connection and create db interaction elements
+$login = Login::get_instance();
 $db = open_connection();
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $address_inserter = new Address_inserter($db);
@@ -20,14 +22,21 @@ if (!$updating && $customer_inserter->does_exist($_POST['username'])) {
 } else {
 
   try {
-    $address_info = [
-      'street_address' => $_POST['address'],
-      'city' => $_POST['city'],
-      'zip' => $_POST['zip'],
-      'state' => $_POST['state']
-    ];
     
-    $address_id = $address_inserter->insert($address_info)['id'];
+    if ($updating && $_POST['address-selection'] == 'other-address') {
+      $address_id = intval($_POST['other-address']);
+    } elseif ($updating && $_POST['address-selection'] == 'current-address') {
+      $address_id = $login->get_primary_address()['id'];
+    } else {
+      $address_info = [
+        'street_address' => $_POST['street_address'],
+        'city' => $_POST['city'],
+        'zip' => $_POST['zip'],
+        'state' => $_POST['state']
+      ];
+      
+      $address_id = $address_inserter->insert($address_info)['id'];
+    }
     
     if ($updating) {
       $customer_inserter->update([
@@ -56,14 +65,18 @@ if (!$updating && $customer_inserter->does_exist($_POST['username'])) {
       'expiration' => $_POST['card-expiration']
     ]);
   
-    // insert customer, address into lookup table
-    $query = 'INSERT INTO customer_address
-        VALUES (:username, :address_id);';
-    $stmt = $db->prepare($query);
-    $stmt->execute([
-        'username' => $_POST['username'],
-        'address_id' => $address_id
-    ]);
+    try {
+      // insert customer, address into lookup table
+      $query = 'INSERT INTO customer_address
+          VALUES (:username, :address_id);';
+      $stmt = $db->prepare($query);
+      $stmt->execute([
+          'username' => $_POST['username'],
+          'address_id' => $address_id
+      ]);
+    } catch (PDOException $e) {
+      // exception thrown if username/address combo already in
+    }
   
     // put card number into customer
     // TODO: do this when initially adding customer
