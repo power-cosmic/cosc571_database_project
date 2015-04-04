@@ -48,10 +48,17 @@ function createHeader($showCart = true, $showLogin = true) {
         </div>
         <div style="position:absolute;bottom:10px;text-align:center;width:100%;">
           <form id="the-search" action="' . $GLOBALS['locations']['search'] . '" method="GET">
-            <div id="short-name">'. $GLOBALS['name']['short'] .'</div>
+            <div id="short-name">
+              <a class="no-decoration" href="' . $GLOBALS['locations']['home'] . '">'. $GLOBALS['name']['short'] .'</a>
+            </div>
             <input type="text" name="query" placeholder="search query" id="search-bar"
                 value="' . $_GET['query'] . '">
             <input type="submit" value="search" class="green button">
+            <div id="simple-cart">
+              <a class="no-decoration" href="' . $GLOBALS['locations']['cart'] . '">
+                &lfloor;<span id="cart-update-num"></span>&rfloor;
+              </a>
+            </div>
           </form>
         </div>
       </div>' . "\n";

@@ -51,6 +51,17 @@ a.no-decoration:link, a.no-decoration:visited, a.no-decoration:hover, a.no-decor
   opacity: 1.0;
 }
 
+#simple-cart {
+  transition: all 0.2s;
+  opacity: 0.0;
+  display: inline;
+  font-weight: bold;
+}
+
+#simple-cart.display {
+  opacity: 1.0;
+}
+
 #header {
   transition: all 0.4s;
   z-index: 2;
