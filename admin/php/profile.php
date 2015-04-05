@@ -67,6 +67,7 @@ function createProfileForm($username = null) {
          .generateGenericForRow('card number', $user)
          .generateGenericForRow('card expiration', $user)
          .'<input type="submit" value="Register" id="submit" class="green button">
+         <div id="error-log"></div>
       </form>'; 
   
   return $to_return;
