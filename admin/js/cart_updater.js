@@ -47,6 +47,7 @@ define(['lib/jquery'], function() {
 			var row = getBookRow($(this));
 			var isbn = getIsbn($(this).attr('name'));
 			updateCart('add', {'isbn': isbn});
+			$(this).prop('disabled', true);
 		});
 		
 		// quantity listener
