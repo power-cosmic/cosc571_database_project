@@ -103,6 +103,10 @@ class Cart {
     return $item;
   }
 
+  public function contains($book) {
+    return isset($this->items[$book->isbn]);
+  }
+  
   /**
    * Remove an item from the cart.
    * @param String $isbn Book ISBN

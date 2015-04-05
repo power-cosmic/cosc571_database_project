@@ -188,7 +188,7 @@ session_start();
             <tr class="book-row">
               <td class="book-info">
                 <input type="button" class="green button centered-input add-button"
-                    value="Add to cart" name="add <?=$book->isbn?>">
+                    value="Add to cart" name="add <?=$book->isbn?>" <?=$cart->contains($book)? 'disabled':''?>>
               </td>
                 <td class="book-info">
                   <input type="button" class="blue button centered-input"
