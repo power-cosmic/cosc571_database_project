@@ -9,8 +9,11 @@ $name = array(
   //'short' => '3-B'
   //'long' => 'Titan Entertainment',
   //'short' => 'T &and; E'
-  'long' => 'Power Cosmic ',
-  'short' => 'P &#8757; C'
+  //'long' => 'Power Cosmic ',
+  //'short' => 'P &#8757; C',
+  'long' => 'Theoretical Education',
+  'short' => '&asymp; edu',
+  'slogan' => "It's education... in theory."
 );
 
 $project_root_parts = explode('/', $_SERVER['SCRIPT_NAME']);

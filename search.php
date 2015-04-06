@@ -178,10 +178,52 @@ session_start();
 
               $matches = explode(',', $_GET['query']);
               //print_r($matches);
+              $removed = array();
+              $no_good_search_terms = [
+                  'a',
+                  'the',
+                  'in',
+                  'of',
+                  'is',
+                  'as',
+                  'that',
+                  'which',
+                  'also',
+                  'about',
+                  'around',
+                  'because',
+                  'became',
+                  'been',
+                  'behind',
+                  'both',
+                  'best',
+                  'better',
+                  'cases',
+                  'cannot',
+                  'clearly',
+                  'could'
+
+              ];
+
+              foreach ($matches as $key => $value) {
+                $value = trim($value);
+                $matches[$key] = trim($value);
+                //
+                if (strlen($value) <= 3 || in_array($value, $no_good_search_terms)) {
+                  array_push($removed, $value);
+                  unset($matches[$key]);
+                }
+              }
+
               $sql .= get_specific_clauses($matches, $_GET['criteria'], $_GET['category']);
               //echo "<tr><td colspan='3'>$sql</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
+              echo "<tr><td colspan='3'>"
+                        . $stmt->rowCount() . ' results found for "'
+                        . implode('", "', $matches) . '"</td></tr>';
+              echo "<tr><td colspan='3'>" . "Search terms removed: "
+                        . implode(', ', $removed) . "</td></tr>";
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $book = new Book($book_data);
             ?>
@@ -194,7 +236,15 @@ session_start();
                   <input type="button" class="blue button centered-input"
                     value="Reviews" onclick="window.location.href='review.php?isbn=<?=$book->isbn?>'" />
                 </td>
-              <td class="book-info"><?=$book->generateBookInfo()?></td>
+              <td class="book-info" style="position:relative;width:100%;">
+                <?=$book->generateBookInfo()?>
+                <!--
+                <div style="position:absolute;float:right;
+                              top:2px;right:3px;
+                              width:40px;height:10px;background-color:red;">
+                </div>
+                -->
+              </td>
             </tr>
             <?php
               }
