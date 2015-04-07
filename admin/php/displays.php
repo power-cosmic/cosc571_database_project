@@ -56,7 +56,7 @@ function createHeader($showCart = true, $showLogin = true) {
             <input type="submit" value="search" class="green button">
             <div id="simple-cart">
               <a class="no-decoration" href="' . $GLOBALS['locations']['cart'] . '">
-                &lfloor;<span class="cart-update-num"></span>&rfloor;
+                &lfloor;<span class="cart-update-num">0</span>&rfloor;
               </a>
             </div>
           </form>
