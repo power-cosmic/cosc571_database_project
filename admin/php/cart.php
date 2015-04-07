@@ -106,7 +106,7 @@ class Cart {
   public function contains($book) {
     return isset($this->items[$book->isbn]);
   }
-  
+
   /**
    * Remove an item from the cart.
    * @param String $isbn Book ISBN
@@ -125,6 +125,7 @@ class Cart {
   public function empty_cart() {
     $this->items = null;
     unset($this->items);
+    $this->subtotal = 0;
   }
 
   public function num_in_cart() {
