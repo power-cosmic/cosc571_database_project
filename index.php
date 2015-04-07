@@ -21,24 +21,19 @@ session_start();
           <span class="v-align-helper"></span>
           <?php
           //get the top 10 number of sold books
-          $book_info = [
-              'id' => 1,
-              'title' => 'Absolute Java Is The Best Book Around',
-              'first_name' => 'Walter',
-              'last_name' => 'Savitch',
-              'price' => '149.99',
-              'quantity' => '2',
-              'publisher' => 'Addison-Wesley',
-              'isbn' => '978-0132834230',
-              'cover' => 'admin/images/icons/cart.jpg'
-          ];
-
-          $book = new Book($book_info);
-
-          for ($i = 0; $i < 10; $i++) {
+          $db = open_connection();
+          $sql = "SELECT book_isbn,title,price,first_name,last_name,cover
+                    FROM bbb_te.order_item,bbb_te.book,bbb_te.author
+                    WHERE book_isbn=isbn
+                      AND book.author_id=author.id
+                    GROUP BY book_isbn
+                    LIMIT 10;";
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+          while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $book = new Book($row);
             echo $book->generateBookView();
           }
-
           ?>
         </div>
         <h2 class="book-view-header">Hot Buys:</h2>
@@ -46,6 +41,18 @@ session_start();
           <span class="v-align-helper"></span>
           <?php
             //get the top 10 most recently purchased books
+          $sql = "SELECT book_isbn,title,price,first_name,last_name,cover
+                    FROM bbb_te.order_item,bbb_te.sales_order,bbb_te.book,bbb_te.author
+                    WHERE book_isbn=isbn
+                    AND book.author_id=author.id
+                    ORDER BY submit_date DESC
+                    LIMIT 10;";
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+          while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $book = new Book($row);
+            echo $book->generateBookView();
+          }
           ?>
         </div>
         <h2 class="book-view-header">Great Deals:</h2>
@@ -53,8 +60,11 @@ session_start();
           <span class="v-align-helper"></span>
           <?php
             //get the top 10 least expensive books
-            $sql = "SELECT isbn,title,price,first_name,last_name FROM book,author WHERE book.author_id=author.id GROUP BY price LIMIT 10;";
-            $db = open_connection();
+            $sql = "SELECT isbn,title,price,first_name,last_name,cover
+                      FROM book,author
+                      WHERE book.author_id=author.id
+                      GROUP BY price
+                      LIMIT 10;";
             $stmt = $db->prepare($sql);
             $stmt->execute();
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
