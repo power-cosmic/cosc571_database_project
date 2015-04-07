@@ -21,7 +21,7 @@ session_start();
           $db = open_connection();
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         ?>
-        
+
         <!-- display admin page -->
         <div id="login" class="centered box">
           <p>
@@ -65,8 +65,8 @@ session_start();
               <th>Month</th>
               <th>Average Monthly Sales</th>
             </tr>
-            
-            <?php 
+
+            <?php
             $sql = 'SELECT
               YEAR(submit_date) AS year
             , MONTH(submit_date) AS month
@@ -76,26 +76,26 @@ session_start();
               YEAR(submit_date)
             , MONTH(submit_date)
             HAVING year >= :year;';
-            
+
             $stmt = $db->prepare($sql);
             $year = date('Y');
-            $month = date('M');
+            $month = date('m');
             $stmt->execute(['year' => date('Y')]);
-            
+
             $month_totals = [];
             while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
               if ($result['month'] <= $month) {
                 array_push($month_totals, $result);
               }
             }
-            
+
             for ($i = $month_totals[0]['month'] - 1; $i > 0; $i--) {
               array_unshift($month_totals, [
                 'month' => $i,
                 'total' => '0.00'
               ]);
             }
-            
+
             foreach ($month_totals as $result) {
               $date = mktime(0, 0, 0, $result['month'], 1, 1)
             ?>
