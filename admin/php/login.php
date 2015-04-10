@@ -49,7 +49,7 @@ class Login {
   public function get_email() {
     return $this->email;
   }
-  
+
   public function get_user_type() {
     return $this->user_type;
   }
@@ -78,6 +78,17 @@ class Login {
     return $this->username != null;
   }
 
+  public function add_to_wishlist($isbn) {
+    $db = open_connection();
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query = "INSERT INTO wishlist
+            VALUES (:isbn, :username);";
+    $stmt = $db->prepare($query);
+    $stmt->execute([
+        'isbn' => $isbn,
+        'username' => $this->username
+    ]);
+  }
   public function customer_login($username, $password) {
     $query = "SELECT username, first_name, last_name, email
       FROM customer
