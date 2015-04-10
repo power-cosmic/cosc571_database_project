@@ -4,7 +4,8 @@ div.scrolling-view {
   margin-left: -5%;
   background-color: lightblue;
   margin-top: 20px;
-  margin-bottom: 10px; overflow-x : auto;
+  margin-bottom: 10px;
+  overflow-x : auto;
   white-space: nowrap;
   overflow-x: auto;
 }
@@ -41,11 +42,8 @@ img.book-cover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.book-info:hover {
-  overflow: visible;
-  animation: marquee 5s linear infinite alternate;
-}
 .book-label {
+  float:left;
   text-align: right;
   display: inline-block;
   font-weight: bold;

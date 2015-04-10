@@ -78,16 +78,16 @@ class Book {
    * Generate content for a book with cover, used on the main page
    */
   public function generateBookView() {
-    $to_return = '<div class="book-view">
+    $to_return = '<div class="book-view"><a class="no-decoration" href="book.php?isbn=' . $this->isbn . '">
           <img src="' . $this->get_cover($this->cover) . '" class="book-cover" /><div class="book-info-box">'
             . $this->generateBookInfoLine('Title', $this->title)
             . $this->generateBookInfoLine('Author', $this->first_name . ' ' . $this->last_name)
             . '</div>
-             </div>';
+             </a></div>';
     return $to_return;
   }
 
-  private function get_cover($cover) {
+  public function get_cover($cover) {
     if ($cover) {
       return 'admin/images/covers/' . $cover;
     } else {

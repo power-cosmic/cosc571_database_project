@@ -178,6 +178,17 @@ a.button {
   color: #75C101;
 }
 
+.red {
+  background-color: #cb2424;
+  color: #fe8181;
+  border-color: #b62020;
+}
+
+.red:hover {
+  background-color: #fe8181;
+  color: #cb2424;
+}
+
 .blue {
   background-color: #0F398B;
   color: #96ADDB;
