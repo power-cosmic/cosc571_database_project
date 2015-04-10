@@ -176,9 +176,6 @@ session_start();
                 return $toReturn;
               }
 
-              $matches = explode(',', $_GET['query']);
-              //print_r($matches);
-              $removed = array();
               $no_good_search_terms = [
                   'a',
                   'the',
@@ -187,6 +184,7 @@ session_start();
                   'is',
                   'as',
                   'that',
+                  'this',
                   'which',
                   'also',
                   'about',
@@ -205,17 +203,35 @@ session_start();
 
               ];
 
+              $matches = explode(',', $_GET['query']);
+              $removed = array();
+
+              $misspelled = [];
+              $replaced = [];
+
+              $ps = pspell_new("en");
               foreach ($matches as $key => $value) {
                 $value = trim($value);
                 $matches[$key] = trim($value);
-                //
-                if (strlen($value) <= 3 || in_array($value, $no_good_search_terms)) {
+
+                if (substr($value, 0, 1) === '+') {
+                  $value = substr($value, 1);
+                  $matches[$key] = $value;
+                } elseif (strlen($value) <= 3 || in_array($value, $no_good_search_terms)) {
                   array_push($removed, $value);
                   unset($matches[$key]);
+                } elseif (!pspell_check($ps, $matches[$key])) {
+                  array_push($misspelled, $matches[$key]);
+                  array_push($replaced, pspell_suggest($ps, $matches[$key])[0]);
+
+                  unset($matches[$key]);
+
                 }
               }
 
-              $sql .= get_specific_clauses($matches, $_GET['criteria'], $_GET['category']);
+              $search_terms = (count($replaced)) ? array_merge($matches, $replaced) : $matches;
+              $sql .= get_specific_clauses($search_terms, $_GET['criteria'], $_GET['category']);
+              if (count($search_terms)) {
               //echo "<tr><td colspan='3'>$sql</td></tr>";
               $stmt = $db->prepare($sql);
               $stmt->execute();
@@ -224,6 +240,10 @@ session_start();
                         . implode('", "', $matches) . '"</td></tr>';
               echo "<tr><td colspan='3'>" . "Search terms removed: "
                         . implode(', ', $removed) . "</td></tr>";
+              echo "<tr><td colspan='3'>" . "Search terms misspelled: "
+                        . implode(', ', $misspelled) . "</td></tr>";
+              echo "<tr><td colspan='3'>" . "Search terms replaced: "
+                        . implode(', ', $replaced) . "</td></tr>";
               while($book_data = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $book = new Book($book_data);
             ?>
@@ -237,13 +257,36 @@ session_start();
                     value="Reviews" onclick="window.location.href='review.php?isbn=<?=$book->isbn?>'" />
                 </td>
               <td class="book-info" style="position:relative;width:100%;">
+              <a href="book.php?isbn=<?=$book->isbn?>" class="no-decoration">
                 <?=$book->generateBookInfo()?>
-                <!--
+              </a>
+              <?php if ($_SESSION && $_SESSION['login'] && $_SESSION['login']->get_user_type() === 'user') { ?>
                 <div style="position:absolute;float:right;
-                              top:2px;right:3px;
-                              width:40px;height:10px;background-color:red;">
+                              top:2px;right:3px;">
+                  <input type="button" class="red button centered-input wishlist-button"
+                      value="Add to wishlist" name="wish <?=$book->isbn?>"
+                    <?php
+
+                    $sql = "SELECT count(*) as num
+                            FROM wishlist
+                            WHERE customer_username=:username
+                              AND book_isbn=:isbn;";
+                    $stmt2 = $db->prepare($sql);
+                    $stmt2->execute([
+                        'isbn' => $book->isbn,
+                        'username' => $_SESSION['login']->get_username()
+                    ]);
+                    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                    if ($result2['num'] > 0) {
+                      echo ' disabled="disabled" ';
+                    }
+
+                    ?>
+                     />
+
                 </div>
-                -->
+          <?php }?>
+
               </td>
             </tr>
             <?php
@@ -252,7 +295,8 @@ session_start();
           </table>
 
         </div>
-        <?php } ?>
+        <?php }
+          } ?>
       </div>
       <?=createFooter()?>
     </div>

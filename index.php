@@ -15,14 +15,34 @@ session_start();
       <div class="content centered">
         <?php
           //if logged in, recommended for you/from wishlist
-        ?>
+                if ($_SESSION && $_SESSION['login'] && $_SESSION['login']->get_user_type() === 'user') { ?>
+
+          <h2 class="book-view-header">Treat yo self!</h2>
+        <div id="wish_list" class="scrolling-view">
+          <span class="v-align-helper"></span>
+          <?php
+          //grab your wishlist
+          $db = open_connection();
+          $sql = "SELECT book_isbn as isbn,title,price,first_name,last_name,cover
+                    FROM bbb_te.wishlist,bbb_te.book,bbb_te.author
+                    WHERE book_isbn=isbn
+                      AND book.author_id=author.id;";
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+          while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $book = new Book($row);
+            echo $book->generateBookView();
+          }
+          ?>
+        </div>
+        <?php } ?>
         <h2 class="book-view-header">Best Sellers:</h2>
         <div id="top_picks" class="scrolling-view">
           <span class="v-align-helper"></span>
           <?php
           //get the top 10 number of sold books
           $db = open_connection();
-          $sql = "SELECT book_isbn,title,price,first_name,last_name,cover
+          $sql = "SELECT book_isbn as isbn,title,price,first_name,last_name,cover
                     FROM bbb_te.order_item,bbb_te.book,bbb_te.author
                     WHERE book_isbn=isbn
                       AND book.author_id=author.id
@@ -41,7 +61,7 @@ session_start();
           <span class="v-align-helper"></span>
           <?php
             //get the top 10 most recently purchased books
-          $sql = "SELECT book_isbn,title,price,first_name,last_name,cover
+          $sql = "SELECT book_isbn as isbn,title,price,first_name,last_name,cover
                     FROM bbb_te.order_item,bbb_te.sales_order,bbb_te.book,bbb_te.author
                     WHERE book_isbn=isbn
                     AND book.author_id=author.id

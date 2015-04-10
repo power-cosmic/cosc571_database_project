@@ -1,7 +1,7 @@
 /**
  * 
  */
-define(['js/checkboxGroupManager', 'js/cart_updater', 'lib/jquery'], 
+define(['js/checkboxGroupManager', 'js/cart_updater', 'js/wishlist_updater', 'lib/jquery'], 
         function(CheckboxGroupManager) {
 
 	/*
