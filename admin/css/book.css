@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+img {
+  height: 375px;
+  width: 250px;
+  margin: 5px;
+}
+#options {
+  margin: 5px;
+  text-align:right;
+  float:right;
+  position:relative;
+  width:60%;
+}
+#description {
+  
+}
