@@ -11,7 +11,7 @@ $_SESSION['previous'] = $_SERVER['HTTP_REFERER'];
   <?=createBasicHead('Login', 'customerLogin')?>
   <body>
     <div id="container">
-      <?=createHeader(true, false)?>
+      <?=createHeader(true, false, false)?>
       <div class="content">
         <div id="login" class="centered box">
           <form method="post" action="<?=$_SERVER['PHP_SELF']?>">

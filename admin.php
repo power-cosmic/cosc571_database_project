@@ -14,7 +14,7 @@ session_start();
   <?=createBasicHead('Admin', ['adminLogin', 'admin'])?>
   <body>
     <div id="container">
-      <?=createHeader()?>
+      <?=createHeader(true, true, false)?>
       <div class="content">
 
         <?php if (Login::get_instance()->get_user_type() == $GLOBALS['user_status']['admin']) {

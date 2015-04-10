@@ -15,7 +15,7 @@ $_SESSION['previous'] = $_SERVER['PHP_SELF'];
   <?=createBasicHead('Register', 'registerCheck')?>
   <body>
     <div id="container">
-      <?=createHeader(true, false)?>
+      <?=createHeader(true, false, false)?>
       <div class="content">
         <div id="login" class="centered box">
         <?=createProfileForm()?>

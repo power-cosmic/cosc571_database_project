@@ -2,7 +2,7 @@
 session_start();
 include_once 'constants.php';
 
-function createHeader($showCart = true, $showLogin = true) {
+function createHeader($showCart = true, $showLogin = true, $showSearch = true) {
   $to_return = '<div id="header-replacer" class="collapsed bar"></div>
       <div id="header" class="bar">
         <div class="centered box">
@@ -37,6 +37,12 @@ function createHeader($showCart = true, $showLogin = true) {
             </div>';
         break;
       default:
+      $to_return .= '
+            <div id="logInButton">
+              <a href="' . $GLOBALS['locations']['login'] . '" class="glow-link">log in</a> |
+              <a href="' . $GLOBALS['locations']['register'] . '" class="glow-link">register</a> |
+              <a href="' . $GLOBALS['locations']['cart'] . '" class="glow-link">cart</a>
+            </div>';
     }
   }
 
@@ -45,22 +51,30 @@ function createHeader($showCart = true, $showLogin = true) {
 
   $to_return .= '
           </div>
-        </div>
+        </div>';
+  if ($showSearch) {
+    $to_return .= '
         <div style="position:absolute;bottom:10px;text-align:center;width:100%;">
           <form id="the-search" action="' . $GLOBALS['locations']['search'] . '" method="GET">
             <div id="short-name">
-              <a class="no-decoration" href="' . $GLOBALS['locations']['home'] . '">'. $GLOBALS['name']['short'] .'</a>
+              <a class="no-decoration" href="' . $GLOBALS['locations']['home'] . '">'
+                  . $GLOBALS['name']['short'] .'</a>
             </div>
             <input type="text" name="query" placeholder="search query" id="search-bar"
                 value="' . $_GET['query'] . '">
             <input type="submit" value="search" class="green button">
             <div id="simple-cart">
               <a class="no-decoration" href="' . $GLOBALS['locations']['cart'] . '">
-                &lfloor;<span class="cart-update-num">0</span>&rfloor;
+                &lfloor;<span class="cart-update-num">'
+                . (isset($_SESSION['cart']) ? $_SESSION['cart']->num_in_cart() : '0')
+                . '</span>&rfloor;
               </a>
             </div>
           </form>
-        </div>
+        </div>';
+  }
+
+  $to_return .= '
       </div>' . "\n";
   return $to_return;
 }
