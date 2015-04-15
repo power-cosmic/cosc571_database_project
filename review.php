@@ -50,7 +50,7 @@ if (isset($_POST['rating'])) {
               <div style="position:relative;" class="wide">
                 <h3 style="text-align:left;">Reviews for <?= $book['title']?> by <?= $book['author']?></h3>
                 <?php
-                if ($_SESSION['login']->get_user_type() === 'user') {
+                if ($_SESSION && $_SESSION['login'] && $_SESSION['login']->get_user_type() === 'user') {
                 ?>
                 <input type="button" style="position:absolute;right:0px;top:0px;"
                     class="purple button centered-input"
@@ -100,6 +100,7 @@ if (isset($_POST['rating'])) {
                 </form>
                 <?php
                 }
+
                 ?>
               </div>
 
@@ -130,7 +131,7 @@ if (isset($_POST['rating'])) {
               </table>
             <?php
             } else {
-                if ($_SESSION['login']->get_user_type() === 'user') {
+                if ($_SESSION && $_SESSION['login'] && $_SESSION['login']->get_user_type() === 'user') {
             ?>
             <div class="wide" style="clear:both;">Oops, there's no reviews for this book! Why don't you write one?</div>
 

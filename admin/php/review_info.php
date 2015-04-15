@@ -1,10 +1,11 @@
 <?php
 function generateReview($review) {
-  $to_return = '
+  $to_return = '<tr>
                     <td class="book-info">' . $review['username'] . '</td>
                     <td class="book-info">' . $review['content'] . '</td>
                     <td class="book-info"><div class="centered">'
-                      . generateReviewRating($review) . '</div></td>';
+                      . generateReviewRating($review) . '</div></td>
+                          </tr>';
   return $to_return;
 }
 function generateReviewRating($review) {
